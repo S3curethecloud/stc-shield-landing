@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>STC Shield — Identity Attack Path Detection</title>
+  <meta
+    name="description"
+    content="STC Shield is a multi-cloud identity attack-path detection engine exposing how identities can be abused across AWS, Azure, and GCP."
+  />
+
+  <link rel="stylesheet" href="/css/shield.css" />
+
+  <!-- Cloudflare Web Analytics -->
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"token": "REPLACE_WITH_YOUR_TOKEN"}'>
+  </script>
+</head>
+
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">SecureTheCloud</div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/shield" class="active">Shield</a>
+      <a href="/ai">AI</a>
+      <a href="/labs">Labs</a>
+      <a href="/consulting">Consulting</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>STC Shield</h1>
+    <p class="subtitle">
+      Multi-cloud identity attack-path detection.
+      <br />
+      Model how attackers move through trust — before they do.
+    </p>
+
+    <div class="cta-group">
+      <a
+        class="btn primary"
+        href="https://shield.securethecloud.dev"
+        target="_blank"
+        rel="noopener">
+        Launch Shield Console
+      </a>
+
+      <a class="btn secondary" href="/request-demo/">
+        Request Shield Demo
+      </a>
+    </div>
+
+    <p class="note">
+      Live identity risk view. Expired cloud sessions are blocked by design.
+    </p>
+  </section>
+
+  <!-- SHIELD CONSOLE PREVIEW -->
+  <section class="section">
+    <h2>Shield Console Preview</h2>
+
+    <div class="media-grid">
+      <figure class="media-card">
+        <img src="/assets/shield-console.png" alt="STC Shield Console preview" />
+        <figcaption>Operator console — read-only by design</figcaption>
+      </figure>
+
+      <figure class="media-card">
+        <img src="/assets/attack-path-graph.png" alt="Attack path graph visualization" />
+        <figcaption>Identity attack paths — severity-aware graph</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- STC SHIELD ARCHITECTURE -->
+  <section class="section contrast">
+    <h2>STC Shield Architecture</h2>
+
+    <figure class="media-card">
+      <img
+        src="/diagrams/shield-architecture.svg"
+        alt="STC Shield architecture diagram"
+      />
+      <figcaption>
+        Identity data ingestion → attack path modeling → operator visualization →
+        Phase 2 AI reasoning.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- WHAT IT DOES -->
+  <section id="capabilities" class="section">
+    <h2>What Shield Does</h2>
+    <p>
+      STC Shield analyzes live cloud identity configurations and models how
+      identities can be abused through trust relationships, role assumptions,
+      and privilege escalation paths across AWS, Azure, and GCP.
+    </p>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section class="section grid">
+    <div class="card">
+      <h3>Identity Trust Discovery</h3>
+      <p>SSO, OIDC, SAML, cross-account and federated trust paths.</p>
+    </div>
+
+    <div class="card">
+      <h3>Attack Path Modeling</h3>
+      <p>Identity → role → privilege → resource exploitation paths.</p>
+    </div>
+
+    <div class="card">
+      <h3>Risk Classification</h3>
+      <p>CRITICAL / HIGH / MEDIUM / LOW severity with reasoning.</p>
+    </div>
+
+    <div class="card">
+      <h3>Graph Visualization</h3>
+      <p>Explorable identity relationships with severity-aware edges.</p>
+    </div>
+
+    <div class="card">
+      <h3>Security Reporting</h3>
+      <p>Executive-ready summaries and operator-grade detail.</p>
+    </div>
+
+    <div class="card">
+      <h3>Multi-Cloud Native</h3>
+      <p>AWS, Azure, and GCP — same model, same logic.</p>
+    </div>
+  </section>
+
+  <!-- POSITIONING -->
+  <section class="section contrast">
+    <h2>What Shield Is Not</h2>
+    <p>
+      STC Shield is not a SIEM, not a CSPM clone, and not a compliance checkbox tool.
+      It focuses on identity attack paths — the fastest way attackers move in modern
+      cloud environments.
+    </p>
+  </section>
+
+  <!-- PHASE 2 ROADMAP -->
+  <section class="section">
+    <h2>Phase 2 Roadmap</h2>
+
+    <ul>
+      <li>
+        <strong>AI Security Reasoning</strong> —
+        Explain attack paths, prioritize risk, and suggest mitigations.
+      </li>
+      <li>
+        <strong>Assessment History</strong> —
+        Persist findings for comparison and consulting delivery.
+      </li>
+      <li>
+        <strong>Academy Integration</strong> —
+        Labs powered by real Shield findings.
+      </li>
+      <li>
+        <strong>Consulting Mode</strong> —
+        Executive summaries and export bundles.
+      </li>
+    </ul>
+
+    <p class="note">
+      Phase 2 extends Shield — it does not replace the operator console.
+    </p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© SecureTheCloud • STC Shield</p>
+</footer>
+
+</body>
+</html>
