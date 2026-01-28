@@ -197,7 +197,7 @@ nav a:hover {
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 18px; /* ✅ intentional vertical rhythm */
+  gap: 18px;
 }
 
 .request-demo h2 {
@@ -211,13 +211,14 @@ nav a:hover {
 
 .request-demo .btn-primary {
   display: inline-block;
-  margin-top: 6px; /* ✅ micro-polish */
+  margin-top: 6px;
+  max-width: 520px; /* ✅ refined CTA width */
 }
 
 .request-demo .fineprint {
   font-size: 0.85rem;
   color: #7d8fa3;
-  margin-top: 6px; /* ✅ micro-polish */
+  margin-top: 6px;
 }
 
 /* =========================
