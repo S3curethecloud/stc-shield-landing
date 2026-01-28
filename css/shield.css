@@ -95,12 +95,35 @@ nav a:hover {
   gap: 1.5rem;
 }
 
+/* =========================
+   CARD (LOCKED FOR CLICKABLE USE)
+   ========================= */
+
 .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
   border: 1px solid var(--border);
   padding: 1.5rem;
   border-radius: 8px;
   background: #0f1620;
 }
+
+.card-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
 
 .footer {
   border-top: 1px solid var(--border);
@@ -218,7 +241,7 @@ nav a:hover {
 }
 
 /* =========================
-   BACK TO SHIELD LINK
+   BACK LINKS
    ========================= */
 
 .back-to-shield {
@@ -231,4 +254,16 @@ nav a:hover {
 
 .back-to-shield:hover {
   text-decoration: underline;
+}
+
+/* ✅ NEW — Back link from Request Demo */
+
+.back-link {
+  color: #9aa4b2;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.back-link:hover {
+  color: #ffffff;
 }
