@@ -191,6 +191,7 @@ nav a:hover {
   justify-content: center;
 }
 
+/* Existing layout (kept) */
 .request-demo-inner {
   max-width: 820px;
   width: 100%;
@@ -209,16 +210,55 @@ nav a:hover {
   line-height: 1.6;
 }
 
-.request-demo .btn-primary {
-  display: inline-block;
-  margin-top: 6px;
-  max-width: 520px; /* ✅ refined CTA width */
-}
-
 .request-demo .fineprint {
   font-size: 0.85rem;
   color: #7d8fa3;
   margin-top: 6px;
+}
+
+/* =========================
+   ✅ CORRECT CTA FIX (NEW)
+   ========================= */
+
+/* Button-sized CTA — NOT container-sized */
+.demo-cta,
+.email-demo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 28px;     /* button-sized */
+  width: auto;            /* ✅ critical */
+  max-width: none;        /* prevent stretch */
+
+  margin: 28px auto 16px; /* vertical rhythm + centered */
+
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+/* Centering container without forcing width */
+.request-demo-content {
+  text-align: center;
+}
+
+/* Fine-tuned vertical rhythm */
+.request-demo-content h1 {
+  margin-bottom: 18px;
+}
+
+.request-demo-content p {
+  margin-bottom: 24px;
+}
+
+.demo-cta {
+  margin-bottom: 14px;
+}
+
+.request-demo-content .fine-print {
+  margin-top: 8px;
+  opacity: 0.85;
 }
 
 /* =========================
