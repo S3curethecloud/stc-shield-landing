@@ -49,12 +49,13 @@ nav a:hover {
 
 .hero h1 {
   font-size: 3rem;
+  margin-bottom: 0.75rem; /* ✅ spacing polish */
 }
 
 .subtitle {
   color: var(--muted);
   max-width: 700px;
-  margin: 1rem auto 2rem;
+  margin: 1rem auto 1.25rem; /* ✅ spacing polish */
 }
 
 .cta-group {
@@ -174,9 +175,10 @@ nav a:hover {
 }
 
 .note {
-  margin-top: 1.5rem;
+  margin-top: 0.75rem;      /* ✅ spacing polish */
   color: var(--muted);
   font-size: 0.95rem;
+  line-height: 1.4;         /* ✅ spacing polish */
 }
 
 /* =========================
@@ -202,7 +204,7 @@ nav a:hover {
 
 .request-demo .subtitle {
   color: #9fb3c8;
-  margin-bottom: 24px;
+  margin-bottom: 1.25rem;   /* ✅ spacing polish */
   line-height: 1.6;
 }
 
@@ -256,12 +258,11 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* ✅ NEW — Back link from Request Demo */
-
 .back-link {
   color: #9aa4b2;
   text-decoration: none;
   font-size: 0.9rem;
+  margin-bottom: 1.25rem;   /* ✅ spacing polish */
 }
 
 .back-link:hover {
