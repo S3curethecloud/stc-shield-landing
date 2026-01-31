@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>STC Shield — Console Preview</title>
+
+  <!-- Core styles -->
+  <link rel="stylesheet" href="/css/shield.css" />
+
+  <!-- Security posture -->
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      script-src 'self';
+      style-src 'self' 'unsafe-inline';
+      connect-src 'self';
+      img-src 'self' data:;
+    "
+  />
+</head>
+
+<body>
+
+  <!-- =========================
+       NAV
+       ========================= -->
+  <header class="nav">
+    <div class="nav-inner">
+      <strong>SecureTheCloud</strong>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/shield" class="active">Shield</a>
+        <a href="/ai">AI</a>
+        <a href="/labs">Labs</a>
+        <a href="/consulting">Consulting</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =========================
+       HERO / PRIMARY CTA
+       ========================= -->
+  <section class="hero">
+    <h1>STC Shield — Console Preview</h1>
+
+    <p class="subtitle">
+      Read-only identity risk visualization.
+      Deterministic findings only.
+    </p>
+
+    <div class="cta-group">
+      <!-- ✅ TRAILING SLASH FIXED -->
+      <a
+        class="btn primary"
+        href="/shield/preview/"
+        aria-label="Launch Shield Console Preview">
+        Launch Shield Console (Preview)
+      </a>
+    </div>
+
+    <p class="note">
+      Operator-facing preview. No automated remediation.
+    </p>
+  </section>
+
+  <!-- =========================
+       MAIN LAYOUT
+       ========================= -->
+  <main class="shield-layout">
+
+    <!-- =========================
+         LEFT: FINDINGS / GRAPH
+         ========================= -->
+    <section class="shield-main">
+
+      <header class="shield-header">
+        <h2>Shield Findings</h2>
+        <p class="muted">
+          Select an identity or attack path to inspect risk.
+        </p>
+      </header>
+
+      <div class="shield-canvas">
+        <p class="muted">
+          No selection yet.
+        </p>
+      </div>
+
+      <!-- =========================
+           CONSOLE ENTRY CARDS
+           ========================= -->
+      <section class="section">
+        <div class="grid">
+
+          <!-- ✅ TRAILING SLASH FIXED -->
+          <a href="/shield/preview/" class="card-link">
+            <div class="card">
+              <h3>STC Shield Console</h3>
+              <p>
+                Operator view of identity risk.
+                Read-only access to live findings.
+              </p>
+            </div>
+          </a>
+
+          <!-- ✅ TRAILING SLASH + PARAM FIXED -->
+          <a href="/shield/preview/?view=graph" class="card-link">
+            <div class="card">
+              <h3>Attack Path Graph</h3>
+              <p>
+                Visualize identity traversal across trust boundaries.
+                Severity-aware paths.
+              </p>
+            </div>
+          </a>
+
+        </div>
+      </section>
+
+    </section>
+
+    <!-- =========================
+         RIGHT: AI DRAWER v1.0
+         ========================= -->
+    <aside class="shield-sidebar">
+
+      <div class="ai-drawer disabled" id="ai-drawer">
+
+        <h4>Ask STC AI</h4>
+
+        <p class="muted">
+          Explain the selected identity or attack path.
+          AI responses are grounded in Shield data only.
+        </p>
+
+        <div class="ai-context">
+          <span class="context-label">Context</span>
+          <span class="context-value">No selection</span>
+        </div>
+
+        <textarea
+          id="ai-input"
+          placeholder="Why is this identity reachable?"
+          disabled
+        ></textarea>
+
+        <button
+          id="ai-btn"
+          class="ai-btn"
+          disabled
+        >
+          Explain with STC AI
+        </button>
+
+        <div class="ai-output">
+
+          <h5>Explanation</h5>
+          <pre id="ai-explanation" class="ai-box muted">
+Select a finding to enable AI reasoning.
+          </pre>
+
+          <h5>Citations</h5>
+          <ul id="ai-citations" class="citations muted">
+            <li>No datasets referenced.</li>
+          </ul>
+
+        </div>
+
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- =========================
+       FOOTER
+       ========================= -->
+  <footer class="footer">
+    <p>© SecureTheCloud • STC Shield</p>
+  </footer>
+
+  <!-- =========================
+       AI DRAWER SCRIPT
+       ========================= -->
+  <script src="/js/console-ai.js"></script>
+
+</body>
+</html>
