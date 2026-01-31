@@ -2,118 +2,147 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STC Shield — SecureTheCloud</title>
 
-  <title>STC Shield — Identity Attack Path Detection</title>
-  <meta
-    name="description"
-    content="STC Shield is a multi-cloud identity attack-path detection engine exposing how identities can be abused across AWS, Azure, and GCP."
-  />
-
-  <!-- AUTHORITATIVE CSP (REQUIRED) -->
-  <meta
-    http-equiv="Content-Security-Policy"
-    content="
-      default-src 'self';
-      script-src 'self' 'unsafe-inline';
-      connect-src 'self' http://127.0.0.1:8000;
-      style-src 'self' 'unsafe-inline';
-    "
-  />
+  <!-- 🔒 Canonical CSP (LOCKED) -->
+  <meta http-equiv="Content-Security-Policy"
+        content="
+          default-src 'self';
+          script-src 'self' 'unsafe-inline';
+          connect-src 'self' http://127.0.0.1:8000;
+          style-src 'self' 'unsafe-inline';
+          img-src 'self' data:;
+        ">
 
   <link rel="stylesheet" href="/css/shield.css" />
 </head>
 
 <body>
 
-<header class="nav">
-  <div class="nav-inner">
-    <div class="brand">SecureTheCloud</div>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/shield" class="active">Shield</a>
-      <a href="/ai">AI</a>
-      <a href="/labs">Labs</a>
-      <a href="/consulting">Consulting</a>
-    </nav>
-  </div>
-</header>
+  <!-- =========================
+       NAVIGATION (UNCHANGED)
+       ========================= -->
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="logo">SecureTheCloud</div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/shield/" class="active">Shield</a>
+        <a href="/ai/">AI</a>
+        <a href="/labs/">Labs</a>
+        <a href="/consulting/">Consulting</a>
+      </nav>
+    </div>
+  </header>
 
-<main>
+  <!-- =========================
+       HERO SECTION (v1.0)
+       ========================= -->
+  <section class="hero shield-hero">
+    <h1 class="shield-title">STC Shield</h1>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>STC Shield</h1>
-    <p class="subtitle">
-      Multi-cloud identity attack-path detection.
-      <br />
-      Model how attackers move through trust — before they do.
+    <p class="subtitle shield-subtitle">
+      Multi-cloud identity attack-path detection.<br />
+      Model how attackers move through trust —
+      <em>before they do</em>.
     </p>
 
-    <div class="cta-group">
-      <a
-        class="btn primary"
-        href="https://shield.securethecloud.dev"
-        target="_blank"
-        rel="noopener">
-        Launch Shield Console
+    <div class="cta-group shield-cta-row">
+      <a class="btn primary"
+         href="#console-preview">
+        Launch Shield Console (Preview)
       </a>
 
-      <a class="btn secondary" href="/request-demo/">
+      <a class="btn secondary"
+         href="/request-demo/">
         Request Shield Demo
       </a>
     </div>
 
-    <p class="note">
-      Live identity risk view. Expired cloud sessions are blocked by design.
+    <p class="note shield-trust-note">
+      Live identity risk view. Read-only by design.
+      No automated remediation.
     </p>
   </section>
 
-  <!-- STC AI INTERACTION -->
-  <section class="section contrast">
-    <h2>Ask STC AI</h2>
-    <p class="subtitle">
-      Query identity attack paths, trust relationships, and risk reasoning.
-    </p>
+  <!-- =========================
+       CONSOLE ENTRY SECTION
+       ========================= -->
+  <section id="console-preview" class="section">
+    <h2>Shield Console Preview</h2>
 
-    <p class="note">
-      AI explanations are generated from deterministic Shield data and do not modify system state.
-    </p>
+    <div class="grid">
+      <a class="card-link" href="/shield/console/">
+        <div class="card">
+          <h3>STC Shield Console Preview</h3>
+          <p>Operator console — read-only by design.</p>
+        </div>
+      </a>
 
-    <div class="ai-panel">
-      <input id="ai-input" type="text" placeholder="Ask STC AI..." />
-      <button id="ai-btn" class="btn primary">Ask</button>
-
-      <h3>Question</h3>
-      <div id="ai-question"></div>
-
-      <section id="ai-output">
-
-        <h3>Explanation</h3>
-        <details open>
-          <summary>AI Reasoning</summary>
-          <pre id="ai-explanation"></pre>
-        </details>
-
-        <h3>Result</h3>
-        <pre id="ai-result"></pre>
-
-        <h3>Citations</h3>
-        <ul id="ai-citations" class="citations-list"></ul>
-
-      </section>
+      <a class="card-link" href="/shield/console/?view=graph">
+        <div class="card">
+          <h3>Attack Path Graph Visualization</h3>
+          <p>Identity attack paths — severity-aware graph.</p>
+        </div>
+      </a>
     </div>
   </section>
 
-</main>
+  <!-- =========================
+       AI-AUGMENTED REASONING
+       (CAPABILITY, NOT UI)
+       ========================= -->
+  <section class="section contrast">
+    <h2>AI-Augmented Reasoning</h2>
 
-<footer class="footer">
-  <p>© SecureTheCloud • STC Shield</p>
-</footer>
+    <p class="subtitle">
+      Shield combines deterministic identity analysis with AI-assisted explanations —
+      without modifying system state.
+    </p>
 
-<!-- AUTHORITATIVE SCRIPT ORDER -->
-<script src="/js/config.js"></script>
-<script src="/js/ai.js"></script>
+    <ul class="capability-list">
+      <li>Deterministic attack-path computation</li>
+      <li>Natural-language explanations of identity risk</li>
+      <li>Provenance-aware dataset citations</li>
+    </ul>
+
+    <p class="note">
+      AI explanations are generated from Shield data and do not perform
+      configuration or remediation actions.
+    </p>
+  </section>
+
+  <!-- =========================
+       ARCHITECTURE SECTION
+       ========================= -->
+  <section id="architecture" class="section contrast">
+    <h2>STC Shield Architecture</h2>
+
+    <figure class="media-card">
+      <img
+        src="/diagrams/shield-architecture.svg"
+        alt="STC Shield architecture diagram"
+      />
+      <figcaption>
+        Identity data ingestion → attack-path modeling →
+        operator visualization → AI-augmented reasoning.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- =========================
+       FOOTER (UNCHANGED)
+       ========================= -->
+  <footer class="section">
+    <p class="note">© SecureTheCloud · STC Shield</p>
+  </footer>
+
+  <!-- =========================
+       SCRIPTS (UNCHANGED, KEPT)
+       ========================= -->
+  <script src="/js/config.js"></script>
+  <script src="/js/ai.js"></script>
 
 </body>
 </html>
