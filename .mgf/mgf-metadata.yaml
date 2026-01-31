@@ -1,0 +1,33 @@
+mgf_version: "1.0"
+
+authority:
+  mode: MGF-AUTHORITY-ALL
+  source: stc-intelligence-core
+  required: true
+
+repo:
+  name: "stc-shield-landing"
+  type: "project"
+  owner: "SecureTheCloud"
+  canonical: true
+
+sync:
+  enabled: true
+  mode: delta
+
+classification:
+  domains:
+    - threat_model
+    - zero_trust
+    - identity
+  clouds:
+    - multi
+  use_cases:
+    - demo
+    - practitioner
+    - architect
+
+evidence:
+  labs: false
+  diagrams: true
+  deployments: false

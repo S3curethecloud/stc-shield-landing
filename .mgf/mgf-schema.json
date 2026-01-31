@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MGF Schema — STC Shield Landing",
+  "description": "Authoritative schema for MGF governance and metadata in the STC Shield Landing repository.",
+  "type": "object",
+  "required": ["mgf_version", "authority"],
+  "properties": {
+    "mgf_version": {
+      "type": "string",
+      "enum": ["1.0"]
+    },
+    "authority": {
+      "type": "object",
+      "required": ["mode", "required"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["MGF-AUTHORITY", "MGF-AUTHORITY-ALL"]
+        },
+        "source": { "type": "string" },
+        "required": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "project": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "owner": { "type": "string" },
+        "intent": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "repo": {
+      "type": "object",
+      "required": ["name", "type", "owner"],
+      "properties": {
+        "name": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["project"]
+        },
+        "owner": { "type": "string" },
+        "canonical": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "sync": {
+      "type": "object",
+      "required": ["enabled"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "mode": {
+          "type": "string",
+          "enum": ["delta", "full", "manual"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "classification": {
+      "type": "object",
+      "required": ["domains", "clouds"],
+      "properties": {
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["identity", "zero_trust", "threat_model", "labs", "compliance"]
+          }
+        },
+        "clouds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["aws", "azure", "gcp", "multi"]
+          }
+        },
+        "use_cases": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "labs": { "type": "boolean" },
+        "diagrams": { "type": "boolean" },
+        "deployments": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "rules": {
+      "type": "object",
+      "properties": {
+        "continuity": { "type": "array", "items": { "type": "string" } },
+        "scope_control": { "type": "array", "items": { "type": "string" } },
+        "interaction": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "commit_policy": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "enforcement": {
+      "type": "object",
+      "properties": {
+        "strict": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

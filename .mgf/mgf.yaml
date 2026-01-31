@@ -1,0 +1,35 @@
+mgf_version: "1.0"
+
+authority:
+  mode: MGF-AUTHORITY-ALL
+  source: stc-intelligence-core
+  required: true
+
+project:
+  name: "stc-shield-landing"
+  owner: "SecureTheCloud"
+  intent: >
+    STC Shield Landing is the public-facing, static-first landing and demo
+    surface for the STC Shield product. This repository is governed by MGF
+    rules to guarantee continuity, prevent architectural drift, and enable
+    seamless future handover.
+
+rules:
+  continuity:
+    - Always read MGF-HANDOVER.md when it exists
+    - Resume work from NEXT EXECUTION STEP only
+  scope_control:
+    - Static-first only
+    - No frontend frameworks
+    - No backend logic in this repository
+  interaction:
+    - Prefer execution over explanation
+    - Ask at most one clarifying question
+    - Commands must be copy/paste ready
+
+commit_policy:
+  - Handover document required when active iteration resumes
+  - Decisions must be recorded when behavior or structure is locked
+
+enforcement:
+  strict: true
