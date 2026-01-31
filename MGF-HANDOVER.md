@@ -1,74 +1,105 @@
 # MGF HANDOVER — STC Shield Landing
 
+## 🔒 Context Block (Must Read)
+- Repo State: STABLE / GOVERNED
+- Architecture: STATIC-FIRST (LOCKED)
+- Authority Mode: MGF-AUTHORITY-ALL
+- Primary Objective:
+  Preserve STC Shield’s public landing and read-only AI demo
+  while preventing architectural or behavioral drift.
+- Success Criteria:
+  - Landing page remains fast, static, and credible
+  - AI demo remains read-only and stable
+  - No regression in UX, AI wiring, or security posture
+
+---
+
 ## 1) Project Identity
 - Repo Name: stc-shield-landing
 - Local Path: /home/cloudlab/projects/stc-shield-landing
 - Remote: https://github.com/S3curethecloud/stc-shield-landing.git
-- Active Branch: main
+- Branch: main
 - Owner: SecureTheCloud / Ola Omoniyi
-- Repo Type: Product Landing Page (static-first)
+- Repo Type: Product Landing Page (Static-First)
 
 Purpose:
-STC Shield Landing is the **public-facing landing and demo entry point** for the STC Shield product.
-It presents the Shield value proposition, architecture, and a live AI-powered demo UI wired to STC AI.
-This repo is intentionally static-first and optimized for clarity, credibility, and conversion.
+STC Shield Landing is the **public-facing marketing and demonstration surface**
+for the STC Shield product. It communicates value, architecture, and trust,
+and exposes a **read-only AI-powered demo UI** wired to STC AI.
+This repository is not a control plane and must remain static-first.
 
 ---
 
-## 2) Current State (AUTHORITATIVE)
+## 2) Governance Status (AUTHORITATIVE)
+- MGF Installed: YES
+- Governing Files:
+  - .mgf/mgf.yaml
+  - .mgf/mgf-metadata.yaml
+  - .mgf/mgf-decisions.md
+  - .mgf/mgf-schema.json
+
+Governance Rules:
+- MGF files override chat memory and assumptions
+- Locked decisions must not be reversed without explicit ADR updates
+
+---
+
+## 3) Current State
 - Status: ACTIVE / STABLE
 - Working Tree: CLEAN
-- Deployment Model: Static site (Cloudflare Pages–style headers present)
-- Canonical Entry:
+- Deployment Model: Static hosting
+- Security / Headers:
+  - `_headers` file present
+- Entry Points:
   - `/index.html`
-- Demo Flow:
   - `/request-demo/index.html`
-- MGF Status: NOT YET INSTALLED (no .mgf directory)
 
 ---
 
-## 3) What Is Working ✅
+## 4) What Is Working ✅
 
 ### UI / UX
-- Shield landing page layout stabilized
+- Shield landing layout stabilized
 - CTA spacing and vertical rhythm polished
-- Demo CTA width constrained for visual balance
-- Architecture visuals present (PNG + SVG)
+- Demo CTA width intentionally constrained
+- Visual hierarchy consistent and professional
 
-### AI Integration
+### AI Demo Integration
 - STC AI client fully wired into Shield UI
 - Centralized AI logic:
   - `js/ai.js`
-- Explicit runtime config:
+- Runtime configuration isolated:
   - `js/config.js`
-- Guarded client initialization (prevents runtime breakage)
-- Structured dataset citations surfaced in UI
+- Guarded client initialization
+- Structured dataset citations rendered in UI
 
-### Documentation
-- Architecture document:
+### Documentation & Assets
+- Architecture reference:
   - `ARCHITECTURE-STC-SHIELD-AI.md`
 - Diagrams:
-  - `diagrams/shield-architecture.png`
   - `diagrams/shield-architecture.svg`
+  - `diagrams/shield-architecture.png`
+- Styling:
+  - `css/shield.css`
 
 ---
 
-## 4) What Is Locked (DO NOT CHANGE) 🔒
+## 5) What Is Locked 🔒 (DO NOT CHANGE)
 
-- Static-first architecture (no frameworks)
+The following are enforced by `.mgf/mgf-decisions.md`:
+
+- Static-first architecture (HTML / CSS / JS only)
+- No frontend frameworks (React, Next.js, Vue, etc.)
+- Read-only demo behavior (no mutation, no configuration)
 - Centralized AI logic in `js/ai.js`
-- Config separation via `js/config.js`
-- Shield landing remains **read-only demo**, not a control plane
-- No backend logic added to this repo
+- Configuration isolation in `js/config.js`
+- No backend logic in this repository
 
-These decisions are reinforced by recent commits:
-- B2: Centralize STC AI UI logic
-- B2: Guard AI client + explicit config
-- B3: Structured dataset citations
+Any change violating these constraints is **non-compliant**.
 
 ---
 
-## 5) Architecture Summary
+## 6) Architecture Summary
 
 ### Frontend
 - HTML:
@@ -76,80 +107,69 @@ These decisions are reinforced by recent commits:
   - `request-demo/index.html`
 - CSS:
   - `css/shield.css`
-- JS:
-  - `js/ai.js` (core Shield ↔ AI interaction)
-  - `js/config.js` (runtime config)
+- JavaScript:
+  - `js/ai.js` — Shield ↔ STC AI interaction
+  - `js/config.js` — environment configuration
 
 ### AI Interaction Model
-- Client-side calls to STC AI endpoint
-- Responses rendered in Shield UI
-- Citations displayed for credibility
-- No mutation or write-back behavior
+- Client-side requests to STC AI
+- Responses rendered read-only in the UI
+- Dataset citations included for credibility
+- No write-back, mutation, or control actions
 
 ### Hosting
 - Static hosting
-- `_headers` file indicates security headers / caching rules
+- `_headers` used for security and caching controls
 
 ---
 
-## 6) Recent Commit Context
-Last 10 commits show a **focused stabilization phase**:
-- AI logic consolidation
-- Guardrails around config and client init
-- UX polish and spacing normalization
+## 7) Recent Change Context
+Recent commits represent **stabilization and hardening**:
+- Centralization of AI UI logic
+- Guarded client initialization
+- Explicit runtime configuration
+- Structured dataset citations
 - Architecture documentation added
 
 Interpretation:
-The repo is **feature-complete for v1 demo** and entering a maintenance / polish phase.
+The repository is **v1 demo complete** and should evolve cautiously.
 
 ---
 
-## 7) NEXT EXECUTION STEP (AUTHORITATIVE)
+## 8) NEXT EXECUTION STEP (AUTHORITATIVE)
 
-### Priority 1 — Install MGF Governance
-To align with the rest of the SecureTheCloud ecosystem, this repo must be brought under MGF.
+### Priority 1 — Maintenance Mode
+- Monitor AI endpoint stability
+- Validate `js/config.js` environment values
+- Apply only **surgical UX or copy edits** if required
 
-Actions:
-1. Create `.mgf/` directory
-2. Add:
-   - `mgf.yaml`
-   - `mgf-metadata.yaml`
-   - `mgf-decisions.md`
-   - `mgf-schema.json`
+### Priority 2 — Optional (Explicit Approval Required)
+- Minor copy refinement
+- Additional static diagrams
+- Performance or accessibility polish
 
-This enables:
-- future handover generation
-- STI / STC Intelligence indexing
-- enforced continuity
+No new features or behaviors without a formal decision.
 
 ---
 
-### Priority 2 — Optional (Only If Needed)
-- Validate AI endpoint URL in `js/config.js`
-- Confirm production vs demo environment handling
-- Add minor copy polish if product positioning evolves
+## 9) Guardrails (Non-Negotiable)
+- Do NOT introduce frontend frameworks
+- Do NOT inline AI logic into HTML
+- Do NOT add configuration or mutation capabilities
+- Do NOT turn this repo into a Shield console
+- Do NOT duplicate logic from SecureTheCloud platform repos
 
 ---
 
-## 8) Guardrails (DO NOT VIOLATE)
-
-- Do NOT add frontend frameworks (React, Next.js, etc.)
-- Do NOT move AI logic back into inline scripts
-- Do NOT turn this into a configuration UI
-- Do NOT duplicate Shield logic from the main platform
-- Do NOT break the `/request-demo` flow
-
----
-
-## 9) How to Resume This Repo in a New ChatGPT Session
+## 10) How to Resume This Repo in a New ChatGPT Session
 
 Paste **exactly** this:
 
 ---
 MGF-AUTHORITY-ALL:
+This repository is governed by .mgf/mgf.yaml.
 Resume stc-shield-landing using MGF-HANDOVER.md as the source of truth.
-Start from “NEXT EXECUTION STEP”.
+Start from NEXT EXECUTION STEP.
 Do not redesign architecture.
 Ask at most one clarifying question at a time.
 ---
-
