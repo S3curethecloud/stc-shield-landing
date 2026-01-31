@@ -65,17 +65,12 @@
     </p>
   </section>
 
-  <!-- SHIELD CONSOLE PREVIEW (CLICKABLE CARDS — FIXED PATTERN) -->
+  <!-- SHIELD CONSOLE PREVIEW -->
   <section class="section">
     <h2>Shield Console Preview</h2>
 
     <div class="grid">
-
-      <!-- Console Preview Card -->
-      <a
-        href="https://shield.securethecloud.dev/console"
-        class="card-link"
-      >
+      <a href="https://shield.securethecloud.dev/visualize/" class="card-link">
         <div class="card">
           <div class="card-icon">🛡️</div>
           <h3>STC Shield Console Preview</h3>
@@ -83,18 +78,53 @@
         </div>
       </a>
 
-      <!-- Attack Path Graph Card -->
-      <a
-        href="https://shield.securethecloud.dev/graph"
-        class="card-link"
-      >
+      <a href="https://shield.securethecloud.dev/visualize/?view=graph" class="card-link">
         <div class="card">
           <div class="card-icon">🧠</div>
           <h3>Attack Path Graph Visualization</h3>
           <p>Identity attack paths — severity-aware graph</p>
         </div>
       </a>
+    </div>
+  </section>
 
+  <!-- STC AI INTERACTION -->
+  <section class="section contrast">
+    <h2>Ask STC AI</h2>
+    <p class="subtitle">
+      Query identity attack paths, trust relationships, and risk reasoning.
+    </p>
+
+    <!-- Compliance disclaimer -->
+    <p class="note">
+      AI explanations are generated from deterministic Shield data and do not modify system state.
+    </p>
+
+    <div class="ai-panel">
+      <input
+        id="ai-input"
+        type="text"
+        placeholder="Ask STC AI..."
+      />
+
+      <button id="ai-btn" class="btn primary">
+        Ask
+      </button>
+
+      <h3>Question</h3>
+      <div id="ai-question"></div>
+
+      <h3>Explanation</h3>
+      <details open>
+        <summary>AI Reasoning</summary>
+        <pre id="ai-explanation"></pre>
+      </details>
+
+      <h3>Result</h3>
+      <pre id="ai-result"></pre>
+
+      <h3>Citations</h3>
+      <ul id="ai-citations"></ul>
     </div>
   </section>
 
@@ -114,92 +144,61 @@
     </figure>
   </section>
 
-  <!-- WHAT IT DOES -->
-  <section id="capabilities" class="section">
-    <h2>What Shield Does</h2>
-    <p>
-      STC Shield analyzes live cloud identity configurations and models how
-      identities can be abused through trust relationships, role assumptions,
-      and privilege escalation paths across AWS, Azure, and GCP.
-    </p>
-  </section>
-
-  <!-- CAPABILITIES -->
-  <section class="section grid">
-    <div class="card">
-      <h3>Identity Trust Discovery</h3>
-      <p>SSO, OIDC, SAML, cross-account and federated trust paths.</p>
-    </div>
-
-    <div class="card">
-      <h3>Attack Path Modeling</h3>
-      <p>Identity → role → privilege → resource exploitation paths.</p>
-    </div>
-
-    <div class="card">
-      <h3>Risk Classification</h3>
-      <p>CRITICAL / HIGH / MEDIUM / LOW severity with reasoning.</p>
-    </div>
-
-    <div class="card">
-      <h3>Graph Visualization</h3>
-      <p>Explorable identity relationships with severity-aware edges.</p>
-    </div>
-
-    <div class="card">
-      <h3>Security Reporting</h3>
-      <p>Executive-ready summaries and operator-grade detail.</p>
-    </div>
-
-    <div class="card">
-      <h3>Multi-Cloud Native</h3>
-      <p>AWS, Azure, and GCP — same model, same logic.</p>
-    </div>
-  </section>
-
-  <!-- POSITIONING -->
-  <section class="section contrast">
-    <h2>What Shield Is Not</h2>
-    <p>
-      STC Shield is not a SIEM, not a CSPM clone, and not a compliance checkbox tool.
-      It focuses on identity attack paths — the fastest way attackers move in modern
-      cloud environments.
-    </p>
-  </section>
-
-  <!-- PHASE 2 ROADMAP -->
-  <section class="section">
-    <h2>Phase 2 Roadmap</h2>
-
-    <ul>
-      <li>
-        <strong>AI Security Reasoning</strong> —
-        Explain attack paths, prioritize risk, and suggest mitigations.
-      </li>
-      <li>
-        <strong>Assessment History</strong> —
-        Persist findings for comparison and consulting delivery.
-      </li>
-      <li>
-        <strong>Academy Integration</strong> —
-        Labs powered by real Shield findings.
-      </li>
-      <li>
-        <strong>Consulting Mode</strong> —
-        Executive summaries and export bundles.
-      </li>
-    </ul>
-
-    <p class="note">
-      Phase 2 extends Shield — it does not replace the operator console.
-    </p>
-  </section>
-
 </main>
 
 <footer class="footer">
   <p>© SecureTheCloud • STC Shield</p>
 </footer>
+
+<!-- STC AI CONFIG + CLIENT -->
+<script src="/js/config.js"></script>
+<script src="/js/ai.js"></script>
+
+<!-- AI UX POLISH (AUTHORITATIVE) -->
+<script>
+  document.querySelector("#ai-btn").addEventListener("click", async () => {
+    const q = document.querySelector("#ai-input").value.trim();
+    if (!q) return;
+
+    document.querySelector("#ai-question").textContent = q;
+    document.querySelector("#ai-explanation").textContent = "Thinking…";
+    document.querySelector("#ai-result").textContent = "";
+    document.querySelector("#ai-citations").innerHTML = "";
+
+    try {
+      const payload = await askSTCAI(q);
+      renderAnswer(payload);
+    } catch (err) {
+      document.querySelector("#ai-explanation").textContent =
+        "Unable to retrieve explanation at this time.";
+      alert(err.message);
+    }
+  });
+
+  // Graceful empty citations handling
+  function renderAnswer(payload) {
+    const { result, explanation, citations } = payload;
+
+    document.querySelector("#ai-result").textContent = result || "";
+    document.querySelector("#ai-explanation").textContent = explanation || "";
+
+    const citeEl = document.querySelector("#ai-citations");
+    citeEl.innerHTML = "";
+
+    if (!citations || citations.length === 0) {
+      const li = document.createElement("li");
+      li.textContent = "No datasets referenced for this query.";
+      citeEl.appendChild(li);
+      return;
+    }
+
+    citations.forEach(c => {
+      const li = document.createElement("li");
+      li.textContent = c;
+      citeEl.appendChild(li);
+    });
+  }
+</script>
 
 </body>
 </html>
