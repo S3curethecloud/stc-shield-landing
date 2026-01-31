@@ -1,4 +1,11 @@
+// js/ai.js
+
 async function askSTCAI(question) {
+  // --- CRITICAL GUARD (AUTHORITATIVE) ---
+  if (!window.STC_CONFIG || !window.STC_CONFIG.AI_API_BASE) {
+    throw new Error("STC_CONFIG.AI_API_BASE is not defined");
+  }
+
   const base = window.STC_CONFIG.AI_API_BASE;
 
   const res = await fetch(`${base}/ask/explain`, {
