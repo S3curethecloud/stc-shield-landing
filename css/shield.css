@@ -177,7 +177,7 @@ nav a:hover {
   padding: 96px 24px;
   display: flex;
   justify-content: center;
-  text-align: center; /* ✅ centers CTA without forcing width */
+  text-align: center;
 }
 
 .request-demo-inner {
@@ -203,7 +203,7 @@ nav a:hover {
 }
 
 /* =====================================================
-   ✅ FINAL, GUARANTEED FIX — CTA MUST NOT BE FULL WIDTH
+   CTA WIDTH FIX (LOCKED)
    ===================================================== */
 
 .request-demo .cta-button,
@@ -247,4 +247,15 @@ nav a:hover {
 
 .back-link:hover {
   color: #ffffff;
+}
+
+/* =====================================================
+   ✅ REQUIRED FIX — AI PANEL MUST BE CLICKABLE
+   ===================================================== */
+
+.ai-panel,
+.ai-panel * {
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
 }
