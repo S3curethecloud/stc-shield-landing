@@ -65,29 +65,6 @@
     </p>
   </section>
 
-  <!-- SHIELD CONSOLE PREVIEW -->
-  <section class="section">
-    <h2>Shield Console Preview</h2>
-
-    <div class="grid">
-      <a href="https://shield.securethecloud.dev/visualize/" class="card-link">
-        <div class="card">
-          <div class="card-icon">🛡️</div>
-          <h3>STC Shield Console Preview</h3>
-          <p>Operator console — read-only by design</p>
-        </div>
-      </a>
-
-      <a href="https://shield.securethecloud.dev/visualize/?view=graph" class="card-link">
-        <div class="card">
-          <div class="card-icon">🧠</div>
-          <h3>Attack Path Graph Visualization</h3>
-          <p>Identity attack paths — severity-aware graph</p>
-        </div>
-      </a>
-    </div>
-  </section>
-
   <!-- STC AI INTERACTION -->
   <section class="section contrast">
     <h2>Ask STC AI</h2>
@@ -95,53 +72,33 @@
       Query identity attack paths, trust relationships, and risk reasoning.
     </p>
 
-    <!-- Compliance disclaimer -->
     <p class="note">
       AI explanations are generated from deterministic Shield data and do not modify system state.
     </p>
 
     <div class="ai-panel">
-      <input
-        id="ai-input"
-        type="text"
-        placeholder="Ask STC AI..."
-      />
-
-      <button id="ai-btn" class="btn primary">
-        Ask
-      </button>
+      <input id="ai-input" type="text" placeholder="Ask STC AI..." />
+      <button id="ai-btn" class="btn primary">Ask</button>
 
       <h3>Question</h3>
       <div id="ai-question"></div>
 
-      <h3>Explanation</h3>
-      <details open>
-        <summary>AI Reasoning</summary>
-        <pre id="ai-explanation"></pre>
-      </details>
+      <section id="ai-output">
 
-      <h3>Result</h3>
-      <pre id="ai-result"></pre>
+        <h3>Explanation</h3>
+        <details open>
+          <summary>AI Reasoning</summary>
+          <pre id="ai-explanation"></pre>
+        </details>
 
-      <h3>Citations</h3>
-      <ul id="ai-citations"></ul>
+        <h3>Result</h3>
+        <pre id="ai-result"></pre>
+
+        <h3>Citations</h3>
+        <ul id="ai-citations" class="citations-list"></ul>
+
+      </section>
     </div>
-  </section>
-
-  <!-- STC SHIELD ARCHITECTURE -->
-  <section id="architecture" class="section contrast">
-    <h2>STC Shield Architecture</h2>
-
-    <figure class="media-card">
-      <img
-        src="/diagrams/shield-architecture.svg"
-        alt="STC Shield architecture diagram"
-      />
-      <figcaption>
-        Identity data ingestion → attack path modeling → operator visualization →
-        Phase 2 AI reasoning.
-      </figcaption>
-    </figure>
   </section>
 
 </main>
@@ -154,7 +111,7 @@
 <script src="/js/config.js"></script>
 <script src="/js/ai.js"></script>
 
-<!-- AI UX POLISH (AUTHORITATIVE) -->
+<!-- B3 — STRUCTURED CITATIONS (AUTHORITATIVE) -->
 <script>
   document.querySelector("#ai-btn").addEventListener("click", async () => {
     const q = document.querySelector("#ai-input").value.trim();
@@ -166,7 +123,13 @@
     document.querySelector("#ai-citations").innerHTML = "";
 
     try {
-      const payload = await askSTCAI(q);
+      const res = await fetch("/ask/explain", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: q })
+      });
+
+      const payload = await res.json();
       renderAnswer(payload);
     } catch (err) {
       document.querySelector("#ai-explanation").textContent =
@@ -175,12 +138,14 @@
     }
   });
 
-  // Graceful empty citations handling
   function renderAnswer(payload) {
     const { result, explanation, citations } = payload;
 
-    document.querySelector("#ai-result").textContent = result || "";
-    document.querySelector("#ai-explanation").textContent = explanation || "";
+    document.querySelector("#ai-result").textContent =
+      JSON.stringify(result, null, 2) || "";
+
+    document.querySelector("#ai-explanation").textContent =
+      explanation || "";
 
     const citeEl = document.querySelector("#ai-citations");
     citeEl.innerHTML = "";
@@ -194,7 +159,14 @@
 
     citations.forEach(c => {
       const li = document.createElement("li");
-      li.textContent = c;
+      li.className = "citation-item";
+
+      li.innerHTML = `
+        <strong>Dataset:</strong> ${c.dataset}
+        ${c.authority ? `<br /><strong>Authority:</strong> ${c.authority}` : ""}
+        ${c.last_sync ? `<br /><strong>Last Sync:</strong> ${c.last_sync}` : ""}
+      `;
+
       citeEl.appendChild(li);
     });
   }
