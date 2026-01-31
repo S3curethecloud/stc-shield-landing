@@ -107,70 +107,9 @@
   <p>© SecureTheCloud • STC Shield</p>
 </footer>
 
-<!-- STC AI CONFIG + CLIENT -->
+<!-- STC AI CONFIG + CLIENT (AUTHORITATIVE ORDER) -->
 <script src="/js/config.js"></script>
 <script src="/js/ai.js"></script>
-
-<!-- B3 — STRUCTURED CITATIONS (AUTHORITATIVE) -->
-<script>
-  document.querySelector("#ai-btn").addEventListener("click", async () => {
-    const q = document.querySelector("#ai-input").value.trim();
-    if (!q) return;
-
-    document.querySelector("#ai-question").textContent = q;
-    document.querySelector("#ai-explanation").textContent = "Thinking…";
-    document.querySelector("#ai-result").textContent = "";
-    document.querySelector("#ai-citations").innerHTML = "";
-
-    try {
-      const res = await fetch("/ask/explain", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: q })
-      });
-
-      const payload = await res.json();
-      renderAnswer(payload);
-    } catch (err) {
-      document.querySelector("#ai-explanation").textContent =
-        "Unable to retrieve explanation at this time.";
-      alert(err.message);
-    }
-  });
-
-  function renderAnswer(payload) {
-    const { result, explanation, citations } = payload;
-
-    document.querySelector("#ai-result").textContent =
-      JSON.stringify(result, null, 2) || "";
-
-    document.querySelector("#ai-explanation").textContent =
-      explanation || "";
-
-    const citeEl = document.querySelector("#ai-citations");
-    citeEl.innerHTML = "";
-
-    if (!citations || citations.length === 0) {
-      const li = document.createElement("li");
-      li.textContent = "No datasets referenced for this query.";
-      citeEl.appendChild(li);
-      return;
-    }
-
-    citations.forEach(c => {
-      const li = document.createElement("li");
-      li.className = "citation-item";
-
-      li.innerHTML = `
-        <strong>Dataset:</strong> ${c.dataset}
-        ${c.authority ? `<br /><strong>Authority:</strong> ${c.authority}` : ""}
-        ${c.last_sync ? `<br /><strong>Last Sync:</strong> ${c.last_sync}` : ""}
-      `;
-
-      citeEl.appendChild(li);
-    });
-  }
-</script>
 
 </body>
 </html>

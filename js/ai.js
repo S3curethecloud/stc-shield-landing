@@ -1,7 +1,7 @@
 // js/ai.js
 
 async function askSTCAI(question) {
-  // --- CRITICAL GUARD (AUTHORITATIVE) ---
+  // --- CRITICAL GUARD ---
   if (!window.STC_CONFIG || !window.STC_CONFIG.AI_API_BASE) {
     throw new Error("STC_CONFIG.AI_API_BASE is not defined");
   }
@@ -53,3 +53,29 @@ function renderAnswer(payload) {
     citeEl.appendChild(li);
   });
 }
+
+/**
+ * AUTHORITATIVE FIX:
+ * Bind UI events ONLY after DOMContentLoaded
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.querySelector("#ai-btn");
+  const input = document.querySelector("#ai-input");
+
+  if (!btn || !input) {
+    console.error("STC AI UI elements not found");
+    return;
+  }
+
+  btn.addEventListener("click", async () => {
+    const q = input.value.trim();
+    if (!q) return;
+
+    try {
+      const payload = await askSTCAI(q);
+      renderAnswer(payload);
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+});
