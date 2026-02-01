@@ -1,12 +1,10 @@
 /* ================================
-   STC SHIELD — AI PANEL LOGIC v1.1
-   Read-only • Operator-trust-first
+   STC SHIELD — AI PANEL LOGIC v1.2
+   State-driven • Operator-trust-first
    ================================ */
 
-/* ---------- GLOBAL STATE ---------- */
-const state = {
-  selectedFinding: null,
-};
+/* ---------- CANONICAL STATE ---------- */
+let activeFindingId = null;
 
 /* ---------- DOM REFERENCES ---------- */
 const findingItems = document.querySelectorAll(".finding-item");
@@ -22,32 +20,8 @@ document
   .querySelector(".console-ai")
   ?.classList.remove("active");
 
-/* ---------- RESET AI STATE ---------- */
-function resetAI() {
-  state.selectedFinding = null;
-
-  aiPanel?.classList.remove("active");
-  if (aiButton) aiButton.disabled = true;
-
-  if (aiStateText) {
-    aiStateText.textContent =
-      "Select a finding to enable AI explanations.";
-  }
-
-  if (aiExplanation) {
-    aiExplanation.textContent =
-      "AI explanations are grounded in Shield data only.";
-  }
-
-  if (aiCitations) {
-    aiCitations.innerHTML = "<li>No datasets referenced.</li>";
-  }
-}
-
-/* ---------- ENABLE AI (EXPLICIT USER ACTION ONLY) ---------- */
-function enableAI(findingText) {
-  state.selectedFinding = findingText;
-
+/* ---------- ENABLE AI (IDEMPOTENT) ---------- */
+function enableAI() {
   aiPanel?.classList.add("active");
   if (aiButton) aiButton.disabled = false;
 
@@ -57,32 +31,43 @@ function enableAI(findingText) {
   }
 }
 
-/* ---------- FINDING SELECTION ---------- */
+/* ---------- RENDER AI PANEL (STATE-DRIVEN) ---------- */
+function updateAIPanel(findingId) {
+  if (!findingId) return;
+
+  enableAI(); // idempotent, safe to call every time
+  renderExplanation(findingId);
+  renderCitations(findingId);
+}
+
+/* ---------- FINDING SELECTION (CANONICAL) ---------- */
 findingItems.forEach(item => {
   item.addEventListener("click", () => {
-    findingItems.forEach(i => i.classList.remove("selected"));
-    item.classList.add("selected");
+    const id = item.dataset.findingId || item.textContent.trim();
 
-    const title =
-      item.querySelector("strong")?.textContent ||
-      "Selected finding";
+    /* Always update state */
+    activeFindingId = id;
 
-    enableAI(title);
+    /* Update visual selection */
+    findingItems.forEach(el => el.classList.remove("active"));
+    item.classList.add("active");
+
+    /* ALWAYS re-render AI panel */
+    updateAIPanel(activeFindingId);
   });
 });
 
 /* ---------- AI INVOCATION ---------- */
 aiButton?.addEventListener("click", async () => {
-  if (!state.selectedFinding) return;
+  if (!activeFindingId) return;
 
   aiButton.disabled = true;
   if (aiStateText) aiStateText.textContent = "Analyzing…";
 
   try {
     const response = await askSTCAI(
-      `Explain why this identity is reachable: ${state.selectedFinding}`
+      `Explain why this identity is reachable: ${activeFindingId}`
     );
-
     renderAIResponse(response);
   } catch (err) {
     if (aiStateText) {
@@ -92,6 +77,20 @@ aiButton?.addEventListener("click", async () => {
     aiButton.disabled = false;
   }
 });
+
+/* ---------- RENDER EXPLANATION ---------- */
+function renderExplanation(findingId) {
+  if (aiExplanation) {
+    aiExplanation.textContent =
+      "AI explanations are grounded in Shield data only.";
+  }
+}
+
+/* ---------- RENDER CITATIONS ---------- */
+function renderCitations(findingId) {
+  if (!aiCitations) return;
+  aiCitations.innerHTML = "<li>No datasets referenced.</li>";
+}
 
 /* ---------- RENDER RESPONSE ---------- */
 function renderAIResponse(payload) {
@@ -127,5 +126,5 @@ function renderAIResponse(payload) {
 
 /* ---------- TOOLTIP WIRING (UNCHANGED) ---------- */
 (function () {
-  // Tooltip JS unchanged and intentionally omitted
+  // Tooltip JS intentionally unchanged
 })();
