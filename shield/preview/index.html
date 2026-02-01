@@ -24,178 +24,145 @@
 
 <body>
 
-<main class="shield-console">
+<!-- =================================================
+     CANONICAL CONSOLE LAYOUT ROOT
+     (Matches CSS grid authority exactly)
+     ================================================= -->
+<main class="console-layout">
 
   <!-- =========================
-       CONSOLE HEADER
+       LEFT: FINDINGS
        ========================= -->
-  <section class="console-header">
-    <h1>STC Shield — Console Preview</h1>
+  <aside class="console-findings">
 
-    <p class="console-subtitle">
-      Read-only identity risk visualization. Deterministic findings only.
+    <h2
+      data-tooltip="Deterministic findings computed from the identity graph. No simulation. No guesswork.">
+      Shield Findings
+    </h2>
+
+    <ul class="findings-list">
+
+      <li
+        class="finding-item selected"
+        data-tooltip="Deterministic finding computed from live identity graph. No simulation. No remediation.">
+        <span class="severity high">HIGH</span>
+        <div>
+          <strong>Cross-account role escalation</strong>
+          <p>AWS IAM role reachable via Azure federation</p>
+        </div>
+      </li>
+
+      <li
+        class="finding-item"
+        data-tooltip="Trust relationship allows access from an external system. Review usage and necessity.">
+        <span class="severity medium">MED</span>
+        <div>
+          <strong>Stale service account trust</strong>
+          <p>Unused GCP identity reachable from CI</p>
+        </div>
+      </li>
+
+      <li
+        class="finding-item"
+        data-tooltip="Broad permissions detected. Impact limited to read-only access.">
+        <span class="severity low">LOW</span>
+        <div>
+          <strong>Over-permissive read access</strong>
+          <p>Broad S3 read across multiple accounts</p>
+        </div>
+      </li>
+
+    </ul>
+
+    <p class="panel-footnote">
+      Findings are computed deterministically from identity graphs.
     </p>
 
-    <a
-      class="btn primary"
-      href="#"
-      aria-disabled="true"
-      data-tooltip="Preview mode only. Live data visibility without configuration or remediation.">
-      Launch Shield Console (Preview)
-    </a>
+  </aside>
 
-    <p class="console-note">
-      Operator-facing preview. No automated remediation.
-    </p>
+  <!-- =========================
+       CENTER: FINDING DETAIL
+       ========================= -->
+  <section class="console-detail">
+
+    <h2
+      data-tooltip="Detailed explanation of why this identity or path is reachable.">
+      Finding Detail
+    </h2>
+
+    <div class="detail-block">
+      <h3>Why is this reachable?</h3>
+      <p>
+        This identity can traverse a trust relationship from Azure Entra ID
+        into an AWS account via a federated role with insufficient conditions.
+      </p>
+    </div>
+
+    <div class="detail-block">
+      <h3>Impact</h3>
+      <p>
+        An attacker with control of this identity could assume privileged
+        access across cloud boundaries without direct credential compromise.
+      </p>
+    </div>
+
+    <div class="detail-block">
+      <h3>Constraints</h3>
+      <ul>
+        <li>Read-only visibility</li>
+        <li>No configuration mutation</li>
+        <li>No automated remediation</li>
+      </ul>
+    </div>
+
   </section>
 
   <!-- =========================
-       CONSOLE GRID
+       RIGHT: AI
        ========================= -->
-  <section class="console-grid">
+  <aside class="console-ai">
 
-    <!-- =========================
-         LEFT: FINDINGS
-         ========================= -->
-    <aside class="console-findings">
+    <h2
+      data-tooltip="AI-assisted explanations derived strictly from Shield findings.">
+      AI-Augmented Reasoning
+    </h2>
 
-      <h2
-        data-tooltip="Deterministic findings computed from the identity graph. No simulation. No guesswork.">
-        Shield Findings
-      </h2>
+    <p
+      class="ai-state disabled"
+      data-tooltip="Select a finding first. AI explanations require an active identity or attack path.">
+      Select a finding to enable AI explanations.
+    </p>
 
-      <ul class="findings-list">
+    <button
+      class="btn secondary"
+      disabled
+      data-tooltip="Select a finding first. AI explanations require an active identity or attack path.">
+      Explain with STC AI
+    </button>
 
-        <li
-          class="finding-item selected"
-          data-tooltip="Deterministic finding computed from live identity graph. No simulation. No remediation.">
-          <span class="severity high">HIGH</span>
-          <div>
-            <strong>Cross-account role escalation</strong>
-            <p>AWS IAM role reachable via Azure federation</p>
-          </div>
-        </li>
+    <div class="ai-output">
 
-        <li
-          class="finding-item"
-          data-tooltip="Trust relationship allows access from an external system. Review usage and necessity.">
-          <span class="severity medium">MED</span>
-          <div>
-            <strong>Stale service account trust</strong>
-            <p>Unused GCP identity reachable from CI</p>
-          </div>
-        </li>
+      <h3
+        data-tooltip="Natural-language explanation generated from deterministic Shield data.">
+        Explanation
+      </h3>
 
-        <li
-          class="finding-item"
-          data-tooltip="Broad permissions detected. Impact limited to read-only access.">
-          <span class="severity low">LOW</span>
-          <div>
-            <strong>Over-permissive read access</strong>
-            <p>Broad S3 read across multiple accounts</p>
-          </div>
-        </li>
+      <p class="muted">
+        AI explanations are grounded in Shield data only.
+      </p>
 
+      <h3
+        data-tooltip="Every explanation includes dataset provenance for audit and compliance.">
+        Citations
+      </h3>
+
+      <ul class="citations muted">
+        <li>No datasets referenced.</li>
       </ul>
 
-      <p class="panel-footnote">
-        Findings are computed deterministically from identity graphs.
-      </p>
+    </div>
 
-    </aside>
-
-    <!-- =========================
-         CENTER: DETAIL
-         ========================= -->
-    <section class="console-detail">
-
-      <h2
-        data-tooltip="Detailed explanation of why this identity or path is reachable.">
-        Finding Detail
-      </h2>
-
-      <div class="detail-block">
-        <h3>Why is this reachable?</h3>
-        <p>
-          This identity can traverse a trust relationship from Azure Entra ID
-          into an AWS account via a federated role with insufficient conditions.
-        </p>
-      </div>
-
-      <div class="detail-block">
-        <h3>Impact</h3>
-        <p>
-          An attacker with control of this identity could assume privileged
-          access across cloud boundaries without direct credential compromise.
-        </p>
-      </div>
-
-      <div class="detail-block">
-        <h3>Constraints</h3>
-        <ul>
-          <li>Read-only visibility</li>
-          <li>No configuration mutation</li>
-          <li>No automated remediation</li>
-        </ul>
-      </div>
-
-    </section>
-
-    <!-- =========================
-         RIGHT: AI
-         ========================= -->
-    <aside class="console-ai">
-
-      <h2
-        data-tooltip="AI-assisted explanations derived strictly from Shield findings.">
-        AI-Augmented Reasoning
-      </h2>
-
-      <p
-        class="ai-state disabled"
-        data-tooltip="Select a finding first. AI explanations require an active identity or attack path.">
-        Select a finding to enable AI explanations.
-      </p>
-
-      <button
-        class="btn secondary"
-        disabled
-        data-tooltip="Select a finding first. AI explanations require an active identity or attack path.">
-        Explain with STC AI
-      </button>
-
-      <div class="ai-output">
-
-        <h3
-          data-tooltip="Natural-language explanation generated from deterministic Shield data.">
-          Explanation
-        </h3>
-
-        <p class="muted">
-          AI explanations are grounded in Shield data only.
-        </p>
-
-        <h3
-          data-tooltip="Every explanation includes dataset provenance for audit and compliance.">
-          Citations
-        </h3>
-
-        <ul class="citations muted">
-          <li>No datasets referenced.</li>
-        </ul>
-
-      </div>
-
-    </aside>
-
-  </section>
-
-  <!-- =========================
-       FOOTER
-       ========================= -->
-  <footer class="console-footer">
-    <p>© SecureTheCloud • STC Shield</p>
-  </footer>
+  </aside>
 
 </main>
 
