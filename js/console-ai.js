@@ -1,128 +1,68 @@
-/* ================================
-   STC SHIELD — AI PANEL LOGIC v1.2
-   State-driven • Operator-trust-first
-   ================================ */
+/* ============================================================
+   STC Shield — Canonical Finding → AI Sync (FIX)
+   State-driven • Deterministic • Operator-trust-first
+   ============================================================ */
 
-/* ---------- CANONICAL STATE ---------- */
-let activeFindingId = null;
+let activeFinding = null;
 
 /* ---------- DOM REFERENCES ---------- */
 const findingItems = document.querySelectorAll(".finding-item");
 const aiPanel = document.querySelector(".console-ai");
-const aiButton = aiPanel?.querySelector("button");
-const aiStateText = aiPanel?.querySelector(".ai-state");
-const aiExplanation = aiPanel?.querySelector(".ai-output p");
-const aiCitations = aiPanel?.querySelector(".citations");
+const aiStatus = aiPanel?.querySelector(".ai-status");
+const aiExplanation = aiPanel?.querySelector(".ai-explanation");
+const aiCitations = aiPanel?.querySelector(".ai-citations");
+const aiButton = aiPanel?.querySelector(".ai-btn");
 
 /* ---------- SANITY RESET (CRITICAL) ---------- */
 /* AI MUST NEVER AUTO-ACTIVATE */
-document
-  .querySelector(".console-ai")
-  ?.classList.remove("active");
+aiPanel?.classList.remove("active");
 
-/* ---------- ENABLE AI (IDEMPOTENT) ---------- */
-function enableAI() {
+/* ---------- CANONICAL AI RENDER ---------- */
+function renderAIForFinding(findingEl) {
+  if (!findingEl) return;
+
+  /* Update AI panel state (idempotent) */
   aiPanel?.classList.add("active");
-  if (aiButton) aiButton.disabled = false;
+  aiButton?.classList.remove("disabled");
 
-  if (aiStateText) {
-    aiStateText.textContent =
+  const title =
+    findingEl.querySelector(".finding-title")?.textContent || "Finding";
+  const severity =
+    findingEl.querySelector(".severity")?.textContent || "";
+
+  if (aiStatus) {
+    aiStatus.textContent =
       "AI ready. Explanation will reference Shield data only.";
   }
+
+  if (aiExplanation) {
+    aiExplanation.textContent =
+      `This finding (${severity}) was computed deterministically from the live identity graph. ` +
+      `AI explanations describe reachability and impact without modifying system state.`;
+  }
+
+  if (aiCitations) {
+    aiCitations.innerHTML =
+      "<li>Shield identity graph (deterministic)</li>";
+  }
 }
 
-/* ---------- RENDER AI PANEL (STATE-DRIVEN) ---------- */
-function updateAIPanel(findingId) {
-  if (!findingId) return;
-
-  enableAI(); // idempotent, safe to call every time
-  renderExplanation(findingId);
-  renderCitations(findingId);
-}
-
-/* ---------- FINDING SELECTION (CANONICAL) ---------- */
-findingItems.forEach(item => {
+/* ---------- FINDING SELECTION (AUTHORITATIVE) ---------- */
+findingItems.forEach((item) => {
   item.addEventListener("click", () => {
-    const id = item.dataset.findingId || item.textContent.trim();
+    /* 1️⃣ Clear previous selection (always) */
+    findingItems.forEach((el) =>
+      el.classList.remove("selected", "active")
+    );
 
-    /* Always update state */
-    activeFindingId = id;
+    /* 2️⃣ Set new active finding */
+    item.classList.add("selected", "active");
+    activeFinding = item;
 
-    /* Update visual selection */
-    findingItems.forEach(el => el.classList.remove("active"));
-    item.classList.add("active");
-
-    /* ALWAYS re-render AI panel */
-    updateAIPanel(activeFindingId);
+    /* 3️⃣ ALWAYS re-render AI panel */
+    renderAIForFinding(activeFinding);
   });
 });
-
-/* ---------- AI INVOCATION ---------- */
-aiButton?.addEventListener("click", async () => {
-  if (!activeFindingId) return;
-
-  aiButton.disabled = true;
-  if (aiStateText) aiStateText.textContent = "Analyzing…";
-
-  try {
-    const response = await askSTCAI(
-      `Explain why this identity is reachable: ${activeFindingId}`
-    );
-    renderAIResponse(response);
-  } catch (err) {
-    if (aiStateText) {
-      aiStateText.textContent =
-        "AI unavailable. Deterministic findings remain valid.";
-    }
-    aiButton.disabled = false;
-  }
-});
-
-/* ---------- RENDER EXPLANATION ---------- */
-function renderExplanation(findingId) {
-  if (aiExplanation) {
-    aiExplanation.textContent =
-      "AI explanations are grounded in Shield data only.";
-  }
-}
-
-/* ---------- RENDER CITATIONS ---------- */
-function renderCitations(findingId) {
-  if (!aiCitations) return;
-  aiCitations.innerHTML = "<li>No datasets referenced.</li>";
-}
-
-/* ---------- RENDER RESPONSE ---------- */
-function renderAIResponse(payload) {
-  const { explanation, citations } = payload || {};
-
-  if (aiExplanation) {
-    aiExplanation.textContent =
-      explanation || "No explanation returned.";
-  }
-
-  if (!aiCitations) return;
-
-  aiCitations.innerHTML = "";
-
-  if (!citations || citations.length === 0) {
-    aiCitations.innerHTML = "<li>No datasets referenced.</li>";
-  } else {
-    citations.forEach(c => {
-      const li = document.createElement("li");
-      li.textContent =
-        `${c.dataset}` +
-        `${c.authority ? " · " + c.authority : ""}` +
-        `${c.last_sync ? " · last_sync=" + c.last_sync : ""}`;
-      aiCitations.appendChild(li);
-    });
-  }
-
-  if (aiStateText) {
-    aiStateText.textContent =
-      "AI explanation generated from Shield data.";
-  }
-}
 
 /* ---------- TOOLTIP WIRING (UNCHANGED) ---------- */
 (function () {
