@@ -138,3 +138,38 @@ html, body {
   transition: opacity 0.15s ease;
   pointer-events: none;
 }
+
+/* ============================================================
+   Surgical polish — reading comfort & micro-UX (SAFE)
+   ============================================================ */
+
+/* 1️⃣ Improve vertical rhythm (reading comfort) */
+.console-detail h3 {
+  margin-top: 28px;
+  margin-bottom: 8px;
+}
+
+.console-detail p {
+  line-height: 1.6;
+  max-width: 72ch;
+}
+
+/* 2️⃣ Make findings feel clickable (without lying) */
+.console-findings li {
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.console-findings li:hover {
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-1px);
+}
+
+/* 3️⃣ AI panel visual state (disabled by design) */
+.console-ai {
+  filter: saturate(0.85);
+}
+
+.console-ai.disabled {
+  opacity: 0.55;
+}
