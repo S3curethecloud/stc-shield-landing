@@ -294,3 +294,127 @@ html, body {
   font-size: 12px;
   margin-bottom: 4px;
 }
+
+/* ================================
+   STC SHIELD CONSOLE — LAYOUT v1.0
+   ================================ */
+
+.console-root {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.console-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.console-subtitle {
+  color: #9ca3af;
+  margin-top: 0.5rem;
+}
+
+.console-note {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.console-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 320px;
+  gap: 2rem;
+}
+
+.console-panel {
+  background: linear-gradient(180deg, #0f172a, #0b1220);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.findings-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.finding-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.finding-item:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+.finding-item.selected {
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.severity {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.severity.high { background: #7f1d1d; color: #fecaca; }
+.severity.medium { background: #78350f; color: #fde68a; }
+.severity.low { background: #064e3b; color: #a7f3d0; }
+
+.detail-block {
+  margin-top: 1.5rem;
+}
+
+.detail-block h3 {
+  margin-bottom: 0.25rem;
+}
+
+.ai-panel.collapsed {
+  opacity: 0.6;
+}
+
+.ai-state.disabled {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  margin-bottom: 1rem;
+}
+
+.citations {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.console-footer {
+  text-align: center;
+  margin-top: 4rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* ============================================================
+   STC Tooltip — Enterprise Calm
+   ============================================================ */
+
+.stc-tooltip {
+  position: fixed;
+  z-index: 9999;
+  max-width: 260px;
+  padding: 8px 10px;
+  background: rgba(15, 22, 32, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #e5e7eb;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}

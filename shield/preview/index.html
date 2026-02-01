@@ -9,7 +9,7 @@
   <!-- Core styles -->
   <link rel="stylesheet" href="/css/shield.css" />
 
-  <!-- Security posture -->
+  <!-- Security posture (LOCKED) -->
   <meta
     http-equiv="Content-Security-Policy"
     content="
@@ -24,167 +24,178 @@
 
 <body>
 
+<main class="console-root">
+
   <!-- =========================
-       NAV
+       CONSOLE HEADER
        ========================= -->
-  <header class="nav">
-    <div class="nav-inner">
-      <strong>SecureTheCloud</strong>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/shield" class="active">Shield</a>
-        <a href="/ai">AI</a>
-        <a href="/labs">Labs</a>
-        <a href="/consulting">Consulting</a>
-      </nav>
-    </div>
+  <header class="console-header">
+    <h1>STC Shield — Console Preview</h1>
+    <p class="console-subtitle">
+      Read-only identity risk visualization. Deterministic findings only.
+    </p>
+
+    <a
+      class="btn primary"
+      href="#"
+      aria-disabled="true"
+      data-tooltip="Preview mode only. Live data visibility without configuration or remediation.">
+      Launch Shield Console (Preview)
+    </a>
+
+    <p class="console-note">
+      Operator-facing preview. No automated remediation.
+    </p>
   </header>
 
   <!-- =========================
-       HERO / PRIMARY CTA
+       CONSOLE GRID
        ========================= -->
-  <section class="hero">
-    <h1>STC Shield — Console Preview</h1>
-
-    <p class="subtitle">
-      Read-only identity risk visualization.
-      Deterministic findings only.
-    </p>
-
-    <div class="cta-group">
-      <!-- ✅ TRAILING SLASH FIXED -->
-      <a
-        class="btn primary"
-        href="/shield/preview/"
-        aria-label="Launch Shield Console Preview">
-        Launch Shield Console (Preview)
-      </a>
-    </div>
-
-    <p class="note">
-      Operator-facing preview. No automated remediation.
-    </p>
-  </section>
-
-  <!-- =========================
-       MAIN LAYOUT
-       ========================= -->
-  <main class="shield-layout">
+  <section class="console-grid">
 
     <!-- =========================
-         LEFT: FINDINGS / GRAPH
+         LEFT: FINDINGS LIST
          ========================= -->
-    <section class="shield-main">
+    <aside class="console-panel findings-panel">
+      <h2
+        data-tooltip="Deterministic findings computed from the identity graph. No simulation. No guesswork.">
+        Shield Findings
+      </h2>
 
-      <header class="shield-header">
-        <h2>Shield Findings</h2>
-        <p class="muted">
-          Select an identity or attack path to inspect risk.
-        </p>
-      </header>
+      <ul class="findings-list">
 
-      <div class="shield-canvas">
-        <p class="muted">
-          No selection yet.
+        <li
+          class="finding-item selected"
+          data-tooltip="Deterministic finding computed from live identity graph. No simulation. No remediation.">
+          <span class="severity high">HIGH</span>
+          <div>
+            <strong>Cross-account role escalation</strong>
+            <p>AWS IAM role reachable via Azure federation</p>
+          </div>
+        </li>
+
+        <li
+          class="finding-item"
+          data-tooltip="Trust relationship allows access from an external system. Review usage and necessity.">
+          <span class="severity medium">MED</span>
+          <div>
+            <strong>Stale service account trust</strong>
+            <p>Unused GCP identity reachable from CI</p>
+          </div>
+        </li>
+
+        <li
+          class="finding-item"
+          data-tooltip="Broad permissions detected. Impact limited to read-only access.">
+          <span class="severity low">LOW</span>
+          <div>
+            <strong>Over-permissive read access</strong>
+            <p>Broad S3 read across multiple accounts</p>
+          </div>
+        </li>
+
+      </ul>
+
+      <p class="panel-footnote">
+        Findings are computed deterministically from identity graphs.
+      </p>
+    </aside>
+
+    <!-- =========================
+         CENTER: FINDING DETAIL
+         ========================= -->
+    <section class="console-panel detail-panel">
+      <h2
+        data-tooltip="Detailed explanation of why this identity or path is reachable.">
+        Finding Detail
+      </h2>
+
+      <div class="detail-block">
+        <h3>Why is this reachable?</h3>
+        <p>
+          This identity can traverse a trust relationship from Azure Entra ID
+          into an AWS account via a federated role with insufficient conditions.
         </p>
       </div>
 
-      <!-- =========================
-           CONSOLE ENTRY CARDS
-           ========================= -->
-      <section class="section">
-        <div class="grid">
+      <div class="detail-block">
+        <h3>Impact</h3>
+        <p>
+          An attacker with control of this identity could assume privileged
+          access across cloud boundaries without direct credential compromise.
+        </p>
+      </div>
 
-          <!-- ✅ TRAILING SLASH FIXED -->
-          <a href="/shield/preview/" class="card-link">
-            <div class="card">
-              <h3>STC Shield Console</h3>
-              <p>
-                Operator view of identity risk.
-                Read-only access to live findings.
-              </p>
-            </div>
-          </a>
-
-          <!-- ✅ TRAILING SLASH + PARAM FIXED -->
-          <a href="/shield/preview/?view=graph" class="card-link">
-            <div class="card">
-              <h3>Attack Path Graph</h3>
-              <p>
-                Visualize identity traversal across trust boundaries.
-                Severity-aware paths.
-              </p>
-            </div>
-          </a>
-
-        </div>
-      </section>
-
+      <div class="detail-block">
+        <h3>Constraints</h3>
+        <ul>
+          <li>Read-only visibility</li>
+          <li>No configuration mutation</li>
+          <li>No automated remediation</li>
+        </ul>
+      </div>
     </section>
 
     <!-- =========================
-         RIGHT: AI DRAWER v1.0
+         RIGHT: AI DRAWER
          ========================= -->
-    <aside class="shield-sidebar">
+    <aside class="console-panel ai-panel collapsed">
+      <h2
+        data-tooltip="AI-assisted explanations derived strictly from Shield findings.">
+        AI-Augmented Reasoning
+      </h2>
 
-      <div class="ai-drawer disabled" id="ai-drawer">
+      <p
+        class="ai-state disabled"
+        data-tooltip="Select a finding first. AI explanations require an active identity or attack path.">
+        Select a finding to enable AI explanations.
+      </p>
 
-        <h4>Ask STC AI</h4>
+      <button
+        class="btn secondary"
+        disabled
+        data-tooltip="Select a finding first. AI explanations require an active identity or attack path.">
+        Explain with STC AI
+      </button>
+
+      <div class="ai-output">
+
+        <h3
+          data-tooltip="Natural-language explanation generated from deterministic Shield data.">
+          Explanation
+        </h3>
 
         <p class="muted">
-          Explain the selected identity or attack path.
-          AI responses are grounded in Shield data only.
+          AI explanations are grounded in Shield data only.
         </p>
 
-        <div class="ai-context">
-          <span class="context-label">Context</span>
-          <span class="context-value">No selection</span>
-        </div>
+        <h3
+          data-tooltip="Every explanation includes dataset provenance for audit and compliance.">
+          Citations
+        </h3>
 
-        <textarea
-          id="ai-input"
-          placeholder="Why is this identity reachable?"
-          disabled
-        ></textarea>
-
-        <button
-          id="ai-btn"
-          class="ai-btn"
-          disabled
-        >
-          Explain with STC AI
-        </button>
-
-        <div class="ai-output">
-
-          <h5>Explanation</h5>
-          <pre id="ai-explanation" class="ai-box muted">
-Select a finding to enable AI reasoning.
-          </pre>
-
-          <h5>Citations</h5>
-          <ul id="ai-citations" class="citations muted">
-            <li>No datasets referenced.</li>
-          </ul>
-
-        </div>
+        <ul class="citations muted">
+          <li>No datasets referenced.</li>
+        </ul>
 
       </div>
     </aside>
 
-  </main>
+  </section>
 
   <!-- =========================
        FOOTER
        ========================= -->
-  <footer class="footer">
+  <footer class="console-footer">
     <p>© SecureTheCloud • STC Shield</p>
   </footer>
 
-  <!-- =========================
-       AI DRAWER SCRIPT
-       ========================= -->
-  <script src="/js/console-ai.js"></script>
+</main>
+
+<!-- =========================
+     CONSOLE AI SCRIPT
+     ========================= -->
+<script src="/js/console-ai.js"></script>
 
 </body>
 </html>
