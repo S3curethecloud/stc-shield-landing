@@ -1,5 +1,5 @@
 /* =========================================================
-   STC SHIELD CONSOLE — DARK ENTERPRISE THEME (v1.1)
+   STC SHIELD CONSOLE — DARK ENTERPRISE THEME (v1.3)
    Read-only • Operator-first • AI-augmented
    ========================================================= */
 
@@ -17,76 +17,43 @@ html, body {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* ================================
-   Shield Console Layout (CANONICAL)
-   ================================ */
+/* ============================================================
+   STC Shield — Console Layout (Authoritative)
+   ============================================================ */
 
-.shield-console {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 32px 24px;
-}
-
-.console-header {
-  margin-bottom: 32px;
-  text-align: center;
-}
-
-.console-grid {
+.console-layout {
   display: grid;
-  grid-template-columns: 260px 1fr 360px;
+  grid-template-columns: 280px 1fr 360px;
   gap: 24px;
-  align-items: start;
+  padding: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
-/* ---- Findings (left rail) ---- */
+/* ---------- Findings (LEFT) ---------- */
 .console-findings {
   background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 10px;
+  border: 1px solid rgba(255,215,0,0.15);
+  border-radius: 12px;
   padding: 16px;
-  max-height: calc(100vh - 240px);
   overflow-y: auto;
+  max-height: calc(100vh - 160px);
 }
 
-/* ---- Detail panel (center) ---- */
+/* ---------- Detail (CENTER) ---------- */
 .console-detail {
   background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 12px;
   padding: 24px;
-  min-height: 420px;
 }
 
-/* ---- AI panel (right) ---- */
+/* ---------- AI Panel (RIGHT) ---------- */
 .console-ai {
-  background: linear-gradient(
-    180deg,
-    rgba(20,28,40,0.9),
-    rgba(15,22,32,0.9)
-  );
-  border: 1px solid rgba(255,200,80,0.15);
+  background: rgba(255,255,255,0.02);
+  border-left: 2px solid rgba(255,215,0,0.35);
   border-radius: 12px;
-  padding: 20px;
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.console-ai.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* ---------- Header (legacy-compatible) ---------- */
-.console-subtitle {
-  color: #9ca3af;
-  margin-top: 0.5rem;
-}
-
-.console-note {
-  margin-top: 0.75rem;
-  font-size: 0.9rem;
-  color: #6b7280;
+  padding: 16px;
+  opacity: 0.75; /* intentionally calm */
 }
 
 /* ---------- Findings ---------- */
@@ -149,14 +116,6 @@ html, body {
   color: #9ca3af;
   list-style: none;
   padding-left: 0;
-}
-
-/* ---------- Footer ---------- */
-.console-footer {
-  text-align: center;
-  margin-top: 4rem;
-  font-size: 0.85rem;
-  color: #6b7280;
 }
 
 /* ============================================================
