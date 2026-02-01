@@ -30,17 +30,28 @@
   <!-- =========================
        LEFT: FINDINGS
        ========================= -->
-  <aside class="console-findings">
+  <aside class="console-findings"
+         role="listbox"
+         aria-label="Shield findings"
+         aria-describedby="findings-help">
 
     <h2
       data-tooltip="Deterministic findings computed from the identity graph. No simulation. No guesswork.">
       Shield Findings
     </h2>
 
+    <p id="findings-help" class="visually-hidden">
+      Use arrow keys to navigate findings. Press Enter to select.
+    </p>
+
     <ul class="findings-list">
 
       <li
         class="finding-item selected"
+        role="option"
+        tabindex="0"
+        aria-selected="true"
+        data-finding-id="high-cross-account"
         data-tooltip="Deterministic finding computed from live identity graph. No simulation. No remediation.">
         <span class="severity high">HIGH</span>
         <div>
@@ -51,6 +62,10 @@
 
       <li
         class="finding-item"
+        role="option"
+        tabindex="0"
+        aria-selected="false"
+        data-finding-id="med-stale-trust"
         data-tooltip="Trust relationship allows access from an external system. Review usage and necessity.">
         <span class="severity medium">MED</span>
         <div>
@@ -61,6 +76,10 @@
 
       <li
         class="finding-item"
+        role="option"
+        tabindex="0"
+        aria-selected="false"
+        data-finding-id="low-overpermissive-read"
         data-tooltip="Broad permissions detected. Impact limited to read-only access.">
         <span class="severity low">LOW</span>
         <div>
@@ -80,10 +99,12 @@
   <!-- =========================
        CENTER: DETAIL
        ========================= -->
-  <section class="console-detail">
+  <section class="console-detail"
+           role="region"
+           aria-labelledby="detail-heading">
 
-    <h2
-      data-tooltip="Detailed explanation of why this identity or path is reachable.">
+    <h2 id="detail-heading"
+        data-tooltip="Detailed explanation of why this identity or path is reachable.">
       Finding Detail
     </h2>
 
@@ -117,25 +138,35 @@
   <!-- =========================
        RIGHT: AI
        ========================= -->
-  <aside class="console-ai">
+  <aside class="console-ai"
+         role="region"
+         aria-labelledby="ai-heading"
+         aria-live="polite"
+         aria-busy="false">
 
-    <h2
-      data-tooltip="AI-assisted explanations derived strictly from Shield findings.">
+    <h2 id="ai-heading"
+        data-tooltip="AI-assisted explanations derived strictly from Shield findings.">
       AI-Augmented Reasoning
     </h2>
 
     <p
-      class="ai-state disabled"
+      class="ai-state disabled ai-subtitle"
       data-tooltip="Select a finding first. AI explanations require an active identity or attack path.">
       Select a finding to enable AI explanations.
     </p>
 
     <button
-      class="btn secondary"
+      class="ai-btn btn secondary disabled"
+      aria-disabled="true"
+      aria-describedby="ai-hint"
       disabled
-      data-tooltip="Select a finding first. AI explanations require an active identity or attack path.">
+      data-tooltip="Select a finding first. AI explanations require an active identity.">
       Explain with STC AI
     </button>
+
+    <p id="ai-hint" class="visually-hidden">
+      AI explanations are read-only and grounded in Shield data.
+    </p>
 
     <div class="ai-output">
 
