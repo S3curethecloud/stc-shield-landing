@@ -1,49 +1,47 @@
 /* ============================================================
    STC Shield — Canonical Finding → AI Sync (FIX)
-   State-driven • Deterministic • Operator-trust-first
+   Deterministic • Enterprise-safe • No DOM assumptions
    ============================================================ */
 
 let activeFinding = null;
 
-/* ---------- DOM REFERENCES ---------- */
+/* ---------- DOM REFERENCES (EXISTING HTML ONLY) ---------- */
 const findingItems = document.querySelectorAll(".finding-item");
 const aiPanel = document.querySelector(".console-ai");
-const aiStatus = aiPanel?.querySelector(".ai-status");
-const aiExplanation = aiPanel?.querySelector(".ai-explanation");
-const aiCitations = aiPanel?.querySelector(".ai-citations");
-const aiButton = aiPanel?.querySelector(".ai-btn");
+const aiButton = aiPanel?.querySelector(".btn");
+
+const aiSubtitle = aiPanel?.querySelector(".ai-subtitle");
+const aiExplanationBlock = aiPanel?.querySelector("p");
+const aiCitationsBlock = aiPanel?.querySelectorAll("p")[1];
 
 /* ---------- SANITY RESET (CRITICAL) ---------- */
 /* AI MUST NEVER AUTO-ACTIVATE */
 aiPanel?.classList.remove("active");
 
-/* ---------- CANONICAL AI RENDER ---------- */
+/* ---------- CANONICAL AI RENDER (ALIGN TO DOM) ---------- */
 function renderAIForFinding(findingEl) {
-  if (!findingEl) return;
+  if (!findingEl || !aiPanel) return;
 
-  /* Update AI panel state (idempotent) */
-  aiPanel?.classList.add("active");
+  aiPanel.classList.add("active");
   aiButton?.classList.remove("disabled");
 
-  const title =
-    findingEl.querySelector(".finding-title")?.textContent || "Finding";
   const severity =
-    findingEl.querySelector(".severity")?.textContent || "";
+    findingEl.querySelector(".severity")?.textContent || "UNKNOWN";
 
-  if (aiStatus) {
-    aiStatus.textContent =
+  if (aiSubtitle) {
+    aiSubtitle.textContent =
       "AI ready. Explanation will reference Shield data only.";
   }
 
-  if (aiExplanation) {
-    aiExplanation.textContent =
-      `This finding (${severity}) was computed deterministically from the live identity graph. ` +
+  if (aiExplanationBlock) {
+    aiExplanationBlock.textContent =
+      `This ${severity} severity finding was computed deterministically from the live identity graph. ` +
       `AI explanations describe reachability and impact without modifying system state.`;
   }
 
-  if (aiCitations) {
-    aiCitations.innerHTML =
-      "<li>Shield identity graph (deterministic)</li>";
+  if (aiCitationsBlock) {
+    aiCitationsBlock.textContent =
+      "Shield identity graph (deterministic)";
   }
 }
 
