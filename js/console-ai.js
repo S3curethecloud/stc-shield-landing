@@ -1,64 +1,82 @@
 /* ================================
-   STC SHIELD — AI DRAWER LOGIC v1.0
-   Read-only, state-driven, safe
+   STC SHIELD — AI PANEL LOGIC v1.1
+   Read-only • Operator-trust-first
    ================================ */
 
+/* ---------- GLOBAL STATE ---------- */
 const state = {
   selectedFinding: null,
 };
 
-/* DOM references */
+/* ---------- DOM REFERENCES ---------- */
 const findingItems = document.querySelectorAll(".finding-item");
-const aiPanel = document.querySelector(".ai-panel");
-const aiButton = aiPanel.querySelector("button");
-const aiStateText = aiPanel.querySelector(".ai-state");
-const aiExplanation = aiPanel.querySelector(".ai-output p");
-const aiCitations = aiPanel.querySelector(".citations");
+const aiPanel = document.querySelector(".console-ai");
+const aiButton = aiPanel?.querySelector("button");
+const aiStateText = aiPanel?.querySelector(".ai-state");
+const aiExplanation = aiPanel?.querySelector(".ai-output p");
+const aiCitations = aiPanel?.querySelector(".citations");
 
-/* ---------- STATE TRANSITIONS ---------- */
+/* ---------- SANITY RESET (CRITICAL) ---------- */
+/* AI MUST NEVER AUTO-ACTIVATE */
+document
+  .querySelector(".console-ai")
+  ?.classList.remove("active");
 
+/* ---------- RESET AI STATE ---------- */
 function resetAI() {
-  aiPanel.classList.add("collapsed");
-  aiButton.disabled = true;
-  aiStateText.textContent =
-    "Select a finding to enable AI explanations.";
+  state.selectedFinding = null;
 
-  aiExplanation.textContent =
-    "AI explanations are grounded in Shield data only.";
+  aiPanel?.classList.remove("active");
+  if (aiButton) aiButton.disabled = true;
 
-  aiCitations.innerHTML = "<li>No datasets referenced.</li>";
+  if (aiStateText) {
+    aiStateText.textContent =
+      "Select a finding to enable AI explanations.";
+  }
+
+  if (aiExplanation) {
+    aiExplanation.textContent =
+      "AI explanations are grounded in Shield data only.";
+  }
+
+  if (aiCitations) {
+    aiCitations.innerHTML = "<li>No datasets referenced.</li>";
+  }
 }
 
+/* ---------- ENABLE AI (EXPLICIT USER ACTION ONLY) ---------- */
 function enableAI(findingText) {
   state.selectedFinding = findingText;
 
-  aiPanel.classList.remove("collapsed");
-  aiButton.disabled = false;
-  aiStateText.textContent =
-    "AI ready. Explanation will reference Shield data only.";
+  aiPanel?.classList.add("active");
+  if (aiButton) aiButton.disabled = false;
+
+  if (aiStateText) {
+    aiStateText.textContent =
+      "AI ready. Explanation will reference Shield data only.";
+  }
 }
 
 /* ---------- FINDING SELECTION ---------- */
-
 findingItems.forEach(item => {
   item.addEventListener("click", () => {
     findingItems.forEach(i => i.classList.remove("selected"));
     item.classList.add("selected");
 
     const title =
-      item.querySelector("strong")?.textContent || "Selected finding";
+      item.querySelector("strong")?.textContent ||
+      "Selected finding";
 
     enableAI(title);
   });
 });
 
 /* ---------- AI INVOCATION ---------- */
-
-aiButton.addEventListener("click", async () => {
+aiButton?.addEventListener("click", async () => {
   if (!state.selectedFinding) return;
 
   aiButton.disabled = true;
-  aiStateText.textContent = "Analyzing…";
+  if (aiStateText) aiStateText.textContent = "Analyzing…";
 
   try {
     const response = await askSTCAI(
@@ -67,19 +85,24 @@ aiButton.addEventListener("click", async () => {
 
     renderAIResponse(response);
   } catch (err) {
-    aiStateText.textContent =
-      "AI unavailable. Deterministic findings remain valid.";
+    if (aiStateText) {
+      aiStateText.textContent =
+        "AI unavailable. Deterministic findings remain valid.";
+    }
     aiButton.disabled = false;
   }
 });
 
 /* ---------- RENDER RESPONSE ---------- */
-
 function renderAIResponse(payload) {
-  const { explanation, citations } = payload;
+  const { explanation, citations } = payload || {};
 
-  aiExplanation.textContent =
-    explanation || "No explanation returned.";
+  if (aiExplanation) {
+    aiExplanation.textContent =
+      explanation || "No explanation returned.";
+  }
+
+  if (!aiCitations) return;
 
   aiCitations.innerHTML = "";
 
@@ -96,13 +119,13 @@ function renderAIResponse(payload) {
     });
   }
 
-  aiStateText.textContent =
-    "AI explanation generated from Shield data.";
+  if (aiStateText) {
+    aiStateText.textContent =
+      "AI explanation generated from Shield data.";
+  }
 }
 
-/* ============================================================
-   STC Shield — Tooltip Wiring (No Libraries)
-   ============================================================ */
+/* ---------- TOOLTIP WIRING (UNCHANGED) ---------- */
 (function () {
-  // … tooltip JS exactly as provided …
+  // Tooltip JS unchanged and intentionally omitted
 })();

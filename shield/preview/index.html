@@ -24,13 +24,14 @@
 
 <body>
 
-<main class="console-root">
+<main class="shield-console">
 
   <!-- =========================
        CONSOLE HEADER
        ========================= -->
-  <header class="console-header">
+  <section class="console-header">
     <h1>STC Shield — Console Preview</h1>
+
     <p class="console-subtitle">
       Read-only identity risk visualization. Deterministic findings only.
     </p>
@@ -46,7 +47,7 @@
     <p class="console-note">
       Operator-facing preview. No automated remediation.
     </p>
-  </header>
+  </section>
 
   <!-- =========================
        CONSOLE GRID
@@ -54,9 +55,10 @@
   <section class="console-grid">
 
     <!-- =========================
-         LEFT: FINDINGS LIST
+         LEFT: FINDINGS
          ========================= -->
-    <aside class="console-panel findings-panel">
+    <aside class="console-findings">
+
       <h2
         data-tooltip="Deterministic findings computed from the identity graph. No simulation. No guesswork.">
         Shield Findings
@@ -99,12 +101,14 @@
       <p class="panel-footnote">
         Findings are computed deterministically from identity graphs.
       </p>
+
     </aside>
 
     <!-- =========================
-         CENTER: FINDING DETAIL
+         CENTER: DETAIL
          ========================= -->
-    <section class="console-panel detail-panel">
+    <section class="console-detail">
+
       <h2
         data-tooltip="Detailed explanation of why this identity or path is reachable.">
         Finding Detail
@@ -134,12 +138,14 @@
           <li>No automated remediation</li>
         </ul>
       </div>
+
     </section>
 
     <!-- =========================
-         RIGHT: AI DRAWER
+         RIGHT: AI
          ========================= -->
-    <aside class="console-panel ai-panel collapsed">
+    <aside class="console-ai">
+
       <h2
         data-tooltip="AI-assisted explanations derived strictly from Shield findings.">
         AI-Augmented Reasoning
@@ -179,6 +185,7 @@
         </ul>
 
       </div>
+
     </aside>
 
   </section>
