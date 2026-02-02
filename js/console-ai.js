@@ -32,6 +32,24 @@ function announce(message) {
   }, 10);
 }
 
+/* ---------- ROVING TABINDEX + ACTIVEDESCENDANT (CRITICAL) ---------- */
+function updateRovingTabindex(activeItem) {
+  findingItems.forEach((item) => {
+    item.setAttribute("tabindex", "-1");
+    item.setAttribute("aria-selected", "false");
+  });
+
+  activeItem.setAttribute("tabindex", "0");
+  activeItem.setAttribute("aria-selected", "true");
+  activeItem.focus();
+
+  // Sync listbox active descendant
+  const listbox = document.querySelector(".console-findings");
+  if (listbox && activeItem.id) {
+    listbox.setAttribute("aria-activedescendant", activeItem.id);
+  }
+}
+
 /* ---------- AI RENDERING (DETERMINISTIC) ---------- */
 function renderAIForFinding(findingEl) {
   if (!findingEl || !aiPanel) return;
@@ -68,19 +86,17 @@ function renderAIForFinding(findingEl) {
 /* ---------- FINDING SELECTION (CANONICAL) ---------- */
 findingItems.forEach((item) => {
   item.addEventListener("click", () => {
-    // Clear previous selection
-    findingItems.forEach((el) => {
-      el.classList.remove("selected", "active");
-      el.setAttribute("aria-selected", "false");
-      el.setAttribute("tabindex", "-1");
-    });
+    // Clear previous selection (visual only)
+    findingItems.forEach((el) =>
+      el.classList.remove("selected", "active")
+    );
 
     // Set new active finding
     item.classList.add("selected", "active");
-    item.setAttribute("aria-selected", "true");
-    item.setAttribute("tabindex", "0");
-    item.focus();
     activeFinding = item;
+
+    // 🔴 CRITICAL: focus + roving tabindex + aria-activedescendant
+    updateRovingTabindex(activeFinding);
 
     // Update AI panel
     renderAIForFinding(activeFinding);
