@@ -259,3 +259,23 @@ nav a:hover {
   position: relative;
   z-index: 10;
 }
+
+/* RiskDNA CTA — analytical accent */
+.btn-riskdna {
+  border-color: #2dd4bf;          /* teal-400 */
+  color: #5eead4;                 /* teal-300 */
+}
+
+.btn-riskdna:hover {
+  background: rgba(45, 212, 191, 0.12);
+  border-color: #5eead4;
+  color: #99f6e4;
+}
+
+/* AI-Augmented Reasoning subtitle alignment fix */
+.ai-augmented-reasoning p:first-of-type {
+  margin-top: 0.25rem;
+  margin-left: 0;
+  padding-left: 0;
+  max-width: 720px;
+}
