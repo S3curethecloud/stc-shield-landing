@@ -1,15 +1,12 @@
 /* ============================================================
-   STC Shield — Canonical Finding → AI Sync (FIX)
-   Deterministic • Enterprise-safe • No DOM assumptions
+   STC Shield — Console AI Logic (Authoritative)
    ============================================================ */
 
 let activeFinding = null;
 
-/* ---------- DOM REFERENCES (EXISTING HTML ONLY) ---------- */
 const findingItems = document.querySelectorAll(".finding-item");
 const aiPanel = document.querySelector(".console-ai");
-const aiButton = aiPanel?.querySelector(".btn");
-
+const aiButton = aiPanel?.querySelector(".ai-btn");
 const aiSubtitle = aiPanel?.querySelector(".ai-subtitle");
 const aiExplanationBlock = aiPanel?.querySelector("p");
 const aiCitationsBlock = aiPanel?.querySelectorAll("p")[1];
@@ -21,23 +18,30 @@ findingItems.forEach((el) => {
   el.setAttribute("aria-selected", "false");
 });
 
-/* ---------- SANITY RESET (CRITICAL) ---------- */
-/* AI MUST NEVER AUTO-ACTIVATE */
-aiPanel?.classList.remove("active");
+/* ---------- ARIA LIVE ANNOUNCER (PHASE 2) ---------- */
+const ariaAnnouncer = document.createElement("div");
+ariaAnnouncer.setAttribute("aria-live", "polite");
+ariaAnnouncer.setAttribute("aria-atomic", "true");
+ariaAnnouncer.className = "visually-hidden";
+document.body.appendChild(ariaAnnouncer);
 
-/* Optional high-trust polish: live region for SRs */
-aiPanel?.setAttribute("aria-live", "polite");
-aiPanel?.setAttribute("aria-atomic", "true");
+function announce(message) {
+  ariaAnnouncer.textContent = "";
+  setTimeout(() => {
+    ariaAnnouncer.textContent = message;
+  }, 10);
+}
 
-/* ---------- CANONICAL AI RENDER (ALIGN TO DOM) ---------- */
+/* ---------- AI RENDERING (DETERMINISTIC) ---------- */
 function renderAIForFinding(findingEl) {
   if (!findingEl || !aiPanel) return;
 
-  /* SR: panel is updating */
   aiPanel.setAttribute("aria-busy", "true");
-
   aiPanel.classList.add("active");
+  aiPanel.setAttribute("aria-disabled", "false");
   aiButton?.classList.remove("disabled");
+  aiButton?.removeAttribute("aria-disabled");
+  aiButton?.removeAttribute("disabled");
 
   const severity =
     findingEl.querySelector(".severity")?.textContent || "UNKNOWN";
@@ -58,33 +62,85 @@ function renderAIForFinding(findingEl) {
       "Shield identity graph (deterministic)";
   }
 
-  /* SR: update complete */
   aiPanel.setAttribute("aria-busy", "false");
 }
 
-/* ---------- FINDING SELECTION (AUTHORITATIVE) ---------- */
+/* ---------- FINDING SELECTION (CANONICAL) ---------- */
 findingItems.forEach((item) => {
   item.addEventListener("click", () => {
-    /* 1️⃣ Clear previous selection (visual + ARIA) */
+    // Clear previous selection
     findingItems.forEach((el) => {
       el.classList.remove("selected", "active");
-      el.setAttribute("aria-selected", "false"); // ARIA sync (clear)
+      el.setAttribute("aria-selected", "false");
       el.setAttribute("tabindex", "-1");
     });
 
-    /* 2️⃣ Set new active finding (visual + ARIA + focus) */
+    // Set new active finding
     item.classList.add("selected", "active");
-    item.setAttribute("aria-selected", "true"); // ARIA sync (set)
+    item.setAttribute("aria-selected", "true");
     item.setAttribute("tabindex", "0");
-    item.focus(); // quiet professionalism
+    item.focus();
     activeFinding = item;
 
-    /* 3️⃣ ALWAYS re-render AI panel */
+    // Update AI panel
     renderAIForFinding(activeFinding);
+
+    // Screen reader announcement
+    const severity =
+      activeFinding.querySelector(".severity")?.textContent || "Finding";
+    const title =
+      activeFinding.querySelector("strong")?.textContent || "";
+
+    announce(`Finding selected: ${severity}. ${title}.`);
   });
 });
 
-/* ---------- TOOLTIP WIRING (UNCHANGED) ---------- */
+/* ============================================================
+   ARIA Phase 2 — Keyboard Navigation for Findings
+   ============================================================ */
+
 (function () {
-  // Tooltip JS intentionally unchanged
+  if (!findingItems || findingItems.length === 0) return;
+
+  function focusItem(index) {
+    const clamped =
+      (index + findingItems.length) % findingItems.length;
+    findingItems[clamped].focus();
+  }
+
+  findingItems.forEach((item, index) => {
+    item.addEventListener("keydown", (e) => {
+      let targetIndex = null;
+
+      switch (e.key) {
+        case "ArrowDown":
+          targetIndex = index + 1;
+          break;
+
+        case "ArrowUp":
+          targetIndex = index - 1;
+          break;
+
+        case "Home":
+          targetIndex = 0;
+          break;
+
+        case "End":
+          targetIndex = findingItems.length - 1;
+          break;
+
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          item.click(); // reuse canonical click logic
+          return;
+
+        default:
+          return;
+      }
+
+      e.preventDefault();
+      focusItem(targetIndex);
+    });
+  });
 })();
