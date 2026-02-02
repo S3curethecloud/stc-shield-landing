@@ -296,3 +296,11 @@ nav a:hover {
   text-align: left;
   padding-left: 0;
 }
+
+/* FINAL FIX — AI-Augmented Reasoning subtitle alignment (freeze-safe) */
+.section.contrast > .subtitle {
+  margin-left: 0;
+  padding-left: 0;
+  text-align: left;
+  max-width: 720px;
+}
