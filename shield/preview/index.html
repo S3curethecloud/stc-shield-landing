@@ -33,7 +33,8 @@
   <aside class="console-findings"
          role="listbox"
          aria-label="Shield findings"
-         aria-describedby="findings-help">
+         aria-describedby="findings-help"
+         aria-activedescendant="">
 
     <h2
       data-tooltip="Deterministic findings computed from the identity graph. No simulation. No guesswork.">
@@ -44,13 +45,15 @@
       Use arrow keys to navigate findings. Press Enter to select.
     </p>
 
-    <ul class="findings-list">
+    <ul class="findings-list" role="presentation">
 
       <li
+        id="finding-high-cross-account"
         class="finding-item selected"
         role="option"
         tabindex="0"
         aria-selected="true"
+        aria-controls="detail-heading"
         data-finding-id="high-cross-account"
         data-tooltip="Deterministic finding computed from live identity graph. No simulation. No remediation.">
         <span class="severity high">HIGH</span>
@@ -61,10 +64,12 @@
       </li>
 
       <li
+        id="finding-med-stale-trust"
         class="finding-item"
         role="option"
-        tabindex="0"
+        tabindex="-1"
         aria-selected="false"
+        aria-controls="detail-heading"
         data-finding-id="med-stale-trust"
         data-tooltip="Trust relationship allows access from an external system. Review usage and necessity.">
         <span class="severity medium">MED</span>
@@ -75,10 +80,12 @@
       </li>
 
       <li
+        id="finding-low-overpermissive-read"
         class="finding-item"
         role="option"
-        tabindex="0"
+        tabindex="-1"
         aria-selected="false"
+        aria-controls="detail-heading"
         data-finding-id="low-overpermissive-read"
         data-tooltip="Broad permissions detected. Impact limited to read-only access.">
         <span class="severity low">LOW</span>
@@ -142,7 +149,8 @@
          role="region"
          aria-labelledby="ai-heading"
          aria-live="polite"
-         aria-busy="false">
+         aria-busy="false"
+         aria-disabled="true">
 
     <h2 id="ai-heading"
         data-tooltip="AI-assisted explanations derived strictly from Shield findings.">
