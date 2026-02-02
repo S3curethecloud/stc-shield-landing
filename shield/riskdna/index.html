@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>STC Shield — RiskDNA Preview</title>
+
+  <link rel="stylesheet" href="/css/shield.css" />
+  <link rel="stylesheet" href="/css/shield-riskdna.css" />
+
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      script-src 'self';
+      style-src 'self' 'unsafe-inline';
+      connect-src 'self';
+      img-src 'self' data:;
+    "
+  />
+</head>
+
+<body>
+
+<header class="top-nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">SecureTheCloud</a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a class="active" href="/shield/">Shield</a>
+      <a href="/ai/">AI</a>
+      <a href="/labs/">Labs</a>
+      <a href="/consulting/">Consulting</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page-container">
+  <section class="hero hero-compact">
+    <h1>RiskDNA — Human-to-Cloud Risk</h1>
+    <p class="hero-subtitle">
+      Read-only scoring authority. Shield visualizes. RiskDNA defines risk.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn primary" href="/shield/preview/">Back to Shield Console</a>
+      <a class="btn secondary" href="/shield/">Back to Shield Landing</a>
+    </div>
+
+    <p class="hero-note">
+      No remediation. No mutation. Output is deterministic and board-safe.
+    </p>
+  </section>
+
+  <section class="riskdna-grid">
+
+    <aside class="riskdna-panel">
+      <h2>RiskDNA Inputs</h2>
+      <p class="muted">
+        This preview submits normalized signals (no PII) to the scoring API.
+      </p>
+
+      <div class="riskdna-controls">
+        <button id="riskRunBtn" class="btn primary">
+          Run RiskDNA Analysis
+        </button>
+
+        <button id="riskResetBtn" class="btn secondary">
+          Reset
+        </button>
+      </div>
+
+      <div class="riskdna-footnote muted">
+        API path: <code>/api/risk/score</code> (same-origin, CSP-safe)
+      </div>
+    </aside>
+
+    <section class="riskdna-result" aria-live="polite">
+      <h2>RiskDNA Result</h2>
+
+      <div class="riskdna-kpis">
+        <div class="kpi">
+          <div class="kpi-label">Risk Score</div>
+          <div class="kpi-value" id="riskScoreValue">—</div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-label">Risk Level</div>
+          <div class="kpi-value" id="riskLevelValue">—</div>
+        </div>
+      </div>
+
+      <div class="riskdna-explain">
+        <h3>Explanation</h3>
+        <p id="riskExplainText" class="muted">
+          Run an analysis to generate an executive-safe explanation.
+        </p>
+      </div>
+
+      <div class="riskdna-citations">
+        <h3>Citations</h3>
+        <ul id="riskCitations" class="muted">
+          <li>No datasets referenced.</li>
+        </ul>
+      </div>
+    </section>
+
+  </section>
+</main>
+
+<script src="/js/riskdna.js"></script>
+</body>
+</html>

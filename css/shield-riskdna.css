@@ -1,0 +1,122 @@
+/* ============================================================
+   STC Shield — RiskDNA Preview (v0.1)
+   Enterprise calm • Gold trust accents • Dark operator UI
+   ============================================================ */
+
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 18px 60px;
+}
+
+.hero-compact {
+  padding-top: 56px;
+  padding-bottom: 28px;
+  text-align: center;
+}
+
+.hero-compact h1 {
+  margin: 0 0 10px;
+  font-size: 44px;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  margin: 0 auto 18px;
+  max-width: 780px;
+  color: rgba(255,255,255,0.72);
+}
+
+.hero-actions {
+  display: inline-flex;
+  gap: 10px;
+  margin: 10px 0 12px;
+}
+
+.hero-note {
+  margin: 0;
+  color: rgba(255,255,255,0.58);
+  font-size: 13px;
+}
+
+.riskdna-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.riskdna-panel,
+.riskdna-result {
+  border-radius: 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(212,175,55,0.22);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  padding: 18px;
+}
+
+.riskdna-panel h2,
+.riskdna-result h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.riskdna-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.riskdna-footnote {
+  margin-top: 14px;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.riskdna-kpis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 12px 0 18px;
+}
+
+.kpi {
+  border-radius: 12px;
+  padding: 14px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.kpi-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 6px;
+}
+
+.kpi-value {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #d4af37;
+}
+
+.riskdna-explain h3,
+.riskdna-citations h3 {
+  margin: 14px 0 8px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+}
+
+.riskdna-citations ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+@media (max-width: 900px) {
+  .riskdna-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-compact h1 {
+    font-size: 36px;
+  }
+}
