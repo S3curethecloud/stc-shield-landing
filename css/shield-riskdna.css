@@ -107,6 +107,16 @@
   color: rgba(255,255,255,0.85);
 }
 
+.riskdna-footer-note {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.65);
+  text-align: right;
+}
+
 .riskdna-citations ul {
   margin: 0;
   padding-left: 18px;
@@ -120,3 +130,4 @@
     font-size: 36px;
   }
 }
+
