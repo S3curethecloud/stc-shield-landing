@@ -10,14 +10,14 @@
   <link rel="stylesheet" href="/css/shield.css" />
   <link rel="stylesheet" href="/css/shield-console.css" />
 
-  <!-- Security posture (LOCKED) -->
+  <!-- 🔒 GOVERNED CSP (PATCHED — API ENABLED) -->
   <meta
     http-equiv="Content-Security-Policy"
     content="
       default-src 'self';
       script-src 'self';
       style-src 'self' 'unsafe-inline';
-      connect-src 'self';
+      connect-src 'self' https://stc-intelligence-core.fly.dev;
       img-src 'self' data:;
     "
   />
@@ -25,9 +25,6 @@
 
 <body>
 
-<!-- =========================
-     CONSOLE EXIT NAV (ADDED)
-     ========================= -->
 <nav class="console-nav">
   <a href="/" class="back-link" aria-label="Back to STC Shield landing">
     ← Back to STC Shield
@@ -54,64 +51,13 @@
       Use arrow keys to navigate findings. Press Enter to select.
     </p>
 
-    <!-- Screen-reader-only hint -->
     <p id="finding-detail-hint" class="visually-hidden">
       Details for the selected finding are available in the center panel.
     </p>
 
+    <!-- 🔥 STATIC LIST REMOVED — NOW DYNAMIC -->
     <ul class="findings-list" role="presentation">
-
-      <li
-        id="finding-high-cross-account"
-        class="finding-item selected"
-        role="option"
-        tabindex="0"
-        aria-selected="true"
-        aria-controls="detail-heading"
-        aria-describedby="finding-detail-panel finding-detail-hint"
-        data-finding-id="high-cross-account"
-        data-tooltip="Deterministic finding computed from live identity graph. No simulation. No remediation.">
-        <span class="severity high">HIGH</span>
-        <div>
-          <strong>Cross-account role escalation</strong>
-          <p>AWS IAM role reachable via Azure federation</p>
-        </div>
-      </li>
-
-      <li
-        id="finding-med-stale-trust"
-        class="finding-item"
-        role="option"
-        tabindex="-1"
-        aria-selected="false"
-        aria-controls="detail-heading"
-        aria-describedby="finding-detail-panel finding-detail-hint"
-        data-finding-id="med-stale-trust"
-        data-tooltip="Trust relationship allows access from an external system. Review usage and necessity.">
-        <span class="severity medium">MED</span>
-        <div>
-          <strong>Stale service account trust</strong>
-          <p>Unused GCP identity reachable from CI</p>
-        </div>
-      </li>
-
-      <li
-        id="finding-low-overpermissive-read"
-        class="finding-item"
-        role="option"
-        tabindex="-1"
-        aria-selected="false"
-        aria-controls="detail-heading"
-        aria-describedby="finding-detail-panel finding-detail-hint"
-        data-finding-id="low-overpermissive-read"
-        data-tooltip="Broad permissions detected. Impact limited to read-only access.">
-        <span class="severity low">LOW</span>
-        <div>
-          <strong>Over-permissive read access</strong>
-          <p>Broad S3 read across multiple accounts</p>
-        </div>
-      </li>
-
+      <!-- console-data.js will inject <li> items here -->
     </ul>
 
     <p class="panel-footnote">
@@ -121,7 +67,7 @@
   </aside>
 
   <!-- =========================
-       CENTER: DETAIL
+       CENTER: DETAIL (UNCHANGED)
        ========================= -->
   <section class="console-detail"
            id="finding-detail-panel"
@@ -135,17 +81,15 @@
 
     <div class="detail-block">
       <h3>Why is this reachable?</h3>
-      <p>
-        This identity can traverse a trust relationship from Azure Entra ID
-        into an AWS account via a federated role with insufficient conditions.
+      <p id="detail-why">
+        Select a finding to view deterministic path details.
       </p>
     </div>
 
     <div class="detail-block">
       <h3>Impact</h3>
-      <p>
-        An attacker with control of this identity could assume privileged
-        access across cloud boundaries without direct credential compromise.
+      <p id="detail-impact">
+        —
       </p>
     </div>
 
@@ -161,7 +105,7 @@
   </section>
 
   <!-- =========================
-       RIGHT: AI
+       RIGHT: AI (UNCHANGED STRUCTURE)
        ========================= -->
   <aside class="console-ai"
          role="region"
@@ -185,8 +129,7 @@
       class="ai-btn btn secondary disabled"
       aria-disabled="true"
       aria-describedby="ai-hint"
-      disabled
-      data-tooltip="Select a finding first. AI explanations require an active identity.">
+      disabled>
       Explain with STC AI
     </button>
 
@@ -196,20 +139,10 @@
 
     <div class="ai-output">
 
-      <h3
-        data-tooltip="Natural-language explanation generated from deterministic Shield data.">
-        Explanation
-      </h3>
+      <h3>Explanation</h3>
+      <p class="muted">AI explanations are grounded in Shield data only.</p>
 
-      <p class="muted">
-        AI explanations are grounded in Shield data only.
-      </p>
-
-      <h3
-        data-tooltip="Every explanation includes dataset provenance for audit and compliance.">
-        Citations
-      </h3>
-
+      <h3>Citations</h3>
       <ul class="citations muted">
         <li>No datasets referenced.</li>
       </ul>
@@ -220,6 +153,10 @@
 
 </main>
 
+<!-- 🔥 DATA LAYER (NEW) -->
+<script src="/js/console-data.js"></script>
+
+<!-- 🔥 AI LOGIC -->
 <script src="/js/console-ai.js"></script>
 
 </body>

@@ -1,84 +1,123 @@
 /* ============================================================
-   STC Shield — Console AI Logic (Authoritative, event-driven)
-   - No selection logic here (owned by console-data.js)
-   - Listens for stc:shield:finding:selected
+   STC Shield — Hybrid AI Layer (Authoritative)
+   PURPOSE:
+   - Listen for shield selection event
+   - Enable AI explain
+   - Call STC AI /ask/explain
+   - Render explanation + citations
    ============================================================ */
 
 (function () {
-  const aiPanel = document.querySelector(".console-ai");
-  if (!aiPanel) {
-    console.warn("[console-ai] AI panel not found");
+
+  const API_BASE = "https://stc-intelligence-core.fly.dev";
+  const EXPLAIN_ENDPOINT = `${API_BASE}/ask/explain`;
+
+  const aiRegion = document.querySelector(".console-ai");
+  const aiButton = document.querySelector(".ai-btn");
+  const explanationEl = document.querySelector(".ai-output p.muted");
+  const citationsEl = document.querySelector(".citations");
+  const aiStateText = document.querySelector(".ai-state");
+
+  if (!aiRegion || !aiButton || !explanationEl || !citationsEl) {
+    console.warn("[console-ai] Required DOM elements not found");
     return;
   }
 
-  const aiButton = aiPanel.querySelector(".ai-btn");
-  const aiSubtitle = aiPanel.querySelector(".ai-subtitle");
-  const aiExplanationBlock = aiPanel.querySelectorAll("p")[0];
-  const aiCitationsBlock = aiPanel.querySelectorAll("p")[1];
+  let currentFinding = null;
 
-  let activeFinding = null;
+  /* ============================================================
+     Listen to Shield governed selection event
+     ============================================================ */
 
-  function setDisabled() {
-    aiPanel.classList.remove("active");
-    aiPanel.setAttribute("aria-disabled", "true");
-    aiButton?.classList.add("disabled");
-    aiButton?.setAttribute("aria-disabled", "true");
-    aiButton?.setAttribute("disabled", "true");
-    if (aiSubtitle) aiSubtitle.textContent = "Select a finding to enable AI explanations.";
-    if (aiExplanationBlock) aiExplanationBlock.textContent = "—";
-    if (aiCitationsBlock) aiCitationsBlock.textContent = "No datasets referenced.";
-  }
-
-  function setEnabled(finding) {
-    aiPanel.setAttribute("aria-busy", "true");
-    aiPanel.setAttribute("aria-disabled", "false");
-    aiButton?.classList.remove("disabled");
-    aiButton?.removeAttribute("aria-disabled");
-    aiButton?.removeAttribute("disabled");
-
-    const sev = String(finding?.severity || "UNKNOWN").toUpperCase();
-    const title = String(finding?.title || "Finding");
-
-    if (aiSubtitle) {
-      aiSubtitle.textContent = "AI ready. Explanation will reference Shield data only.";
-    }
-
-    if (aiExplanationBlock) {
-      aiExplanationBlock.textContent =
-        `This ${sev} finding (“${title}”) was computed deterministically from Shield’s identity model. ` +
-        `AI explanations describe reachability + impact without modifying system state.`;
-    }
-
-    if (aiCitationsBlock) {
-      aiCitationsBlock.textContent = "Shield findings feed (deterministic)";
-    }
-
-    aiPanel.setAttribute("aria-busy", "false");
-  }
-
-  // Listen for governed selection event
   document.addEventListener("stc:shield:finding:selected", (e) => {
-    const f = e?.detail?.finding;
-    if (!f) return;
-    activeFinding = f;
-    setEnabled(activeFinding);
+
+    currentFinding = e.detail?.finding || null;
+
+    if (!currentFinding) return;
+
+    aiButton.disabled = false;
+    aiButton.classList.remove("disabled");
+    aiButton.setAttribute("aria-disabled", "false");
+
+    aiRegion.setAttribute("aria-disabled", "false");
+
+    if (aiStateText) {
+      aiStateText.textContent =
+        "AI ready. Explanation will reference Shield data and Academy labs.";
+      aiStateText.classList.remove("disabled");
+    }
+
   });
 
-  // Button action (placeholder now; Hybrid reasoning comes next step)
-  aiButton?.addEventListener("click", () => {
-    if (!activeFinding) return;
-    // Next phase: call /ask/explain in hybrid mode
-    // For now: keep deterministic UI-only behavior
-    if (aiExplanationBlock) {
-      aiExplanationBlock.textContent =
-        "Hybrid reasoning pending: Lab explanation + Shield severity summary (next step).";
+  /* ============================================================
+     Hybrid Explain
+     ============================================================ */
+
+  async function hybridExplain(finding) {
+
+    const payload = {
+      question: `Explain this Shield finding and what lab addresses it.
+Severity: ${finding.severity}
+Title: ${finding.title}
+Summary: ${finding.risk_summary || ""}`,
+      dataset: "academy.labs",
+      context: { source: "shield-console" },
+      mode: "shield_hybrid"
+    };
+
+    const res = await fetch(EXPLAIN_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      throw new Error(`AI HTTP ${res.status}`);
     }
-    if (aiCitationsBlock) {
-      aiCitationsBlock.textContent =
-        "Pending: academy.labs (lab-linked) + shield.findings";
+
+    return res.json();
+  }
+
+  /* ============================================================
+     Button Click
+     ============================================================ */
+
+  aiButton.addEventListener("click", async () => {
+
+    if (!currentFinding) return;
+
+    aiRegion.setAttribute("aria-busy", "true");
+
+    try {
+
+      const envelope = await hybridExplain(currentFinding);
+
+      explanationEl.textContent =
+        envelope?.explanation || "No explanation returned.";
+
+      citationsEl.innerHTML = "";
+
+      const cites = Array.isArray(envelope?.citations)
+        ? envelope.citations
+        : [];
+
+      if (cites.length === 0) {
+        citationsEl.innerHTML = "<li>No datasets referenced.</li>";
+      } else {
+        cites.forEach(c => {
+          const li = document.createElement("li");
+          li.textContent = c;
+          citationsEl.appendChild(li);
+        });
+      }
+
+    } catch (err) {
+      console.error("[console-ai] explain failed:", err);
+      explanationEl.textContent = "AI explain failed.";
+    } finally {
+      aiRegion.setAttribute("aria-busy", "false");
     }
+
   });
 
-  // Default state
-  setDisabled();
 })();
