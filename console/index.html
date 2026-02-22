@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>STC Shield Console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/css/shield.css" />
+</head>
+
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo">🛡️ STC Shield</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/shield">Shield</a>
+        <a href="/console" aria-current="page">Console</a>
+        <a href="/request-demo">Request Demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="nav-inner" style="padding-bottom:40px;">
+
+    <h1>Shield Findings</h1>
+    <p style="color:var(--muted); margin-top:0;">
+      Deterministic findings computed from identity graph modeling.
+      Read-only by design.
+    </p>
+
+    <div class="console-layout" style="display:grid; grid-template-columns: 320px 1fr; gap:24px; margin-top:24px;">
+
+      <!-- FINDINGS LIST -->
+      <div class="console-findings" role="listbox" aria-label="Shield Findings">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- AI PANEL -->
+      <div class="console-ai" aria-disabled="true">
+        <button class="ai-btn disabled" disabled aria-disabled="true">
+          AI Explain
+        </button>
+
+        <p class="ai-subtitle">
+          Select a finding to enable AI explanation.
+        </p>
+
+        <p></p>
+        <p></p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- DATA LAYER -->
+  <script src="/js/console-data.js"></script>
+
+  <!-- INTERACTION + ARIA LAYER -->
+  <script src="/js/console-ai.js"></script>
+
+</body>
+</html>
