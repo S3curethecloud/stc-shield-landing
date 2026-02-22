@@ -83,6 +83,80 @@ function renderAIForFinding(findingEl) {
   aiPanel.setAttribute("aria-busy", "false");
 }
 
+/* ============================================================
+   HYBRID AI EXPLAIN — Shield + Academy Labs
+   ============================================================ */
+
+async function explainFindingHybrid(findingEl) {
+  if (!findingEl || !aiPanel) return;
+
+  const severity =
+    findingEl.querySelector(".severity")?.textContent || "UNKNOWN";
+
+  const title =
+    findingEl.querySelector("strong")?.textContent || "";
+
+  const signals = Array.from(
+    findingEl.querySelectorAll(".signal")
+  ).map((el) => el.textContent.trim());
+
+  aiPanel.setAttribute("aria-busy", "true");
+  aiPanel.classList.add("active");
+
+  if (aiSubtitle) {
+    aiSubtitle.textContent =
+      "Deterministic hybrid reasoning (Shield + Labs).";
+  }
+
+  try {
+    const response = await fetch(
+      "https://stc-intelligence-core.fly.dev/ask/explain",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          version: "v1",
+          question: title,
+          dataset: "academy.labs",
+          context: {
+            enable_graphs: false
+          },
+          meta: {
+            source: "shield-hybrid",
+            severity: severity,
+            signals: signals
+          }
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    const explanation =
+      data?.explanation || "No deterministic explanation available.";
+
+    const citation =
+      data?.citations?.[0] || "academy.labs";
+
+    if (aiExplanationBlock) {
+      aiExplanationBlock.innerHTML =
+        `<strong>Severity:</strong> ${severity}<br>` +
+        `<strong>Signals:</strong> ${signals.join(", ")}<br><br>` +
+        explanation +
+        `<br><br><em>Citation:</em> ${citation}`;
+    }
+
+  } catch (err) {
+    console.error("Hybrid explain error:", err);
+    if (aiExplanationBlock) {
+      aiExplanationBlock.textContent =
+        "AI explanation failed (deterministic engine error).";
+    }
+  }
+
+  aiPanel.setAttribute("aria-busy", "false");
+}
+
 /* ---------- FINDING SELECTION (CANONICAL) ---------- */
 findingItems.forEach((item) => {
   item.addEventListener("click", () => {
@@ -109,6 +183,12 @@ findingItems.forEach((item) => {
 
     announce(`Finding selected: ${severity}. ${title}.`);
   });
+});
+
+/* ---------- AI BUTTON CLICK HANDLER (AUTHORITATIVE) ---------- */
+aiButton?.addEventListener("click", () => {
+  if (!activeFinding) return;
+  explainFindingHybrid(activeFinding);
 });
 
 /* ============================================================
