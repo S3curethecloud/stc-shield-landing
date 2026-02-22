@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="/css/shield.css" />
   <link rel="stylesheet" href="/css/shield-console.css" />
 
-  <!-- 🔒 GOVERNED CSP (PATCHED — API ENABLED) -->
+  <!-- 🔒 GOVERNED CSP (API ENABLED) -->
   <meta
     http-equiv="Content-Security-Policy"
     content="
@@ -36,29 +36,19 @@
   <!-- =========================
        LEFT: FINDINGS
        ========================= -->
-  <aside class="console-findings"
-         role="listbox"
-         aria-label="Shield findings"
-         aria-describedby="findings-help"
-         aria-activedescendant="">
+  <aside class="console-findings">
 
-    <h2
-      data-tooltip="Deterministic findings computed from the identity graph. No simulation. No guesswork.">
+    <h2>
       Shield Findings
     </h2>
 
-    <p id="findings-help" class="visually-hidden">
-      Use arrow keys to navigate findings. Press Enter to select.
-    </p>
+    <div id="findings-count"></div>
 
-    <p id="finding-detail-hint" class="visually-hidden">
-      Details for the selected finding are available in the center panel.
-    </p>
-
-    <!-- 🔥 STATIC LIST REMOVED — NOW DYNAMIC -->
-    <ul class="findings-list" role="presentation">
-      <!-- console-data.js will inject <li> items here -->
-    </ul>
+    <div id="findings-list"
+         role="listbox"
+         aria-label="Shield findings"
+         aria-activedescendant="">
+    </div>
 
     <p class="panel-footnote">
       Findings are computed deterministically from identity graphs.
@@ -67,30 +57,24 @@
   </aside>
 
   <!-- =========================
-       CENTER: DETAIL (UNCHANGED)
+       CENTER: DETAIL
        ========================= -->
   <section class="console-detail"
-           id="finding-detail-panel"
            role="region"
-           aria-labelledby="detail-heading">
+           aria-labelledby="finding-title">
 
-    <h2 id="detail-heading"
-        data-tooltip="Detailed explanation of why this identity or path is reachable.">
+    <h2 id="finding-title">
       Finding Detail
     </h2>
 
     <div class="detail-block">
       <h3>Why is this reachable?</h3>
-      <p id="detail-why">
-        Select a finding to view deterministic path details.
-      </p>
+      <p id="finding-summary">—</p>
     </div>
 
     <div class="detail-block">
       <h3>Impact</h3>
-      <p id="detail-impact">
-        —
-      </p>
+      <p id="finding-impact">—</p>
     </div>
 
     <div class="detail-block">
@@ -102,45 +86,49 @@
       </ul>
     </div>
 
+    <div>
+      <a id="finding-lab-link" href="#" style="display:none;">
+        View linked lab →
+      </a>
+    </div>
+
+    <div>
+      <strong>Attack path:</strong>
+      <div id="finding-attackpath">—</div>
+    </div>
+
   </section>
 
   <!-- =========================
-       RIGHT: AI (UNCHANGED STRUCTURE)
+       RIGHT: AI
        ========================= -->
   <aside class="console-ai"
          role="region"
          aria-labelledby="ai-heading"
          aria-live="polite"
-         aria-busy="false"
-         aria-disabled="true">
+         aria-busy="false">
 
-    <h2 id="ai-heading"
-        data-tooltip="AI-assisted explanations derived strictly from Shield findings.">
+    <h2 id="ai-heading">
       AI-Augmented Reasoning
     </h2>
 
-    <p
-      class="ai-state disabled ai-subtitle"
-      data-tooltip="Select a finding first. AI explanations require an active identity or attack path.">
+    <p class="ai-state disabled ai-subtitle">
       Select a finding to enable AI explanations.
     </p>
 
     <button
       class="ai-btn btn secondary disabled"
       aria-disabled="true"
-      aria-describedby="ai-hint"
       disabled>
       Explain with STC AI
     </button>
 
-    <p id="ai-hint" class="visually-hidden">
-      AI explanations are read-only and grounded in Shield data.
-    </p>
-
     <div class="ai-output">
 
       <h3>Explanation</h3>
-      <p class="muted">AI explanations are grounded in Shield data only.</p>
+      <p class="muted">
+        AI explanations are grounded in Shield data only.
+      </p>
 
       <h3>Citations</h3>
       <ul class="citations muted">
@@ -153,10 +141,10 @@
 
 </main>
 
-<!-- 🔥 DATA LAYER (NEW) -->
+<!-- 🔥 DATA LAYER -->
 <script src="/js/console-data.js"></script>
 
-<!-- 🔥 AI LOGIC -->
+<!-- 🔥 AI LAYER -->
 <script src="/js/console-ai.js"></script>
 
 </body>

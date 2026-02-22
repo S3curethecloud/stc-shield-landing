@@ -14,7 +14,7 @@
 
   const aiRegion = document.querySelector(".console-ai");
   const aiButton = document.querySelector(".ai-btn");
-  const explanationEl = document.querySelector(".ai-output p.muted");
+  const explanationEl = document.getElementById("ai-explanation");
   const citationsEl = document.querySelector(".citations");
   const aiStateText = document.querySelector(".ai-state");
 
