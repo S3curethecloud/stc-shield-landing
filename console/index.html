@@ -2,63 +2,105 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>STC Shield Console</title>
+  <title>STC Shield Console | Findings</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="STC Shield Console — live findings computed deterministically from identity graph modeling." />
+
+  <!-- Use existing Shield styles -->
   <link rel="stylesheet" href="/css/shield.css" />
+
+  <style>
+    .console-layout { display: grid; grid-template-columns: 360px 1fr 360px; gap: 18px; padding: 24px; max-width: 1400px; margin: 0 auto; }
+    .card { background: rgba(9, 12, 18, 0.72); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 18px; }
+    .muted { opacity: 0.75; }
+    .console-findings-header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+    .findings-list { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+    .finding-item { cursor: pointer; padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); outline: none; }
+    .finding-item:hover { background: rgba(255,255,255,0.06); }
+    .finding-item.selected { border-color: rgba(255, 200, 0, 0.45); box-shadow: 0 0 0 1px rgba(255, 200, 0, 0.25); }
+    .severity-pill { display: inline-flex; align-items: center; font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); margin-right: 8px; }
+    .sev-LOW { color: #7ee787; border-color: rgba(126,231,135,0.35); }
+    .sev-MEDIUM { color: #ffa657; border-color: rgba(255,166,87,0.35); }
+    .sev-HIGH { color: #ff7b72; border-color: rgba(255,123,114,0.35); }
+    .sev-CRITICAL { color: #ffd33d; border-color: rgba(255,211,61,0.35); }
+    .loading, .error { padding: 12px; border-radius: 12px; border: 1px dashed rgba(255,255,255,0.14); background: rgba(255,255,255,0.02); }
+    .detail-title { font-size: 18px; margin: 0 0 10px 0; }
+    .detail-block { margin-top: 12px; line-height: 1.45; }
+    .detail-label { font-size: 12px; opacity: 0.7; margin-bottom: 4px; }
+    .detail-value { font-size: 14px; }
+    .lab-link { display: inline-block; margin-top: 10px; text-decoration: none; }
+    .lab-link:hover { text-decoration: underline; }
+
+    .console-ai .ai-btn { margin-top: 12px; width: 100%; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255, 200, 0, 0.10); color: #ffd33d; cursor: pointer; }
+    .console-ai .ai-btn.disabled { opacity: 0.4; cursor: not-allowed; }
+
+    @media (max-width: 1100px) {
+      .console-layout { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 
 <body>
+  <main class="console-layout">
 
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="/" class="logo">🛡️ STC Shield</a>
-      <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="/shield">Shield</a>
-        <a href="/console" aria-current="page">Console</a>
-        <a href="/request-demo">Request Demo</a>
+    <!-- LEFT: Findings list -->
+    <section class="console-findings card" role="listbox" aria-label="Shield Findings List" aria-live="polite">
+      <div class="console-findings-header">
+        <h1 style="margin:0;">Shield Findings</h1>
+        <span class="muted" id="findings-count">—</span>
       </div>
-    </div>
-  </nav>
+      <div class="muted">Deterministic findings computed from identity graph modeling. Read-only by design.</div>
 
-  <main class="nav-inner" style="padding-bottom:40px;">
+      <div id="findings-list" class="findings-list">
+        <div class="loading">Loading findings…</div>
+      </div>
+    </section>
 
-    <h1>Shield Findings</h1>
-    <p style="color:var(--muted); margin-top:0;">
-      Deterministic findings computed from identity graph modeling.
-      Read-only by design.
-    </p>
+    <!-- MIDDLE: Finding detail -->
+    <section class="console-detail card" aria-label="Finding detail">
+      <h2 class="detail-title" id="finding-title">Select a finding</h2>
 
-    <div class="console-layout" style="display:grid; grid-template-columns: 320px 1fr; gap:24px; margin-top:24px;">
-
-      <!-- FINDINGS LIST -->
-      <div class="console-findings" role="listbox" aria-label="Shield Findings">
-        <!-- Injected dynamically -->
+      <div class="detail-block">
+        <div class="detail-label">Summary</div>
+        <div class="detail-value" id="finding-summary">Choose a finding on the left to view its deterministic risk summary.</div>
       </div>
 
-      <!-- AI PANEL -->
-      <div class="console-ai" aria-disabled="true">
-        <button class="ai-btn disabled" disabled aria-disabled="true">
-          AI Explain
-        </button>
-
-        <p class="ai-subtitle">
-          Select a finding to enable AI explanation.
-        </p>
-
-        <p></p>
-        <p></p>
+      <div class="detail-block">
+        <div class="detail-label">Attack path</div>
+        <div class="detail-value" id="finding-attackpath">—</div>
       </div>
 
-    </div>
+      <a id="finding-lab-link" class="lab-link" href="#" target="_blank" rel="noopener" style="display:none;">
+        View linked Lab →
+      </a>
+    </section>
+
+    <!-- RIGHT: AI panel -->
+    <aside class="console-ai card" aria-label="AI-augmented reasoning" aria-disabled="true">
+      <h2 style="margin:0 0 6px 0;">AI-Augmented Reasoning</h2>
+      <div class="muted ai-subtitle">Select a finding to enable AI explanations.</div>
+
+      <button class="ai-btn disabled" aria-disabled="true" disabled>
+        AI Explain
+      </button>
+
+      <div class="detail-block">
+        <div class="detail-label">Explanation</div>
+        <p class="detail-value">—</p>
+      </div>
+
+      <div class="detail-block">
+        <div class="detail-label">Citations</div>
+        <p class="detail-value">No datasets referenced.</p>
+      </div>
+    </aside>
 
   </main>
 
-  <!-- DATA LAYER -->
+  <!-- Data layer FIRST (renders list + emits selection event) -->
   <script src="/js/console-data.js"></script>
 
-  <!-- INTERACTION + ARIA LAYER -->
+  <!-- AI layer SECOND (listens for selection event) -->
   <script src="/js/console-ai.js"></script>
-
 </body>
 </html>
