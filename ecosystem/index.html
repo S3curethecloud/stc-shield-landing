@@ -1,75 +1,219 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SecureTheCloud | Ecosystem</title>
-<link rel="stylesheet" href="ecosystem.css" />
+  <!--
+    STC PLATFORM HOME (Shield-first)
+    GOVERNANCE: READ-ONLY UI SURFACE
+    - No drift: renders from backend feed only
+    - No mutations: no writes, no stateful remediation
+    - Deterministic counters: derived from incidents[].severity
+  -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>SecureTheCloud | Platform</title>
+  <meta name="description" content="Deterministic risk intelligence. STC Shield unifies scoring, governance, and AI reasoning into an executive command surface." />
+
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/assets/css/stc.css" />
 </head>
 
 <body>
+  <div class="bg-grid" aria-hidden="true"></div>
 
-<section class="ecosystem-hero">
-  <div class="hero-inner">
-    <div class="logo-lockup">
-      <!-- Your Logo SVG -->
-      <svg viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg">
-        <g>
-          <path d="M32 4L56 12V28C56 42 44 54 32 60C20 54 8 42 8 28V12L32 4Z"
-                fill="#0f1a2e"/>
-          <path d="M32 10L50 16V28C50 38 42 48 32 52C22 48 14 38 14 28V16L32 10Z"
-                fill="#f5b300"/>
-        </g>
-        <text x="74"
-              y="32"
-              font-family="Arial, sans-serif"
-              font-size="28"
-              font-weight="600"
-              dominant-baseline="middle"
-              fill="#ffffff">
-          Secure <tspan fill="#f5b300">TheCloud</tspan>
-        </text>
-      </svg>
+  <!-- TOP NAV -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="/" aria-label="SecureTheCloud Home">
+        <span class="brand__mark">STC</span>
+        <span class="brand__name">SecureTheCloud</span>
+      </a>
+
+      <nav class="nav">
+        <a href="/shield/">Shield</a>
+        <a href="/copilot/">Copilot</a>
+        <a href="/ecosystem/">Ecosystem</a>
+        <a href="/riskdna/">RiskDNA</a>
+        <a href="/aegis-air/">Aegis-Air</a>
+        <a href="/labs/">Labs</a>
+        <a href="/media/">Media</a>
+        <a href="/consultancy/">Consultancy</a>
+      </nav>
+
+      <div class="topbar__actions">
+        <a class="btn btn--ghost" href="/console/">Console</a>
+        <a class="btn btn--primary" href="/shield/">Launch Shield</a>
+      </div>
     </div>
+  </header>
 
-    <h1>The SecureTheCloud Ecosystem</h1>
-    <p>Detection. Enforcement. Intelligence. Unified under deterministic control.</p>
-  </div>
-</section>
+  <!-- HERO -->
+  <main class="container">
+    <section class="hero">
+      <div class="hero__left">
+        <div class="eyebrow">Shield-First Platform</div>
+        <h1>Deterministic Risk Intelligence</h1>
+        <p class="lede">
+          STC Shield unifies identity scoring, governance, and AI reasoning into a single executive command surface.
+          <span class="muted">No drift. No hallucination. No guesswork.</span>
+        </p>
 
-<section class="ecosystem-flow">
-  <div class="flow-container">
+        <div class="cta">
+          <a class="btn btn--primary" href="/shield/">Launch Shield</a>
+          <a class="btn btn--ghost" href="/copilot/">Open Copilot</a>
+          <a class="btn btn--ghost" href="/riskdna/">Explore RiskDNA</a>
+        </div>
 
-    <div class="flow-node" data-node="shield">
-      <h2>Shield</h2>
-      <p>Detect identity attack paths.</p>
-    </div>
+        <div class="hero__meta">
+          <div class="meta-chip">
+            <div class="meta-chip__k">Backend</div>
+            <div class="meta-chip__v">stc-intelligence-core.fly.dev</div>
+          </div>
+          <div class="meta-chip">
+            <div class="meta-chip__k">Surface</div>
+            <div class="meta-chip__v">Read-Only Executive Preview</div>
+          </div>
+          <div class="meta-chip">
+            <div class="meta-chip__k">Update</div>
+            <div class="meta-chip__v"><span id="stc-last-updated">—</span></div>
+          </div>
+        </div>
+      </div>
 
-    <div class="flow-connector"></div>
+      <!-- LIVE PANEL -->
+      <aside class="hero__right" aria-label="Live Signal Preview">
+        <div class="panel">
+          <div class="panel__head">
+            <div>
+              <div class="panel__title">Live Signal Preview</div>
+              <div class="panel__subtitle">Derived from Shield feed (read-only)</div>
+            </div>
 
-    <div class="flow-node" data-node="runtime">
-      <h2>Runtime</h2>
-      <p>Enforce zero-trust AI agent access.</p>
-    </div>
+            <div class="status" id="stc-status">
+              <span class="dot dot--idle" aria-hidden="true"></span>
+              <span class="status__text">Idle</span>
+            </div>
+          </div>
 
-    <div class="flow-connector"></div>
+          <div class="stats">
+            <div class="stat stat--critical">
+              <div class="stat__label">CRITICAL</div>
+              <div class="stat__value" id="critical-count">—</div>
+            </div>
+            <div class="stat stat--high">
+              <div class="stat__label">HIGH</div>
+              <div class="stat__value" id="high-count">—</div>
+            </div>
+            <div class="stat stat--medium">
+              <div class="stat__label">MEDIUM</div>
+              <div class="stat__value" id="medium-count">—</div>
+            </div>
+            <div class="stat stat--low">
+              <div class="stat__label">LOW</div>
+              <div class="stat__value" id="low-count">—</div>
+            </div>
+          </div>
 
-    <div class="flow-node" data-node="copilot">
-      <h2>Copilot</h2>
-      <p>Explain deterministic risk decisions.</p>
-    </div>
+          <div class="pulse">
+            <div class="pulse__label">
+              Risk Pulse
+              <span class="muted">subtle animation tied to live incident volume</span>
+            </div>
 
-  </div>
-</section>
+            <!-- Canvas graph (lightweight) -->
+            <div class="pulse__canvas-wrap">
+              <canvas id="riskPulse" width="720" height="200" aria-label="Risk pulse graph"></canvas>
+            </div>
 
-<section class="ecosystem-support">
-  <div class="support-grid">
-    <div class="support-card">Labs</div>
-    <div class="support-card">Media</div>
-    <div class="support-card">Consulting</div>
-  </div>
-</section>
+            <div class="pulse__foot">
+              <span class="mono" id="stc-feed-count">incidents: —</span>
+              <span class="mono" id="stc-feed-mode">mode: preview</span>
+            </div>
+          </div>
 
-<script src="ecosystem.js"></script>
+          <div class="panel__foot">
+            <a class="link" href="/shield/">Open full Shield →</a>
+            <a class="link" href="/graph/">View blast radius →</a>
+            <a class="link" href="/console/">Console →</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ECOSYSTEM STRIP -->
+    <section class="ecosystem">
+      <div class="eco-card">
+        <div class="eco-card__k">Shield</div>
+        <div class="eco-card__v">Executive risk surface</div>
+        <a class="eco-card__a" href="/shield/">Open</a>
+      </div>
+      <div class="eco-card">
+        <div class="eco-card__k">RiskDNA</div>
+        <div class="eco-card__v">Deterministic scoring engine</div>
+        <a class="eco-card__a" href="/riskdna/">Open</a>
+      </div>
+      <div class="eco-card">
+        <div class="eco-card__k">Copilot</div>
+        <div class="eco-card__v">Governed explanations</div>
+        <a class="eco-card__a" href="/copilot/">Open</a>
+      </div>
+      <div class="eco-card">
+        <div class="eco-card__k">Aegis-Air</div>
+        <div class="eco-card__v">Vertical proof (airline)</div>
+        <a class="eco-card__a" href="/aegis-air/">Open</a>
+      </div>
+      <div class="eco-card">
+        <div class="eco-card__k">Labs</div>
+        <div class="eco-card__v">Hands-on architectures</div>
+        <a class="eco-card__a" href="/labs/">Open</a>
+      </div>
+    </section>
+
+    <!-- MEDIA + CONSULTANCY -->
+    <section class="two-up">
+      <div class="card">
+        <div class="card__k">Media</div>
+        <h2>Architecture deep-dives & executive explainers</h2>
+        <p class="muted">
+          Watch platform walkthroughs, lab breakdowns, and deterministic AI governance demos.
+        </p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/media/">Open Media</a>
+          <a class="btn btn--ghost" href="https://www.youtube.com/" target="_blank" rel="noreferrer">YouTube</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__k">Consultancy</div>
+        <h2>Cloud security architecture & risk intelligence advisory</h2>
+        <p class="muted">
+          Principal-level engagements: identity security, multi-cloud governance, Kubernetes/telco CNF design, and risk modeling.
+        </p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/consultancy/">Request Consultation</a>
+          <a class="btn btn--ghost" href="/labs/">View Capability Labs</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__left">
+          <div class="brand brand--mini">
+            <span class="brand__mark">STC</span>
+            <span class="brand__name">SecureTheCloud</span>
+          </div>
+          <div class="muted">Deterministic risk intelligence platform.</div>
+        </div>
+
+        <div class="footer__right">
+          <div class="mono small">© <span id="stc-year"></span> SecureTheCloud</div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script defer src="/assets/js/stc-home.js"></script>
 </body>
 </html>
