@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  background: #0b1220;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.ecosystem-hero {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.ecosystem-hero h1 {
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.ecosystem-hero p {
+  color: #b0b8c5;
+  font-size: 18px;
+}
+
+.logo-lockup svg {
+  margin-bottom: 30px;
+}
+
+.ecosystem-flow {
+  padding: 80px 20px;
+}
+
+.flow-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.flow-node {
+  background: #0f1a2e;
+  border: 1px solid #f5b30033;
+  padding: 30px;
+  width: 240px;
+  text-align: center;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.flow-node h2 {
+  color: #f5b300;
+}
+
+.flow-node.active {
+  border-color: #f5b300;
+  box-shadow: 0 0 20px #f5b30055;
+  transform: translateY(-4px);
+}
+
+.flow-connector {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, #f5b300 0%, transparent 100%);
+  animation: pulse 3s infinite linear;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+.ecosystem-support {
+  padding: 80px 20px;
+}
+
+.support-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.support-card {
+  background: #0f1a2e;
+  border: 1px solid #ffffff11;
+  padding: 20px 40px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.support-card:hover {
+  border-color: #f5b300;
+}
