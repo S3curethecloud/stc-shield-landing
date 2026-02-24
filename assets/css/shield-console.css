@@ -1,0 +1,128 @@
+/* Shield Console (Preview) — layout only. No theme drift. */
+
+.consolebar{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+  padding-top:18px;
+  padding-bottom:18px;
+}
+
+.consolebar__title{
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:0.2px;
+}
+
+.consolebar__sub{
+  margin-top:6px;
+  font-size:13px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:8px 10px;
+  border-radius:999px;
+  font-size:12px;
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.04);
+}
+
+.badge.readonly{
+  border-color: rgba(245,179,0,0.35);
+  box-shadow: 0 0 0 1px rgba(245,179,0,0.12) inset;
+}
+
+.badge.preview{
+  border-color: rgba(255,255,255,0.18);
+}
+
+.console-layout{
+  display:grid;
+  grid-template-columns: 320px 1fr 340px;
+  gap:18px;
+  padding-top:10px;
+  padding-bottom:26px;
+}
+
+.console-sidebar h3,
+.console-context h3{
+  margin-top:2px;
+  margin-bottom:12px;
+}
+
+.finding-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.finding{
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.10);
+  background:rgba(255,255,255,0.03);
+  cursor:default;
+}
+
+.finding.active{
+  border-color: rgba(245,179,0,0.35);
+  box-shadow: 0 0 0 1px rgba(245,179,0,0.10) inset;
+}
+
+.console-note{
+  margin-top:14px;
+  font-size:12px;
+}
+
+.view-toggle{
+  display:flex;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.toggle{
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.03);
+  font-weight:600;
+}
+
+.toggle.active{
+  border-color: rgba(245,179,0,0.35);
+  box-shadow: 0 0 0 1px rgba(245,179,0,0.10) inset;
+}
+
+.main-canvas{
+  min-height: 420px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.10);
+  background:rgba(0,0,0,0.15);
+  padding:16px;
+}
+
+.placeholder{
+  margin:0;
+  line-height:1.5;
+}
+
+.ai-panel-placeholder{
+  margin-top:16px;
+  padding:14px;
+  border-radius:14px;
+  border:1px dashed rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.02);
+}
+
+.console-footer{
+  display:flex;
+  justify-content:space-between;
+  padding-bottom:28px;
+  font-size:12px;
+}
