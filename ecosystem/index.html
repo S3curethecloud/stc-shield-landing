@@ -2,104 +2,239 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ecosystem | SecureTheCloud</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>SecureTheCloud | Ecosystem</title>
+  <meta name="description" content="The SecureTheCloud ecosystem: Detection, Enforcement, Intelligence — unified under deterministic control." />
+
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="/assets/css/stc.css" />
+  <link rel="stylesheet" href="/ecosystem/ecosystem.css" />
 </head>
+
 <body>
+  <div class="bg-grid" aria-hidden="true"></div>
 
-<!-- ====================================== -->
-<!-- CANONICAL TOPBAR (GLOBAL STANDARD) -->
-<!-- ====================================== -->
-<header class="topbar">
-  <div class="container topbar__inner">
-    <a class="brand" href="/">
-      <span class="brand__mark">STC</span>
-      <span class="brand__name">SecureTheCloud</span>
-    </a>
+  <!-- TOP NAV (MUST MATCH MGF ORDER) -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="/" aria-label="SecureTheCloud Home">
+        <span class="brand__mark">STC</span>
+        <span class="brand__name">SecureTheCloud</span>
+      </a>
 
-    <nav class="nav">
-      <a href="/">Home</a>
-      <a href="/shield/">Shield</a>
-      <a href="/copilot/">Copilot</a>
-      <a href="/ecosystem/" class="active">Ecosystem</a>
-      <a href="/riskdna/">RiskDNA</a>
-      <a href="/aegis-air/">Aegis-Air</a>
-      <a href="/labs/">Labs</a>
-      <a href="/media/">Media</a>
-      <a href="/consultancy/">Consultancy</a>
-    </nav>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/shield/">Shield</a>
+        <a href="/copilot/">Copilot</a>
+        <a class="is-active" href="/ecosystem/">Ecosystem</a>
+        <a href="/riskdna/">RiskDNA</a>
+        <a href="/aegis-air/">Aegis-Air</a>
+        <a href="/labs/">Labs</a>
+        <a href="/media/">Media</a>
+        <a href="/consultancy/">Consultancy</a>
+      </nav>
 
-    <div class="topbar__actions">
-      <a class="btn btn--ghost" href="/console/">Console</a>
-      <a class="btn btn--primary" href="/shield/">Launch Shield</a>
+      <div class="topbar__actions">
+        <!-- Keep these consistent across all pages -->
+        <a class="btn btn--ghost" href="/shield/">Console</a>
+        <a class="btn btn--primary" href="/shield/preview/">Launch Shield</a>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<!-- ============================== -->
-<!-- ECOSYSTEM MODULE STRUCTURE -->
-<!-- ============================== -->
-<main class="container module">
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero hero--single">
+      <div class="hero__left">
+        <div class="eyebrow">Platform Architecture</div>
+        <h1>The SecureTheCloud Ecosystem</h1>
+        <p class="lede">
+          Detection. Enforcement. Intelligence. Unified under deterministic control.
+          <span class="muted">Executive surface first — clean, read-only, governed.</span>
+        </p>
 
-  <!-- Standardized Module Hero -->
-  <section class="module__hero">
-    <div class="eyebrow">Platform Architecture</div>
-    <h1>The SecureTheCloud Ecosystem</h1>
-    <p class="lede">
-      Detection. Enforcement. Intelligence. Unified under deterministic control.
-    </p>
-  </section>
+        <div class="cta">
+          <a class="btn btn--primary" href="/shield/">Open Shield</a>
+          <a class="btn btn--ghost" href="/copilot/">Open Copilot</a>
+          <a class="btn btn--ghost" href="#runtime">View Runtime</a>
+        </div>
+      </div>
+    </section>
 
-  <!-- Module Flow Diagram -->
-  <section class="module__flow">
+    <!-- FLOW -->
+    <section class="eco-flow reveal" id="eco-flow" aria-label="Ecosystem flow">
+      <div class="card eco-flow__card">
+        <div class="card__k">Executive Map</div>
+        <h2 class="eco-flow__title">How the modules connect</h2>
+        <p class="muted eco-flow__subtitle">
+          Core loop (top): Shield → RiskDNA → Copilot. Runtime (below) enforces zero-trust access for agents and services.
+        </p>
 
-    <div class="flow-container">
+        <div class="eco-flow__canvas" role="group" aria-label="Module flow diagram">
+          <div class="eco-flow__row">
+            <a class="eco-node" href="/shield/" data-title="Shield" data-desc="Detect identity attack paths and visualize blast radius (read-only executive surface).">
+              <div class="eco-node__k">Shield</div>
+              <div class="eco-node__v">Detection surface</div>
+            </a>
 
-      <div class="flow-node">
-        <h2>Shield</h2>
-        <p>Detect identity attack paths.</p>
+            <div class="eco-link" aria-hidden="true"></div>
+
+            <a class="eco-node" href="/riskdna/" data-title="RiskDNA" data-desc="Deterministic scoring and normalization of identity + behavioral signals.">
+              <div class="eco-node__k">RiskDNA</div>
+              <div class="eco-node__v">Scoring engine</div>
+            </a>
+
+            <div class="eco-link" aria-hidden="true"></div>
+
+            <a class="eco-node" href="/copilot/" data-title="Copilot" data-desc="Governed explanations: executive brief, decision trace, policy guidance.">
+              <div class="eco-node__k">Copilot</div>
+              <div class="eco-node__v">Governed reasoning</div>
+            </a>
+          </div>
+
+          <div class="eco-flow__row eco-flow__row--runtime">
+            <div class="eco-spine" aria-hidden="true"></div>
+
+            <!-- Runtime is on-page for now to avoid dead links -->
+            <a class="eco-node eco-node--runtime" href="#runtime"
+               data-title="Runtime"
+               data-desc="Zero-Trust Runtime for AI Agents: issues short-lived, least-privilege credentials and continuously enforces policy before any system/data access.">
+              <div class="eco-node__k">Runtime</div>
+              <div class="eco-node__v">Enforcement layer</div>
+              <div class="eco-node__tag">New</div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hover/Focus details (exec-friendly, zero clutter) -->
+        <div class="eco-detail" id="eco-detail" aria-live="polite">
+          <div class="eco-detail__k">Focused module</div>
+          <div class="eco-detail__title" id="eco-detail-title">Shield</div>
+          <div class="eco-detail__desc muted" id="eco-detail-desc">
+            Detect identity attack paths and visualize blast radius (read-only executive surface).
+          </div>
+          <div class="eco-detail__actions">
+            <a class="btn btn--primary" id="eco-detail-link" href="/shield/">Open</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE CARDS -->
+    <section class="eco-grid reveal" aria-label="Modules">
+      <div class="card">
+        <div class="card__k">Shield</div>
+        <h2>Detection surface</h2>
+        <p class="muted">Executive visualization of identity attack paths and risk propagation.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/shield/">Open</a>
+          <a class="btn btn--ghost" href="/shield/preview/">Preview Console</a>
+        </div>
       </div>
 
-      <div class="flow-connector"></div>
-
-      <div class="flow-node">
-        <h2>Runtime</h2>
-        <p>Enforce zero-trust AI agent access.</p>
+      <div class="card">
+        <div class="card__k">RiskDNA</div>
+        <h2>Deterministic scoring</h2>
+        <p class="muted">Real-time identity + behavioral risk scoring engine for control decisions.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/riskdna/">Open</a>
+        </div>
       </div>
 
-      <div class="flow-connector"></div>
-
-      <div class="flow-node">
-        <h2>Copilot</h2>
-        <p>Explain deterministic risk decisions.</p>
+      <div class="card">
+        <div class="card__k">Copilot</div>
+        <h2>Governed explanations</h2>
+        <p class="muted">Executive brief, decision trace, and policy guidance across the platform.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/copilot/">Open</a>
+        </div>
       </div>
 
-    </div>
+      <div class="card" id="runtime">
+        <div class="card__k">Runtime</div>
+        <h2>Zero-trust agent enforcement</h2>
+        <p class="muted">
+          Issues short-lived, least-privilege credentials to AI agents and enforces authorization continuously before access.
+        </p>
+        <div class="card__actions">
+          <!-- Keep non-404: point to request/demo or keep disabled until runtime page exists -->
+          <a class="btn btn--primary" href="/consultancy/">Request Walkthrough</a>
+          <span class="muted small">Module page can be added later without changing the ecosystem story.</span>
+        </div>
+      </div>
 
-  </section>
+      <div class="card">
+        <div class="card__k">Aegis-Air</div>
+        <h2>Vertical proof</h2>
+        <p class="muted">Secure aviation-grade cloud architecture demonstration module.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/aegis-air/">Open</a>
+        </div>
+      </div>
 
-  <!-- Supporting Surfaces -->
-  <section class="module__grid">
+      <div class="card">
+        <div class="card__k">Labs</div>
+        <h2>Applied research</h2>
+        <p class="muted">Experimental builds, architecture testing, and governed prototypes.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/labs/">Open</a>
+        </div>
+      </div>
 
-    <div class="card">
-      <h2>Labs</h2>
-      <p class="muted">Experimental research and applied threat modeling.</p>
-    </div>
+      <div class="card">
+        <div class="card__k">Media</div>
+        <h2>Briefings & updates</h2>
+        <p class="muted">Official announcements and executive explainers under release governance.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/media/">Open</a>
+        </div>
+      </div>
 
-    <div class="card">
-      <h2>Media</h2>
-      <p class="muted">Platform briefings and deterministic analysis content.</p>
-    </div>
+      <div class="card">
+        <div class="card__k">Consultancy</div>
+        <h2>Architecture advisory</h2>
+        <p class="muted">Strategic security architecture and deterministic governance advisory services.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/consultancy/">Open</a>
+        </div>
+      </div>
+    </section>
 
-    <div class="card">
-      <h2>Consultancy</h2>
-      <p class="muted">Strategic architecture and implementation advisory.</p>
-    </div>
+    <!-- GOVERNANCE BOUNDARY -->
+    <section class="eco-govern reveal" aria-label="Governance boundary">
+      <div class="card eco-govern__card">
+        <div class="card__k">Governance Boundary</div>
+        <h2>Executive demo surfaces are read-only by design</h2>
+        <ul class="muted eco-govern__list">
+          <li><strong>Read-only</strong>: UI never mutates backend state.</li>
+          <li><strong>No secrets</strong>: no credentials, tokens, or sensitive config exposed.</li>
+          <li><strong>No full tenant graph</strong>: demos show bounded, executive-safe slices.</li>
+          <li><strong>Deterministic</strong>: outputs are explainable and reproducible.</li>
+        </ul>
+      </div>
+    </section>
 
-  </section>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__left">
+          <div class="brand brand--mini">
+            <span class="brand__mark">STC</span>
+            <span class="brand__name">SecureTheCloud</span>
+          </div>
+          <div class="muted">Deterministic risk intelligence platform.</div>
+        </div>
+        <div class="footer__right">
+          <div class="mono small">© <span id="stc-year"></span> SecureTheCloud</div>
+        </div>
+      </div>
+    </footer>
+  </main>
 
-</main>
-
+  <script defer src="/ecosystem/ecosystem.js"></script>
+  <script>
+    // footer year (safe, deterministic)
+    document.getElementById("stc-year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
