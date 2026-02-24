@@ -126,3 +126,40 @@
   padding-bottom:28px;
   font-size:12px;
 }
+
+/* ============================================================
+   PATCH — INTERACTIVITY + VISIBILITY FIXES
+   ============================================================ */
+
+/* Findings interactivity */
+.finding {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.finding:hover {
+  background: rgba(245, 179, 0, 0.08);
+  border-color: #f5b300;
+}
+
+.finding.active {
+  border-color: #f5b300;
+  background: rgba(245, 179, 0, 0.15);
+}
+
+/* Table / Graph Toggle */
+.view-toggle .toggle {
+  background: #1f2937;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.view-toggle .toggle.active {
+  background: #f5b300;
+  color: #0b1220;
+  border-color: #f5b300;
+  font-weight: 600;
+}
