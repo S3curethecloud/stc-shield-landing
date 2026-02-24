@@ -1,87 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SecureTheCloud | Ecosystem</title>
-<link rel="stylesheet" href="ecosystem.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ecosystem | SecureTheCloud</title>
+  <link rel="stylesheet" href="/assets/css/stc.css" />
 </head>
-
 <body>
 
-<!-- CANONICAL PLATFORM NAV -->
-<nav class="nav">
-  <a href="/">Home</a>
-  <a href="/shield/">Shield</a>
-  <a href="/copilot/">Copilot</a>
-  <a class="active" href="/ecosystem/">Ecosystem</a>
-  <a href="/riskdna/">RiskDNA</a>
-  <a href="/aegis-air/">Aegis-Air</a>
-  <a href="/labs/">Labs</a>
-  <a href="/media/">Media</a>
-  <a href="/consultancy/">Consultancy</a>
-</nav>
+<!-- ====================================== -->
+<!-- CANONICAL TOPBAR (GLOBAL STANDARD) -->
+<!-- ====================================== -->
+<header class="topbar">
+  <div class="container topbar__inner">
+    <a class="brand" href="/">
+      <span class="brand__mark">STC</span>
+      <span class="brand__name">SecureTheCloud</span>
+    </a>
 
-<section class="ecosystem-hero">
-  <div class="hero-inner">
-    <div class="logo-lockup">
-      <svg viewBox="0 0 340 64" xmlns="http://www.w3.org/2000/svg">
-        <g>
-          <path d="M32 4L56 12V28C56 42 44 54 32 60C20 54 8 42 8 28V12L32 4Z"
-                fill="#0f1a2e"/>
-          <path d="M32 10L50 16V28C50 38 42 48 32 52C22 48 14 38 14 28V16L32 10Z"
-                fill="#f5b300"/>
-        </g>
-        <text x="74"
-              y="32"
-              font-family="Arial, sans-serif"
-              font-size="28"
-              font-weight="600"
-              dominant-baseline="middle"
-              fill="#ffffff">
-          Secure <tspan fill="#f5b300">TheCloud</tspan>
-        </text>
-      </svg>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/shield/">Shield</a>
+      <a href="/copilot/">Copilot</a>
+      <a href="/ecosystem/" class="active">Ecosystem</a>
+      <a href="/riskdna/">RiskDNA</a>
+      <a href="/aegis-air/">Aegis-Air</a>
+      <a href="/labs/">Labs</a>
+      <a href="/media/">Media</a>
+      <a href="/consultancy/">Consultancy</a>
+    </nav>
+
+    <div class="topbar__actions">
+      <a class="btn btn--ghost" href="/console/">Console</a>
+      <a class="btn btn--primary" href="/shield/">Launch Shield</a>
     </div>
+  </div>
+</header>
 
+<!-- ============================== -->
+<!-- ECOSYSTEM MODULE STRUCTURE -->
+<!-- ============================== -->
+<main class="container module">
+
+  <!-- Standardized Module Hero -->
+  <section class="module__hero">
+    <div class="eyebrow">Platform Architecture</div>
     <h1>The SecureTheCloud Ecosystem</h1>
-    <p>Detection. Enforcement. Intelligence. Unified under deterministic control.</p>
-  </div>
-</section>
+    <p class="lede">
+      Detection. Enforcement. Intelligence. Unified under deterministic control.
+    </p>
+  </section>
 
-<section class="ecosystem-flow">
-  <div class="flow-container">
+  <!-- Module Flow Diagram -->
+  <section class="module__flow">
 
-    <div class="flow-node" data-node="shield">
-      <h2>Shield</h2>
-      <p>Detect identity attack paths.</p>
+    <div class="flow-container">
+
+      <div class="flow-node">
+        <h2>Shield</h2>
+        <p>Detect identity attack paths.</p>
+      </div>
+
+      <div class="flow-connector"></div>
+
+      <div class="flow-node">
+        <h2>Runtime</h2>
+        <p>Enforce zero-trust AI agent access.</p>
+      </div>
+
+      <div class="flow-connector"></div>
+
+      <div class="flow-node">
+        <h2>Copilot</h2>
+        <p>Explain deterministic risk decisions.</p>
+      </div>
+
     </div>
 
-    <div class="flow-connector"></div>
+  </section>
 
-    <div class="flow-node" data-node="runtime">
-      <h2>Runtime</h2>
-      <p>Enforce zero-trust AI agent access.</p>
+  <!-- Supporting Surfaces -->
+  <section class="module__grid">
+
+    <div class="card">
+      <h2>Labs</h2>
+      <p class="muted">Experimental research and applied threat modeling.</p>
     </div>
 
-    <div class="flow-connector"></div>
-
-    <div class="flow-node" data-node="copilot">
-      <h2>Copilot</h2>
-      <p>Explain deterministic risk decisions.</p>
+    <div class="card">
+      <h2>Media</h2>
+      <p class="muted">Platform briefings and deterministic analysis content.</p>
     </div>
 
-  </div>
-</section>
+    <div class="card">
+      <h2>Consultancy</h2>
+      <p class="muted">Strategic architecture and implementation advisory.</p>
+    </div>
 
-<section class="ecosystem-support">
-  <div class="support-grid">
-    <div class="support-card">Labs</div>
-    <div class="support-card">Media</div>
-    <div class="support-card">Consultancy</div>
-  </div>
-</section>
+  </section>
 
-<script src="ecosystem.js"></script>
+</main>
+
 </body>
 </html>
