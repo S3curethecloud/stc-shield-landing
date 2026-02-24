@@ -10,20 +10,14 @@
     content="STC Shield operator console preview. Read-only identity attack-path visibility."
   />
 
-  <!-- Use the SAME platform theme (gold/black) -->
   <link rel="stylesheet" href="/assets/css/stc.css" />
-  <!-- Console-only layout rules (minimal, no churn) -->
   <link rel="stylesheet" href="/assets/css/shield-console.css" />
 </head>
 
 <body>
 
-  <!-- Background grid (same platform feel) -->
   <div class="bg-grid" aria-hidden="true"></div>
 
-  <!-- ====================================== -->
-  <!-- CANONICAL TOPBAR (SHARED ACROSS ALL)   -->
-  <!-- ====================================== -->
   <header class="topbar">
     <div class="container topbar__inner">
       <a class="brand" href="/" aria-label="SecureTheCloud Home">
@@ -44,17 +38,12 @@
       </nav>
 
       <div class="topbar__actions">
-        <!-- Console points to the one operator surface -->
         <a class="btn btn--ghost is-active" href="/shield/preview/" aria-current="page">Console</a>
-        <!-- Launch Shield goes to the Shield module landing -->
         <a class="btn btn--primary" href="/shield/">Launch Shield</a>
       </div>
     </div>
   </header>
 
-  <!-- ====================================== -->
-  <!-- CONSOLE STATUS BAR (OPERATOR-ONLY)     -->
-  <!-- ====================================== -->
   <section class="container consolebar" aria-label="Console status">
     <div class="consolebar__left">
       <div class="consolebar__title">
@@ -71,16 +60,11 @@
     </div>
   </section>
 
-  <!-- ====================================== -->
-  <!-- CONSOLE LAYOUT                         -->
-  <!-- ====================================== -->
   <main class="container console-layout">
 
-    <!-- LEFT: Findings / Navigation -->
     <aside class="card console-sidebar" aria-label="Findings navigation">
       <h3>Findings</h3>
 
-      <!-- PLACEHOLDER LIST ONLY (no data logic in v1.0 skeleton) -->
       <ul class="finding-list" aria-label="Finding list (placeholder)">
         <li class="finding active">Critical Identity Paths</li>
         <li class="finding">High-Risk Roles</li>
@@ -93,7 +77,6 @@
       </div>
     </aside>
 
-    <!-- CENTER: Main Visualization -->
     <section class="card console-main" aria-label="Truth surface">
       <div class="view-toggle" role="tablist" aria-label="View mode">
         <button class="toggle active" role="tab" aria-selected="true" type="button">
@@ -106,7 +89,6 @@
 
       <div class="main-canvas" role="region" aria-label="Main canvas">
 
-        <!-- Attack Path Map (Graph) -->
         <section class="card" id="attack-path-map" style="margin-top:16px;">
 
           <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
@@ -133,19 +115,10 @@
             Read-only visualization of <code>finding.attack_path</code>. No mutation.
           </div>
 
-          <!-- TEMP SVG PATH TEST (ABSOLUTE) -->
-          <div class="muted" style="margin-top:14px;">Shield Architecture (SVG path test — absolute)</div>
+          <div class="muted" style="margin-top:14px;">Shield Architecture</div>
           <img
             src="/diagrams/shield-architecture.svg"
             alt="Shield architecture diagram"
-            style="max-width:100%; border:1px solid #333; border-radius:12px; margin-top:8px;"
-          />
-
-          <!-- TEMP SVG PATH TEST (RELATIVE FALLBACK) -->
-          <div class="muted" style="margin-top:14px;">Shield Architecture (SVG path test — relative fallback)</div>
-          <img
-            src="../../diagrams/shield-architecture.svg"
-            alt="Shield architecture diagram (relative fallback)"
             style="max-width:100%; border:1px solid #333; border-radius:12px; margin-top:8px;"
           />
 
@@ -154,7 +127,6 @@
       </div>
     </section>
 
-    <!-- RIGHT: Context + AI (future) -->
     <aside class="card console-context" aria-label="Context panel">
       <h3>Context</h3>
 
@@ -162,7 +134,6 @@
         Select an identity or attack path to inspect details.
       </p>
 
-      <!-- AI panel placeholder (INTENTIONAL, EMPTY) -->
       <div class="ai-panel-placeholder" aria-label="AI Reasoning (placeholder)">
         <h4>AI Reasoning</h4>
         <p class="muted">
@@ -178,12 +149,40 @@
     <span class="muted">No configuration changes are performed</span>
   </footer>
 
-  <!-- ====================================== -->
-  <!-- SCRIPTS (ORDER IS GOVERNED)            -->
-  <!-- Graph must load before console-data    -->
-  <!-- ====================================== -->
+  <!-- GOVERNED SCRIPT ORDER -->
   <script src="/js/shield-graph.js"></script>
   <script src="/js/console-data.js"></script>
+
+  <script>
+  /* =========================================
+     Toggle: Table View / Graph View
+     Pure visibility control. No mutation.
+     ========================================= */
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const toggles = document.querySelectorAll(".view-toggle .toggle");
+    const graphSection = document.getElementById("attack-path-map");
+
+    if (!graphSection || toggles.length === 0) return;
+
+    toggles.forEach(btn => {
+      btn.addEventListener("click", () => {
+
+        toggles.forEach(t => t.classList.remove("active"));
+        btn.classList.add("active");
+
+        if (btn.textContent.trim() === "Graph View") {
+          graphSection.style.display = "block";
+        } else {
+          graphSection.style.display = "none";
+        }
+      });
+    });
+
+    graphSection.style.display = "none";
+  });
+  </script>
 
 </body>
 </html>
