@@ -1,77 +1,159 @@
-<svg width="1200" height="720" viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <style>
-      .bg { fill: #0b0f14; }
-      .panel { fill: #0f1620; stroke: #1f2937; stroke-width: 1.5; rx: 10; }
-      .title { fill: #f9fafb; font-size: 22px; font-weight: 600; font-family: Inter, system-ui, sans-serif; }
-      .label { fill: #e5e7eb; font-size: 15px; font-weight: 500; font-family: Inter, system-ui, sans-serif; }
-      .muted { fill: #9ca3af; font-size: 13px; font-family: Inter, system-ui, sans-serif; }
-      .gold { fill: #f59e0b; font-weight: 600; }
-      .arrow { stroke: #374151; stroke-width: 2; marker-end: url(#arrow); }
-    </style>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1400" height="820" viewBox="0 0 1400 820"
+     xmlns="http://www.w3.org/2000/svg"
+     font-family="Inter, Segoe UI, Arial, sans-serif">
 
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L9,3 z" fill="#374151" />
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1f2937"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8"
+                    flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+
+    <marker id="arrow" markerWidth="10" markerHeight="10"
+            refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#38bdf8"/>
     </marker>
   </defs>
 
   <!-- Background -->
-  <rect class="bg" x="0" y="0" width="1200" height="720"/>
+  <rect width="1400" height="820" fill="url(#bgGrad)" />
 
   <!-- Title -->
-  <text x="600" y="48" text-anchor="middle" class="title">
-    STC Shield Architecture
-  </text>
-  <text x="600" y="72" text-anchor="middle" class="muted">
-    Deterministic identity attack-path detection with AI-augmented reasoning
-  </text>
-
-  <!-- Identity Sources -->
-  <rect class="panel" x="60" y="110" width="320" height="120"/>
-  <text x="220" y="140" text-anchor="middle" class="label">Identity Sources</text>
-  <text x="220" y="165" text-anchor="middle" class="muted">AWS IAM · Azure Entra ID · GCP IAM</text>
-  <text x="220" y="190" text-anchor="middle" class="muted">Roles · Trust · Federation</text>
-
-  <!-- Ingestion -->
-  <rect class="panel" x="440" y="110" width="320" height="120"/>
-  <text x="600" y="140" text-anchor="middle" class="label">Deterministic Ingestion</text>
-  <text x="600" y="165" text-anchor="middle" class="muted">Identity graph construction</text>
-  <text x="600" y="190" text-anchor="middle" class="muted">Trust relationships · Edges</text>
-
-  <!-- Attack Path Engine -->
-  <rect class="panel" x="820" y="110" width="320" height="120"/>
-  <text x="980" y="140" text-anchor="middle" class="label">Attack Path Modeling Engine</text>
-  <text x="980" y="165" text-anchor="middle" class="muted">Graph traversal · Reachability</text>
-  <text x="980" y="190" text-anchor="middle" class="muted">Severity scoring</text>
-
-  <!-- Arrows top row -->
-  <line class="arrow" x1="380" y1="170" x2="440" y2="170"/>
-  <line class="arrow" x1="760" y1="170" x2="820" y2="170"/>
-
-  <!-- Operator Console -->
-  <rect class="panel" x="260" y="300" width="340" height="160"/>
-  <text x="430" y="330" text-anchor="middle" class="label">Shield Operator Console</text>
-  <text x="430" y="355" text-anchor="middle" class="muted">Table view · Graph view</text>
-  <text x="430" y="380" text-anchor="middle" class="muted">Read-only · Session-aware</text>
-  <text x="430" y="410" text-anchor="middle" class="muted">No remediation · No mutation</text>
-
-  <!-- AI Reasoning -->
-  <rect class="panel" x="600" y="300" width="340" height="160"/>
-  <text x="770" y="330" text-anchor="middle" class="label">AI-Augmented Reasoning</text>
-  <text x="770" y="355" text-anchor="middle" class="muted">Natural-language explanations</text>
-  <text x="770" y="380" text-anchor="middle" class="muted">Grounded in Shield data</text>
-  <text x="770" y="410" text-anchor="middle" class="muted">Citations · Provenance</text>
-
-  <!-- Arrows bottom -->
-  <line class="arrow" x1="980" y1="230" x2="430" y2="300"/>
-  <line class="arrow" x1="980" y1="230" x2="770" y2="300"/>
-
-  <!-- Footer note -->
-  <text x="600" y="660" text-anchor="middle" class="muted">
-    AI explains results. Shield computes truth. System state is never modified.
+  <text x="700" y="60" text-anchor="middle"
+        font-size="34" font-weight="600"
+        fill="#ffffff">
+    STC Shield — Architecture v1.1
   </text>
 
-  <text x="600" y="690" text-anchor="middle" class="gold">
-    SecureTheCloud · STC Shield
+  <!-- User / Actor -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="330" width="240" height="140" rx="18"
+          fill="url(#cardGrad)" stroke="#334155"/>
+    <text x="200" y="380" text-anchor="middle"
+          font-size="18" fill="#ffffff">User / Actor</text>
+    <text x="200" y="410" text-anchor="middle"
+          font-size="14" fill="#94a3b8">Device + Identity</text>
+  </g>
+
+  <!-- RiskDNA -->
+  <g filter="url(#shadow)">
+    <rect x="420" y="230" width="300" height="140" rx="18"
+          fill="url(#cardGrad)" stroke="#334155"/>
+    <text x="570" y="285" text-anchor="middle"
+          font-size="20" fill="#ffffff">RiskDNA</text>
+    <text x="570" y="315" text-anchor="middle"
+          font-size="14" fill="#94a3b8">Behavioral Risk Engine</text>
+  </g>
+
+  <!-- Shield Enforcement Boundary -->
+  <rect x="360" y="200" width="760" height="520" rx="28"
+        fill="none"
+        stroke="#38bdf8"
+        stroke-width="2"
+        stroke-dasharray="8 6"/>
+
+  <text x="740" y="220" text-anchor="middle"
+        font-size="14" fill="#38bdf8">
+    Shield Enforcement Boundary — Blast Radius Containment Zone
   </text>
+
+  <!-- Shield Core -->
+  <g filter="url(#shadow)">
+    <rect x="470" y="420" width="280" height="160" rx="18"
+          fill="url(#cardGrad)" stroke="#334155"/>
+    <text x="610" y="470" text-anchor="middle"
+          font-size="20" font-weight="600"
+          fill="#38bdf8">Shield Core</text>
+    <text x="610" y="500" text-anchor="middle"
+          font-size="14" fill="#94a3b8">Zero-Trust Enforcement</text>
+    <text x="610" y="525" text-anchor="middle"
+          font-size="14" fill="#94a3b8">Policy Evaluation Engine</text>
+  </g>
+
+  <!-- Datastore Segmentation Layer -->
+  <!-- Policy Store -->
+  <g filter="url(#shadow)">
+    <rect x="820" y="390" width="260" height="100" rx="16"
+          fill="url(#cardGrad)" stroke="#334155"/>
+    <text x="950" y="430" text-anchor="middle"
+          font-size="16" fill="#ffffff">Policy Store</text>
+    <text x="950" y="455" text-anchor="middle"
+          font-size="13" fill="#94a3b8">Access Rules</text>
+  </g>
+
+  <!-- Telemetry Store -->
+  <g filter="url(#shadow)">
+    <rect x="820" y="510" width="260" height="100" rx="16"
+          fill="url(#cardGrad)" stroke="#334155"/>
+    <text x="950" y="550" text-anchor="middle"
+          font-size="16" fill="#ffffff">Telemetry Store</text>
+    <text x="950" y="575" text-anchor="middle"
+          font-size="13" fill="#94a3b8">Behavior + Signals</text>
+  </g>
+
+  <!-- Enforcement Log Store -->
+  <g filter="url(#shadow)">
+    <rect x="820" y="630" width="260" height="100" rx="16"
+          fill="url(#cardGrad)" stroke="#334155"/>
+    <text x="950" y="670" text-anchor="middle"
+          font-size="16" fill="#ffffff">Enforcement Log Store</text>
+    <text x="950" y="695" text-anchor="middle"
+          font-size="13" fill="#94a3b8">Decision Audit Trail</text>
+  </g>
+
+  <!-- Protected Resource -->
+  <g filter="url(#shadow)">
+    <rect x="1150" y="350" width="220" height="160" rx="18"
+          fill="url(#cardGrad)" stroke="#334155"/>
+    <text x="1260" y="405" text-anchor="middle"
+          font-size="18" fill="#ffffff">Protected Resource</text>
+    <text x="1260" y="435" text-anchor="middle"
+          font-size="14" fill="#94a3b8">Control / Data Plane</text>
+  </g>
+
+  <!-- Flow Arrows -->
+  <line x1="320" y1="400" x2="420" y2="300"
+        stroke="#38bdf8" stroke-width="2"
+        marker-end="url(#arrow)"/>
+
+  <line x1="320" y1="400" x2="470" y2="500"
+        stroke="#38bdf8" stroke-width="2"
+        marker-end="url(#arrow)"/>
+
+  <line x1="720" y1="300" x2="1150" y2="430"
+        stroke="#38bdf8" stroke-width="2"
+        marker-end="url(#arrow)"/>
+
+  <line x1="750" y1="500" x2="820" y2="440"
+        stroke="#38bdf8" stroke-width="2"
+        marker-end="url(#arrow)"/>
+
+  <line x1="750" y1="520" x2="820" y2="560"
+        stroke="#38bdf8" stroke-width="2"
+        marker-end="url(#arrow)"/>
+
+  <line x1="750" y1="540" x2="820" y2="680"
+        stroke="#38bdf8" stroke-width="2"
+        marker-end="url(#arrow)"/>
+
+  <line x1="1080" y1="440" x2="1150" y2="430"
+        stroke="#38bdf8" stroke-width="2"
+        marker-end="url(#arrow)"/>
+
+  <!-- Footer -->
+  <text x="700" y="790" text-anchor="middle"
+        font-size="12" fill="#64748b">
+    SecureTheCloud Deterministic Enforcement Model — Canonical v1.1 (Segmentation Enabled)
+  </text>
+
 </svg>

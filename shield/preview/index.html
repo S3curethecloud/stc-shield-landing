@@ -105,9 +105,36 @@
       </div>
 
       <div class="main-canvas" role="region" aria-label="Main canvas">
-        <p class="placeholder muted">
-          Select a finding to view identity attack paths.
-        </p>
+
+        <!-- Attack Path Map (Graph) -->
+        <section class="card" id="attack-path-map" style="margin-top:16px;">
+
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <h2 style="margin:0;">Attack Path Map</h2>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn btn--ghost" id="graph-zoom-out" type="button">Zoom −</button>
+              <button class="btn btn--ghost" id="graph-zoom-in" type="button">Zoom +</button>
+              <button class="btn btn--ghost" id="graph-reset" type="button">Reset</button>
+              <button class="btn btn--ghost" id="graph-fullscreen" type="button">Fullscreen</button>
+            </div>
+          </div>
+
+          <div id="finding-graph"
+               style="margin-top:12px;height:320px;border-radius:14px;overflow:hidden;"
+               aria-label="Attack path graph"
+               role="img"></div>
+
+          <div id="graph-inspector" class="muted" style="margin-top:10px;">
+            Select a node or edge to inspect.
+          </div>
+
+          <div class="muted" style="margin-top:10px;">
+            Read-only visualization of <code>finding.attack_path</code>. No mutation.
+          </div>
+
+        </section>
+
       </div>
     </section>
 
@@ -134,6 +161,13 @@
     <span>STC Shield • Preview</span>
     <span class="muted">No configuration changes are performed</span>
   </footer>
+
+  <!-- ====================================== -->
+  <!-- SCRIPTS (ORDER IS GOVERNED)            -->
+  <!-- Graph must load before console-data    -->
+  <!-- ====================================== -->
+  <script src="/js/shield-graph.js"></script>
+  <script src="/js/console-data.js"></script>
 
 </body>
 </html>

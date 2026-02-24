@@ -104,27 +104,30 @@
     // Attack path (best-effort display without guessing shape)
     const ap = finding.attack_path;
     if (ap && typeof ap === "object") {
-      const nodes = Array.isArray(ap.nodes) ? ap.nodes.map(n => n.id || n).filter(Boolean) : [];
+      const nodes = Array.isArray(ap.nodes)
+        ? ap.nodes.map(n => n.id || n).filter(Boolean)
+        : [];
       attackEl.textContent = nodes.length ? nodes.join(" → ") : "—";
     } else {
       attackEl.textContent = "—";
     }
 
-    // Render attack path graph (read-only, no guessing)
+    /* ============================================================
+       NEW: Deterministic Attack Path Graph Render
+       Do NOT remove existing logic
+       ============================================================ */
+
     const graphEl = document.getElementById("finding-graph");
     const inspectorEl = document.getElementById("graph-inspector");
 
-    if (window.STCShieldGraph && typeof window.STCShieldGraph.render === "function") {
+    if (graphEl && window.STCShieldGraph) {
       window.STCShieldGraph.render(graphEl, finding.attack_path, {
-        severity: sev,
+        severity: finding.severity,
         findingId: finding.finding_id || finding.id || null,
         onInspect: (msg) => {
           if (inspectorEl) inspectorEl.textContent = msg;
         }
       });
-    } else {
-      if (graphEl) graphEl.innerHTML = "";
-      if (inspectorEl) inspectorEl.textContent = "Graph renderer not loaded.";
     }
 
     // Lab anchor: ONLY if explicitly present (no guessing)
@@ -161,16 +164,9 @@
     active.setAttribute("tabindex", "0");
     if (focus) active.focus();
 
-    // listbox activedescendant
-    const listbox = document.querySelector(".console-findings");
-    if (listbox && active.id) {
-      listbox.setAttribute("aria-activedescendant", active.id);
-    }
-
     const selectedFinding = findings[clamped];
     updateDetail(selectedFinding);
 
-    // Emit governed event for AI layer
     document.dispatchEvent(new CustomEvent("stc:shield:finding:selected", {
       detail: { finding: selectedFinding }
     }));
@@ -182,32 +178,6 @@
       if (!item) return;
       const idx = Number(item.getAttribute("data-index"));
       if (Number.isFinite(idx)) setActive(idx);
-    });
-
-    listEl.addEventListener("keydown", (e) => {
-      const items = listEl.querySelectorAll(".finding-item");
-      if (!items || items.length === 0) return;
-
-      if (activeIndex < 0) activeIndex = 0;
-
-      let next = null;
-      switch (e.key) {
-        case "ArrowDown": next = activeIndex + 1; break;
-        case "ArrowUp": next = activeIndex - 1; break;
-        case "Home": next = 0; break;
-        case "End": next = items.length - 1; break;
-        case "Enter":
-        case " ":
-          e.preventDefault();
-          setActive(activeIndex);
-          return;
-        default:
-          return;
-      }
-
-      e.preventDefault();
-      next = (next + items.length) % items.length;
-      setActive(next);
     });
   }
 
@@ -221,20 +191,14 @@
         headers: { "Accept": "application/json" }
       });
 
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
-      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const data = await res.json();
-      const arr = Array.isArray(data.findings) ? data.findings : [];
+      findings = Array.isArray(data.findings) ? data.findings : [];
 
-      findings = arr;
       renderList();
-
-      // Make list interactive
       bindInteractions();
 
-      // Auto-select first finding for demo clarity (deterministic)
       if (findings.length > 0) {
         setActive(0, { focus: false });
       }
@@ -245,6 +209,5 @@
     }
   }
 
-  // Boot
   loadFindings();
 })();
