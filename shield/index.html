@@ -8,9 +8,9 @@
 </head>
 <body>
 
-<!-- ============================= -->
-<!-- CANONICAL TOPBAR (STANDARD) -->
-<!-- ============================= -->
+<!-- ====================================== -->
+<!-- CANONICAL TOPBAR (SHARED ACROSS ALL) -->
+<!-- ====================================== -->
 <header class="topbar">
   <div class="container topbar__inner">
     <a class="brand" href="/">
@@ -37,53 +37,36 @@
   </div>
 </header>
 
-<!-- ============================= -->
-<!-- MODULE HERO (STANDARD SCALE) -->
-<!-- ============================= -->
-<section class="module__hero">
-  <div class="eyebrow">STC Module</div>
-  <h1>Shield</h1>
-  <p class="lede">
-    Detect identity attack paths across cloud environments using deterministic scoring.
-  </p>
-</section>
+<!-- ========================= -->
+<!-- SHIELD MODULE STRUCTURE -->
+<!-- ========================= -->
+<main class="container module">
 
-<!-- ============================= -->
-<!-- MODULE CONTENT GRID -->
-<!-- ============================= -->
-<main class="container module__content">
+  <!-- Standardized Hero -->
+  <section class="module__hero">
+    <div class="eyebrow">Detection Surface</div>
+    <h1>Shield</h1>
+    <p class="lede">
+      Executive visualization of identity attack paths and risk propagation.
+    </p>
+  </section>
 
-  <div class="module__grid">
+  <!-- Product Surface Grid -->
+  <section class="module__grid">
 
     <div class="card">
-      <h3>Identity Graph Mapping</h3>
-      <p>
-        Continuously maps role relationships, policy inheritance, and privilege escalation paths across multi-cloud environments.
-      </p>
+      <h2>Live Risk Overview</h2>
+      <p class="muted">Read-only deterministic feed.</p>
+      <a class="btn btn--primary" href="/shield/preview/">Open Console</a>
     </div>
 
     <div class="card">
-      <h3>Blast Radius Containment</h3>
-      <p>
-        Deterministically isolates compromised identities and reduces lateral movement across environments.
-      </p>
+      <h2>Blast Radius Graph</h2>
+      <p class="muted">Visualize trust-boundary traversal.</p>
+      <a class="btn btn--ghost" href="/graph/">View Graph</a>
     </div>
 
-    <div class="card">
-      <h3>RiskDNA Scoring</h3>
-      <p>
-        Assigns weighted risk scores based on identity exposure, privilege chain depth, and attack feasibility.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Zero-Trust Enforcement</h3>
-      <p>
-        Enforces conditional access decisions based on real-time identity posture and contextual evaluation.
-      </p>
-    </div>
-
-  </div>
+  </section>
 
 </main>
 
