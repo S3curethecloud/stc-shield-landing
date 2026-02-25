@@ -1,87 +1,173 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <script>
-    window.location.replace("/copilot/app/");
-  </script>
-
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Copilot | SecureTheCloud</title>
+
+  <meta name="description"
+        content="STC Copilot — governed deterministic reasoning for security labs, detections, and executive decision support." />
 
   <link rel="canonical" href="https://securethecloud.dev/copilot/" />
 
+  <!-- Unified Platform Theme -->
   <link rel="stylesheet" href="/assets/css/stc.css" />
 </head>
+
 <body>
+  <div class="bg-grid" aria-hidden="true"></div>
 
-<!-- ====================================== -->
-<!-- CANONICAL TOPBAR (SHARED ACROSS ALL) -->
-<!-- ====================================== -->
-<header class="topbar">
-  <div class="container topbar__inner">
-    <a class="brand" href="/">
-      <span class="brand__mark">STC</span>
-      <span class="brand__name">SecureTheCloud</span>
-    </a>
+  <!-- ====================================== -->
+  <!-- CANONICAL TOPBAR (PLATFORM-UNIFIED) -->
+  <!-- ====================================== -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="/" aria-label="SecureTheCloud Home">
+        <span class="brand__mark">STC</span>
+        <span class="brand__name">SecureTheCloud</span>
+      </a>
 
-    <nav class="nav">
-      <a href="/">Home</a>
-      <a href="/shield/">Shield</a>
-      <a href="/copilot/" class="active">Copilot</a>
-      <a href="/ecosystem/">Ecosystem</a>
-      <a href="/riskdna/">RiskDNA</a>
-      <a href="/aegis-air/">Aegis-Air</a>
-      <a href="/labs/">Labs</a>
-      <a href="/media/">Media</a>
-      <a href="/consultancy/">Consultancy</a>
-    </nav>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/shield/">Shield</a>
+        <a href="/copilot/" class="active" aria-current="page">Copilot</a>
+        <a href="/ecosystem/">Ecosystem</a>
+        <a href="/riskdna/">RiskDNA</a>
+        <a href="/aegis-air/">Aegis-Air</a>
+        <a href="/labs/">Labs</a>
+        <a href="/media/">Media</a>
+        <a href="/consultancy/">Consultancy</a>
+      </nav>
 
-    <div class="topbar__actions">
-      <a class="btn btn--ghost" href="/console/">Console</a>
-      <a class="btn btn--primary" href="/shield/">Launch Shield</a>
+      <div class="topbar__actions">
+        <!-- IMPORTANT: Console in this platform maps to Shield preview -->
+        <a class="btn btn--ghost" href="/shield/preview/">Console</a>
+        <a class="btn btn--primary" href="/shield/">Launch Shield</a>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<!-- ============================== -->
-<!-- COPILOT MODULE (PHASE 1) -->
-<!-- ============================== -->
-<main class="container module">
+  <!-- ====================================== -->
+  <!-- COPILOT OVERVIEW (ENTERPRISE) -->
+  <!-- ====================================== -->
+  <main class="container module">
 
-  <!-- Standard Module Hero (Consistent Scale) -->
-  <section class="module__hero">
-    <div class="eyebrow">STC Module</div>
-    <h1>Copilot</h1>
-    <p class="lede">
-      Governed deterministic explanations for identity risk decisions across the SecureTheCloud platform.
-    </p>
-  </section>
+    <!-- HERO -->
+    <section class="module__hero">
+      <div class="eyebrow">STC Module</div>
+      <h1>Copilot</h1>
+      <p class="lede">
+        Governed deterministic reasoning for security labs, detections, and executive decisions across the SecureTheCloud platform.
+        <span class="muted">No web. No drift. Auditable outputs.</span>
+      </p>
 
-  <!-- Module Content Grid -->
-  <section class="module__grid">
+      <div class="cta">
+        <a class="btn btn--primary" href="/copilot/app/">Launch Copilot App</a>
+        <a class="btn btn--ghost" href="/copilot/mobile/">Mobile Apps</a>
+        <a class="btn btn--ghost" href="/ecosystem/">View Ecosystem</a>
+      </div>
 
-    <div class="card">
-      <h2>Executive Brief</h2>
-      <p class="muted">Summarize what happened, why it matters, and what to do next.</p>
-      <a class="btn btn--primary" href="/copilot/brief/">Open Brief</a>
-    </div>
+      <!-- Posture / constraints chips (keeps the page “enterprise”) -->
+      <div class="hero__meta" style="margin-top:18px;">
+        <div class="meta-chip">
+          <div class="meta-chip__k">Posture</div>
+          <div class="meta-chip__v">Governed · Deterministic</div>
+        </div>
+        <div class="meta-chip">
+          <div class="meta-chip__k">Surface</div>
+          <div class="meta-chip__v">Web App + Voice + Mobile</div>
+        </div>
+        <div class="meta-chip">
+          <div class="meta-chip__k">Integration</div>
+          <div class="meta-chip__v">Shield + RiskDNA + Labs</div>
+        </div>
+      </div>
+    </section>
 
-    <div class="card">
-      <h2>Decision Trace</h2>
-      <p class="muted">Explain RiskDNA scoring inputs and Shield containment outcomes.</p>
-      <a class="btn btn--ghost" href="/copilot/trace/">View Trace</a>
-    </div>
+    <!-- PRIMARY CAPABILITIES -->
+    <section class="module__grid" aria-label="Copilot capabilities">
 
-    <div class="card">
-      <h2>Policy Guidance</h2>
-      <p class="muted">Translate detections into corrective actions and governance controls.</p>
-      <a class="btn btn--ghost" href="/copilot/policy/">Open Guidance</a>
-    </div>
+      <div class="card">
+        <div class="card__k">EXECUTIVE</div>
+        <h2>Executive Brief</h2>
+        <p class="muted">
+          Summarize what happened, why it matters, and what to do next — grounded in governed platform signals.
+        </p>
+        <a class="btn btn--primary" href="/copilot/app/#brief">Open in App</a>
+      </div>
 
-  </section>
+      <div class="card">
+        <div class="card__k">TRACEABILITY</div>
+        <h2>Decision Trace</h2>
+        <p class="muted">
+          Explain RiskDNA scoring inputs and Shield containment context with deterministic lineage.
+        </p>
+        <a class="btn btn--ghost" href="/copilot/app/#trace">Open in App</a>
+      </div>
 
-</main>
+      <div class="card">
+        <div class="card__k">GOVERNANCE</div>
+        <h2>Policy Guidance</h2>
+        <p class="muted">
+          Translate detections into corrective actions and guardrails. No mutation. No automated remediation.
+        </p>
+        <a class="btn btn--ghost" href="/copilot/app/#guidance">Open in App</a>
+      </div>
 
+    </section>
+
+    <!-- EXECUTION SURFACES -->
+    <section style="margin-top:22px;" aria-label="Execution surfaces">
+      <div class="card" style="padding:22px;">
+        <div class="card__k">EXECUTION SURFACES</div>
+        <h2 style="margin-top:8px;">Where Copilot Runs</h2>
+        <p class="muted" style="max-width:70ch;">
+          Copilot exists as an enterprise surface: overview for stakeholders, app for operators and students, and mobile for voice-first guided learning.
+        </p>
+
+        <div class="module__grid" style="margin-top:16px;">
+          <div class="card">
+            <div class="card__k">WEB</div>
+            <h3 style="margin:10px 0 6px;">Copilot App</h3>
+            <p class="muted">Primary execution surface for deterministic Q&A, exports, and voice.</p>
+            <a class="btn btn--primary" href="/copilot/app/">Launch App</a>
+          </div>
+
+          <div class="card">
+            <div class="card__k">MOBILE</div>
+            <h3 style="margin:10px 0 6px;">iOS + Android</h3>
+            <p class="muted">Voice-first learning surface for STC Academy students.</p>
+            <a class="btn btn--ghost" href="/copilot/mobile/">View Mobile</a>
+          </div>
+
+          <div class="card">
+            <div class="card__k">PLATFORM</div>
+            <h3 style="margin:10px 0 6px;">Shield + RiskDNA</h3>
+            <p class="muted">Copilot explanations are grounded in platform truth surfaces.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <a class="btn btn--ghost" href="/shield/">Open Shield</a>
+              <a class="btn btn--ghost" href="/riskdna/">Open RiskDNA</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GOVERNANCE STRIP -->
+    <section style="margin-top:18px;">
+      <div class="card" style="padding:18px;">
+        <div class="card__k">GOVERNANCE BOUNDARY</div>
+        <p class="muted" style="margin:10px 0 0;">
+          Copilot provides explanations only. It does not modify system state. Outputs are designed for auditability and deterministic traceability.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="container console-footer" style="margin-top:22px;">
+    <span>SecureTheCloud • Copilot</span>
+    <span class="muted">Deterministic · No Web · Audited</span>
+  </footer>
 </body>
 </html>
