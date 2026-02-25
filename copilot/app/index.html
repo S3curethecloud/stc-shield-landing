@@ -1,0 +1,199 @@
+<!-- =========================================================
+     STC COPILOT — PLATFORM ALIGNED APP SURFACE
+     FILE: /copilot/app/index.html
+     AUTHORITY: MGF-AUTHORITY-ALL
+     STATUS: REFACTORED · PLATFORM UNIFIED · SHIELD BRIDGE APPLIED
+========================================================= -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STC Copilot App</title>
+
+  <meta name="description"
+        content="STC Copilot — Deterministic AI for security labs, datasets, and executive explanations." />
+
+  <link rel="canonical" href="https://securethecloud.dev/copilot/app/" />
+
+  <!-- Unified Platform Styling -->
+  <link rel="stylesheet" href="/assets/css/stc.css" />
+
+  <!-- Copilot App Specific Styles -->
+  <link rel="stylesheet" href="/copilot/app/styles.css" />
+</head>
+
+<body>
+
+<!-- ====================================== -->
+<!-- PLATFORM HEADER (UNIFIED) -->
+<!-- ====================================== -->
+<header class="topbar">
+  <div class="container topbar__inner">
+    <a class="brand" href="/">
+      <span class="brand__mark">STC</span>
+      <span class="brand__name">SecureTheCloud</span>
+    </a>
+
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/shield/">Shield</a>
+      <a href="/copilot/" class="active">Copilot</a>
+      <a href="/ecosystem/">Ecosystem</a>
+      <a href="/riskdna/">RiskDNA</a>
+      <a href="/aegis-air/">Aegis-Air</a>
+      <a href="/labs/">Labs</a>
+      <a href="/media/">Media</a>
+      <a href="/consultancy/">Consultancy</a>
+    </nav>
+
+    <div class="topbar__actions">
+      <a class="btn btn--ghost" href="/shield/preview/">Console</a>
+      <a class="btn btn--primary" href="/shield/">Launch Shield</a>
+    </div>
+  </div>
+</header>
+
+<div id="stc-app" class="static-ui">
+  <div class="stc-layout">
+    <div class="app-container">
+
+      <!-- CANONICAL ASK SURFACE -->
+      <section id="copilot-ask" class="ask-container">
+
+        <h1>What can I help with?</h1>
+
+        <div class="interview-bar">
+          <label class="interview-toggle">
+            <input type="checkbox" id="interview-mode-toggle" />
+            <span>Interview Mode</span>
+          </label>
+
+          <select id="interview-context" disabled>
+            <option selected>STC Shield</option>
+          </select>
+
+          <span class="interview-hint">
+            Analysis panels appear after responses.
+          </span>
+        </div>
+
+        <details class="context-drawer" data-governance="context-drawer">
+          <summary>Context</summary>
+          <div class="context-body">
+            <p class="context-note">
+              Context influences deterministic routing only (no memory).
+            </p>
+          </div>
+        </details>
+
+        <div class="ask-row">
+          <button id="voice-btn" class="mic-button" aria-label="Start voice input">
+            🎤
+          </button>
+
+          <textarea
+            id="copilot-input"
+            placeholder="Ask about labs, datasets, detections, or architecture…"
+            rows="1"
+          ></textarea>
+
+          <button id="ask-btn" class="ask-button">Ask</button>
+        </div>
+
+        <!-- RESPONSE SURFACE -->
+        <section id="response-surface">
+
+          <div class="copilot-card card">
+            <h2>Copilot Response</h2>
+
+            <div id="copilot-text" class="copilot-text">—</div>
+
+            <p id="copilot-idle-line" class="copilot-idle-line">
+              Deterministic responses from curated SecureTheCloud datasets.
+            </p>
+
+            <details id="transcript-toggle" class="transcript-toggle">
+              <summary class="transcript-summary">
+                <span class="transcript-label">Transcript</span>
+              </summary>
+
+              <section id="transcript-panel">
+                <div id="transcript-body"></div>
+              </section>
+            </details>
+
+            <div id="export-row" class="export-row hidden" aria-label="Exports">
+              <button id="export-txt" class="export-btn" type="button">Export TXT</button>
+              <button id="export-json" class="export-btn" type="button">Export JSON</button>
+              <button id="export-pdf" class="export-btn" type="button">Export PDF</button>
+            </div>
+          </div>
+
+          <div id="anki-hud" class="anki-hud hidden">
+            <div class="anki-card">
+              <div id="anki-prompt" class="anki-front">—</div>
+              <div class="anki-controls">
+                <button data-rating="again" class="anki-btn">Again</button>
+                <button data-rating="hard" class="anki-btn">Hard</button>
+                <button data-rating="good" class="anki-btn">Good</button>
+                <button data-rating="easy" class="anki-btn">Easy</button>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- PERMANENT ANKI FLOATING MOUNT -->
+        <div id="anki-floating-root"></div>
+
+        <!-- SHIELD BRIDGE CARD (REPLACEMENT FOR EMBED) -->
+        <section class="card shield-bridge">
+          <h3>Related Shield Surface</h3>
+          <p class="muted">
+            Copilot explanations are grounded in Shield findings.
+          </p>
+
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn btn--ghost" href="/shield/">Open Shield Module</a>
+            <a class="btn btn--primary" href="/shield/preview/">Open Shield Console</a>
+          </div>
+        </section>
+
+        <!-- CLEAN AUTHORITY STRIP -->
+        <footer id="authority-strip">
+          <span class="platform-signals">
+            Active datasets: Labs Inventory · SIEM Dataset · Shield Findings · Voice Intelligence
+          </span>
+
+          <span class="platform-legal">
+            Deterministic · No Web · Audited
+          </span>
+
+          <span class="platform-legal copyright">
+            © 2025 SecureTheCloud AI — Multi-Cloud Architecture Intelligence Platform
+          </span>
+        </footer>
+
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     GOVERNED SCRIPT ORDER (UPDATED PATHS)
+========================================================= -->
+
+<script src="/assets/js/voice.js"></script>
+<script src="/copilot/app/copilot-ui-bindings.js"></script>
+<script src="/copilot/app/bridge/shield.js"></script>
+
+<script type="module" src="/copilot/app/copilot-state-machine.js"></script>
+<script type="module" src="/copilot/app/envelope-validator.js"></script>
+<script type="module" src="/copilot/app/exports/export-txt.js"></script>
+<script type="module" src="/copilot/app/exports/export-json.js"></script>
+<script type="module" src="/copilot/app/exports/export-pdf.js"></script>
+
+</body>
+</html>
