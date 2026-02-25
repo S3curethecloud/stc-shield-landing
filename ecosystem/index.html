@@ -7,7 +7,6 @@
   <title>SecureTheCloud | Ecosystem</title>
   <meta name="description" content="The SecureTheCloud ecosystem: Detection, Enforcement, Intelligence — unified under deterministic control." />
 
-  <!-- CANONICAL (SELF) -->
   <link rel="canonical" href="https://securethecloud.dev/ecosystem/" />
 
   <link rel="icon" href="/favicon.ico" />
@@ -39,6 +38,7 @@
       </nav>
 
       <div class="topbar__actions">
+        <!-- Keep these consistent across all pages -->
         <a class="btn btn--ghost" href="/shield/">Console</a>
         <a class="btn btn--primary" href="/shield/preview/">Launch Shield</a>
       </div>
@@ -46,6 +46,7 @@
   </header>
 
   <main class="container">
+    <!-- HERO -->
     <section class="hero hero--single">
       <div class="hero__left">
         <div class="eyebrow">Platform Architecture</div>
@@ -63,7 +64,158 @@
       </div>
     </section>
 
-    <!-- (Remaining content unchanged from scanned file) -->
+    <!-- FLOW -->
+    <section class="eco-flow reveal" id="eco-flow" aria-label="Ecosystem flow">
+      <div class="card eco-flow__card">
+        <div class="card__k">Executive Map</div>
+        <h2 class="eco-flow__title">How the modules connect</h2>
+        <p class="muted eco-flow__subtitle">
+          Core loop (top): Shield → RiskDNA → Copilot. Runtime (below) enforces zero-trust access for agents and services.
+        </p>
+
+        <div class="eco-flow__canvas" role="group" aria-label="Module flow diagram">
+          <div class="eco-flow__row">
+            <a class="eco-node" href="/shield/" data-title="Shield" data-desc="Detect identity attack paths and visualize blast radius (read-only executive surface).">
+              <div class="eco-node__k">Shield</div>
+              <div class="eco-node__v">Detection surface</div>
+            </a>
+
+            <div class="eco-link" aria-hidden="true"></div>
+
+            <a class="eco-node" href="/riskdna/" data-title="RiskDNA" data-desc="Deterministic scoring and normalization of identity + behavioral signals.">
+              <div class="eco-node__k">RiskDNA</div>
+              <div class="eco-node__v">Scoring engine</div>
+            </a>
+
+            <div class="eco-link" aria-hidden="true"></div>
+
+            <a class="eco-node" href="/copilot/" data-title="Copilot" data-desc="Governed explanations: executive brief, decision trace, policy guidance.">
+              <div class="eco-node__k">Copilot</div>
+              <div class="eco-node__v">Governed reasoning</div>
+            </a>
+          </div>
+
+          <div class="eco-flow__row eco-flow__row--runtime">
+            <div class="eco-spine" aria-hidden="true"></div>
+
+            <!-- Runtime is on-page for now to avoid dead links -->
+            <a class="eco-node eco-node--runtime" href="#runtime"
+               data-title="Runtime"
+               data-desc="Zero-Trust Runtime for AI Agents: issues short-lived, least-privilege credentials and continuously enforces policy before any system/data access.">
+              <div class="eco-node__k">Runtime</div>
+              <div class="eco-node__v">Enforcement layer</div>
+              <div class="eco-node__tag">New</div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hover/Focus details (exec-friendly, zero clutter) -->
+        <div class="eco-detail" id="eco-detail" aria-live="polite">
+          <div class="eco-detail__k">Focused module</div>
+          <div class="eco-detail__title" id="eco-detail-title">Shield</div>
+          <div class="eco-detail__desc muted" id="eco-detail-desc">
+            Detect identity attack paths and visualize blast radius (read-only executive surface).
+          </div>
+          <div class="eco-detail__actions">
+            <a class="btn btn--primary" id="eco-detail-link" href="/shield/">Open</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE CARDS -->
+    <section class="eco-grid reveal" aria-label="Modules">
+      <div class="card">
+        <div class="card__k">Shield</div>
+        <h2>Detection surface</h2>
+        <p class="muted">Executive visualization of identity attack paths and risk propagation.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/shield/">Open</a>
+          <a class="btn btn--ghost" href="/shield/preview/">Preview Console</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__k">RiskDNA</div>
+        <h2>Deterministic scoring</h2>
+        <p class="muted">Real-time identity + behavioral risk scoring engine for control decisions.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/riskdna/">Open</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__k">Copilot</div>
+        <h2>Governed explanations</h2>
+        <p class="muted">Executive brief, decision trace, and policy guidance across the platform.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/copilot/">Open</a>
+        </div>
+      </div>
+
+      <div class="card" id="runtime">
+        <div class="card__k">Runtime</div>
+        <h2>Zero-trust agent enforcement</h2>
+        <p class="muted">
+          Issues short-lived, least-privilege credentials to AI agents and enforces authorization continuously before access.
+        </p>
+        <div class="card__actions">
+          <!-- Keep non-404: point to request/demo or keep disabled until runtime page exists -->
+          <a class="btn btn--primary" href="/consultancy/">Request Walkthrough</a>
+          <span class="muted small">Module page can be added later without changing the ecosystem story.</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__k">Aegis-Air</div>
+        <h2>Vertical proof</h2>
+        <p class="muted">Secure aviation-grade cloud architecture demonstration module.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/aegis-air/">Open</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__k">Labs</div>
+        <h2>Applied research</h2>
+        <p class="muted">Experimental builds, architecture testing, and governed prototypes.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/labs/">Open</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__k">Media</div>
+        <h2>Briefings & updates</h2>
+        <p class="muted">Official announcements and executive explainers under release governance.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/media/">Open</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__k">Consultancy</div>
+        <h2>Architecture advisory</h2>
+        <p class="muted">Strategic security architecture and deterministic governance advisory services.</p>
+        <div class="card__actions">
+          <a class="btn btn--primary" href="/consultancy/">Open</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GOVERNANCE BOUNDARY -->
+    <section class="eco-govern reveal" aria-label="Governance boundary">
+      <div class="card eco-govern__card">
+        <div class="card__k">Governance Boundary</div>
+        <h2>Executive demo surfaces are read-only by design</h2>
+        <ul class="muted eco-govern__list">
+          <li><strong>Read-only</strong>: UI never mutates backend state.</li>
+          <li><strong>No secrets</strong>: no credentials, tokens, or sensitive config exposed.</li>
+          <li><strong>No full tenant graph</strong>: demos show bounded, executive-safe slices.</li>
+          <li><strong>Deterministic</strong>: outputs are explainable and reproducible.</li>
+        </ul>
+      </div>
+    </section>
 
     <footer class="footer">
       <div class="footer__inner">
@@ -83,6 +235,7 @@
 
   <script defer src="/ecosystem/ecosystem.js"></script>
   <script>
+    // footer year (safe, deterministic)
     document.getElementById("stc-year").textContent = new Date().getFullYear();
   </script>
 </body>
