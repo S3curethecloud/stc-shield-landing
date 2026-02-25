@@ -385,3 +385,16 @@ h2{
   .two-up{grid-template-columns:1fr;}
   .nav{display:none;} /* keep it clean on mobile */
 }
+
+.store-badges {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-top: 16px;
+}
+.store-badges img {
+  transition: 0.2s ease;
+}
+.store-badges img:hover {
+  opacity: 0.85;
+}
