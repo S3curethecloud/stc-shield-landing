@@ -60,6 +60,27 @@
     <div class="card">
       <h2>Live Risk Overview</h2>
       <p class="muted">Read-only deterministic feed.</p>
+
+      <div class="shield-live-panel">
+
+        <div id="shield-risk-score" class="risk-badge">
+          Risk Score: —
+        </div>
+
+        <h3>Drivers</h3>
+        <ul id="shield-drivers"></ul>
+
+        <h3>Recommended Actions</h3>
+        <ul id="shield-actions"></ul>
+
+        <button id="shield-why-button" class="btn btn--ghost">
+          Why This Score?
+        </button>
+
+        <div id="shield-why-panel" style="display:none;"></div>
+
+      </div>
+
       <a class="btn btn--primary" href="/shield/preview/">Open Console</a>
     </div>
 
@@ -72,7 +93,7 @@
   </section>
 
 </main>
-       <script src="/assets/js/shield-ui.js"></script>
+<script src="/assets/js/shield-ui.js"></script>
 
 </body>
 </html>
