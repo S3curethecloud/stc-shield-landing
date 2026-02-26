@@ -150,4 +150,4 @@ document.addEventListener("DOMContentLoaded", () => {
   renderShieldPanel();
 });
 
-<script src="/assets/js/shield-ui.js"></script>
+
