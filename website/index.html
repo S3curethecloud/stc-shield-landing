@@ -10,234 +10,229 @@
 
 <body>
 
+  <div class="bg-grid"></div>
+
   <!-- ========================================================= -->
-  <!-- NAVIGATION -->
+  <!-- TOP BAR -->
   <!-- ========================================================= -->
-  <header class="stc-nav">
-    <div class="container nav-inner">
-      <div class="logo">SecureTheCloud</div>
-      <nav>
+  <header class="topbar">
+    <div class="container topbar__inner">
+
+      <a href="/" class="brand">
+        <div class="brand__mark">STC</div>
+        <div class="brand__name">SecureTheCloud</div>
+      </a>
+
+      <nav class="nav">
         <a href="/architecture">Architecture</a>
         <a href="/runtime">Runtime</a>
         <a href="/whitepaper">Whitepaper</a>
-        <a href="/console" class="nav-cta">Access Console</a>
       </nav>
+
+      <div class="topbar__actions">
+        <a href="/shield" class="btn btn--ghost">Shield</a>
+        <a href="/copilot" class="btn btn--primary">Access Console</a>
+      </div>
+
     </div>
   </header>
 
   <!-- ========================================================= -->
-  <!-- SECTION 1 — HERO -->
+  <!-- HERO SECTION -->
   <!-- ========================================================= -->
-  <section class="hero">
-    <div class="container hero-inner">
+  <section class="section">
+    <div class="container">
 
-      <div class="hero-text">
-        <h1>
-          Deterministic Governance Infrastructure
-          <span class="highlight">for AI Systems</span>
-        </h1>
+      <div class="hero">
 
-        <p class="subheading">
-          Issue. Validate. Revoke. Prove.
-          Zero-Trust Runtime with Cryptographic Audit Integrity.
-        </p>
+        <div>
 
-        <div class="hero-actions">
-          <a href="/architecture" class="btn-primary">View Architecture</a>
-          <a href="/whitepaper" class="btn-secondary">Read Whitepaper</a>
+          <div class="eyebrow">
+            Deterministic Zero-Trust Runtime
+          </div>
+
+          <h1 class="h-display">
+            Governance Infrastructure<br>
+            for AI Systems
+          </h1>
+
+          <p class="lede lede--large">
+            Issue. Validate. Revoke. Prove.<br>
+            Runtime-enforced authority with cryptographically verifiable audit integrity.
+          </p>
+
+          <div class="cta">
+            <a href="/architecture" class="btn btn--primary">
+              View Architecture
+            </a>
+            <a href="/whitepaper" class="btn">
+              Read Whitepaper
+            </a>
+          </div>
+
+          <!-- 10-Second Credibility Strip -->
+          <div class="proof-strip">
+            <div class="proof-row">
+              <div><strong>Deterministic Graph Execution</strong> — Version pinned</div>
+              <div><strong>Immediate Revocation</strong> — 401 guaranteed</div>
+              <div><strong>Redis Authority</strong> — JWT is transport only</div>
+              <div><strong>Hash-Chained Audit</strong> — Tamper detection proven</div>
+            </div>
+          </div>
+
         </div>
-      </div>
 
-      <div class="hero-visual">
-        <!-- Placeholder for Architecture SVG -->
-        <div class="diagram-placeholder">
-          <div>Decision Plane</div>
-          <div>↓</div>
-          <div>Enforcement Plane</div>
-          <div>↓</div>
-          <div>Audit Ledger</div>
+        <!-- HERO PANEL (LIVE STATE PREVIEW) -->
+        <div class="panel">
+
+          <div class="panel__head">
+            <div>
+              <div class="panel__title">Runtime Governance Status</div>
+              <div class="panel__subtitle">
+                Single-Tenant Deterministic Foundation — Phase 4 Locked
+              </div>
+            </div>
+
+            <div class="status">
+              <div class="dot dot--ok"></div>
+              <div class="status__text">Operational</div>
+            </div>
+          </div>
+
+          <div class="gov-panel">
+
+            <div class="gov-row">
+              <div class="gov-label">Runtime</div>
+              <div class="gov-value state-active">ACTIVE</div>
+            </div>
+
+            <div class="gov-row">
+              <div class="gov-label">Audit Chain</div>
+              <div class="gov-value state-valid" id="audit-status">
+                VALID
+              </div>
+            </div>
+
+            <div class="gov-row">
+              <div class="gov-label">Chain Head</div>
+              <div class="gov-value mono" id="chain-head">
+                —
+              </div>
+            </div>
+
+            <div class="gov-row">
+              <div class="gov-label">Last Verified</div>
+              <div class="gov-value mono" id="last-verified">
+                —
+              </div>
+            </div>
+
+          </div>
+
+          <div class="panel__foot">
+            <button class="btn" onclick="verifyAudit()">Verify Now</button>
+            <a href="/runtime" class="link">Runtime Documentation →</a>
+          </div>
+
         </div>
+
       </div>
 
     </div>
   </section>
 
   <!-- ========================================================= -->
-  <!-- SECTION 2 — PROVEN PROPERTIES -->
+  <!-- ARCHITECTURE SNAPSHOT -->
   <!-- ========================================================= -->
-  <section class="properties">
+  <section class="section section--divider">
     <div class="container">
 
-      <h2>Operational Guarantees</h2>
+      <h2 class="h-section">Three-Plane Architecture</h2>
 
-      <div class="properties-grid">
-        <div class="property">
-          <h3>Deterministic Graph Execution</h3>
-          <p>Version-pinned control-plane reasoning. No hidden state. No LLM enforcement.</p>
+      <div class="two-up">
+
+        <div class="card">
+          <div class="card__k">Decision Plane</div>
+          <h2>Intelligence Core</h2>
+          <p>
+            Deterministic graph traversal (controlplane.v1 / v1.1),
+            Continuous Access Enforcement activation,
+            version-pinned decision hashes,
+            structured revocation propagation.
+          </p>
         </div>
 
-        <div class="property">
-          <h3>Runtime Authority Enforcement</h3>
-          <p>Redis-backed authority. JWT is transport — not truth.</p>
+        <div class="card">
+          <div class="card__k">Enforcement Plane</div>
+          <h2>Zero-Trust Runtime</h2>
+          <p>
+            Redis-backed authority store,
+            strict introspection validation,
+            immediate session deletion on revocation,
+            audit-anchored lifecycle verification.
+          </p>
         </div>
 
-        <div class="property">
-          <h3>Immediate Revocation</h3>
-          <p>Session deletion results in guaranteed 401 enforcement.</p>
-        </div>
-
-        <div class="property">
-          <h3>Hash-Chained Audit Ledger</h3>
-          <p>Cryptographically verifiable event continuity.</p>
-        </div>
-
-        <div class="property">
-          <h3>Tamper Detection Proven</h3>
-          <p>Manual mutation test demonstrates broken → recoverable state.</p>
-        </div>
-
-        <div class="property">
-          <h3>No LLM in Enforcement Path</h3>
-          <p>All enforcement decisions are deterministic and reproducible.</p>
-        </div>
       </div>
 
     </div>
   </section>
 
   <!-- ========================================================= -->
-  <!-- SECTION 3 — ARCHITECTURE SNAPSHOT -->
+  <!-- AUTHORITY LIFECYCLE -->
   <!-- ========================================================= -->
-  <section class="architecture-snapshot">
+  <section class="section section--divider">
     <div class="container">
 
-      <h2>Three-Plane Architecture</h2>
+      <h2 class="h-section">Authority Lifecycle</h2>
 
-      <div class="arch-grid">
+      <div class="lifecycle">
 
-        <div class="arch-card">
-          <h3>Intelligence Core</h3>
-          <ul>
-            <li>controlplane.v1 / v1.1</li>
-            <li>CAE boundary activation</li>
-            <li>Deterministic decision hash</li>
-            <li>Revocation propagation</li>
-          </ul>
+        <div class="lifecycle__step">
+          <h3>Issue</h3>
+          <p>Session authority written to Redis. Audit block appended.</p>
         </div>
 
-        <div class="arch-card">
-          <h3>Zero-Trust Runtime</h3>
-          <ul>
-            <li>Token issuance</li>
-            <li>Redis authority store</li>
-            <li>Strict introspection</li>
-            <li>Immediate revocation delete</li>
-          </ul>
+        <div class="lifecycle__step">
+          <h3>Introspect</h3>
+          <p>JWT signature verified. Redis authority validated.</p>
         </div>
 
-        <div class="arch-card">
-          <h3>Audit Integrity</h3>
-          <ul>
-            <li>Hash-chained events</li>
-            <li>/v1/audit/verify</li>
-            <li>Replay validation</li>
-            <li>Forensic metadata anchoring</li>
-          </ul>
+        <div class="lifecycle__step">
+          <h3>Revoke</h3>
+          <p>Session deleted immediately. Enforcement guaranteed.</p>
+        </div>
+
+        <div class="lifecycle__step">
+          <h3>Verify</h3>
+          <p>Hash chain validated for forensic continuity.</p>
         </div>
 
       </div>
 
-      <p class="phase-label">
-        Single-Tenant Deterministic Foundation — Phase 4 Locked
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- ENTERPRISE POSITIONING -->
+  <!-- ========================================================= -->
+  <section class="section section--divider">
+    <div class="container container--narrow">
+
+      <h2 class="h-section">Built for Regulated Environments</h2>
+
+      <p class="lede">
+        SecureTheCloud produces audit-ready governance evidence.
+        Designed for AI platform teams, security architects,
+        and enterprises requiring deterministic authority enforcement.
       </p>
 
-    </div>
-  </section>
-
-  <!-- ========================================================= -->
-  <!-- SECTION 4 — LIVE GOVERNANCE STATE -->
-  <!-- ========================================================= -->
-  <section class="governance-state">
-    <div class="container">
-
-      <h2>Runtime Governance Status</h2>
-
-      <div class="status-panel">
-        <div><strong>Runtime:</strong> <span id="runtime-status">Active</span></div>
-        <div><strong>Audit Chain:</strong> <span id="audit-status">Valid</span></div>
-        <div><strong>Last Verified:</strong> <span id="last-verified">—</span></div>
-        <div><strong>Chain Head:</strong> <span id="chain-head">—</span></div>
-      </div>
-
-      <div class="status-actions">
-        <button onclick="verifyAudit()" class="btn-secondary">
-          Verify Now
-        </button>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========================================================= -->
-  <!-- SECTION 5 — AUTHORITY LIFECYCLE -->
-  <!-- ========================================================= -->
-  <section class="lifecycle">
-    <div class="container">
-
-      <h2>Authority Lifecycle</h2>
-
-      <div class="lifecycle-steps">
-        <div class="step">
-          <h3>Issue</h3>
-          <p>Redis session created. Audit entry appended.</p>
-        </div>
-
-        <div class="step">
-          <h3>Introspect</h3>
-          <p>Signature verified. Authority validated.</p>
-        </div>
-
-        <div class="step">
-          <h3>Revoke</h3>
-          <p>Session deleted immediately.</p>
-        </div>
-
-        <div class="step">
-          <h3>Verify</h3>
-          <p>Hash chain validated for continuity.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========================================================= -->
-  <!-- SECTION 6 — ENTERPRISE POSITIONING -->
-  <!-- ========================================================= -->
-  <section class="enterprise">
-    <div class="container">
-
-      <h2>Built for Regulated Environments</h2>
-
-      <div class="enterprise-grid">
-        <div>
-          <h3>Designed For</h3>
-          <ul>
-            <li>AI platform teams</li>
-            <li>Regulated industries</li>
-            <li>Cloud-native enterprises</li>
-            <li>Security architecture leaders</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3>Produces Evidence</h3>
-          <ul>
-            <li>SOC 2–aligned audit artifacts</li>
-            <li>Deterministic enforcement proof</li>
-            <li>Replay-verifiable authority lifecycle</li>
-            <li>Version-pinned governance records</li>
-          </ul>
+      <div class="proof-strip">
+        <div class="proof-row">
+          <div>SOC 2 logical isolation alignment</div>
+          <div>Replay-verifiable lifecycle evidence</div>
+          <div>Version-pinned governance records</div>
+          <div>No LLM in enforcement path</div>
         </div>
       </div>
 
@@ -247,29 +242,32 @@
   <!-- ========================================================= -->
   <!-- FOOTER -->
   <!-- ========================================================= -->
-  <footer class="stc-footer">
-    <div class="container footer-inner">
-      <div>SecureTheCloud v1.0</div>
-      <div>Single-Tenant Deterministic Foundation</div>
-      <div>Multi-Tenant Isolation — Phase 5</div>
-      <div>Governance Discipline — Enforced</div>
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="small muted">
+        SecureTheCloud v1.0 — Deterministic Edition
+      </div>
+      <div class="small muted">
+        Multi-Tenant Isolation — Phase 5
+      </div>
     </div>
   </footer>
 
   <!-- ========================================================= -->
-  <!-- GOVERNANCE VERIFY SCRIPT -->
+  <!-- RUNTIME VERIFY SCRIPT -->
   <!-- ========================================================= -->
   <script>
-    async function verifyAudit() {
-      try {
+    async function verifyAudit(){
+      try{
         const res = await fetch("https://ztr-runtime.fly.dev/v1/audit/verify");
         const data = await res.json();
 
-        document.getElementById("audit-status").textContent = data.status;
+        document.getElementById("audit-status").textContent = data.status || "UNKNOWN";
         document.getElementById("chain-head").textContent = data.chain_head || "—";
         document.getElementById("last-verified").textContent = new Date().toISOString();
-      } catch (err) {
-        document.getElementById("audit-status").textContent = "Error";
+
+      } catch(e){
+        document.getElementById("audit-status").textContent = "ERROR";
       }
     }
   </script>
