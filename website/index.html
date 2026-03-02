@@ -38,75 +38,29 @@
   </header>
 
   <!-- ========================================================= -->
-  <!-- HERO SECTION -->
+  <!-- HERO SECTION (UPDATED) -->
   <!-- ========================================================= -->
-  <section class="section">
-    <div class="container">
+  <section class="hero container">
 
-      <div class="hero">
+    <div>
+      <div class="eyebrow">SecureTheCloud</div>
 
-        <div>
+      <h1>Zero-Trust Runtime for AI Agents</h1>
 
-          <div class="eyebrow">
-            Deterministic Zero-Trust Runtime
-          </div>
+      <p class="lede">
+        Every issued token carries a cryptographic decision_hash of the policy evaluation that authorized it.
+        No LLM in the enforcement path.
+        Deterministic governance, verifiable at runtime.
+      </p>
 
-          <h1 class="h-display">
-            Governance Infrastructure<br>
-            for AI Systems
-          </h1>
-
-          <p class="lede lede--large">
-            Issue. Validate. Revoke. Prove.<br>
-            Runtime-enforced authority with cryptographically verifiable audit integrity.
-          </p>
-
-          <div class="cta">
-            <a href="/architecture" class="btn btn--primary">
-              View Architecture
-            </a>
-            <a href="/whitepaper" class="btn">
-              Read Whitepaper
-            </a>
-          </div>
-
-          <div class="proof-strip">
-            <div class="proof-row">
-              <div><strong>Deterministic Graph Execution</strong> — Version pinned</div>
-              <div><strong>Immediate Revocation</strong> — 401 guaranteed</div>
-              <div><strong>Redis Authority</strong> — JWT is transport only</div>
-              <div><strong>Hash-Chained Audit</strong> — Tamper detection proven</div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- HERO PANEL (DETERMINISTIC ENFORCEMENT GRAPH) -->
-        <div class="panel">
-
-          <div class="panel__head">
-            <div>
-              <div class="panel__title">Deterministic Enforcement Graph</div>
-              <div class="panel__subtitle">
-                controlplane.v1.1 traversal → revocation decision
-              </div>
-            </div>
-
-            <div class="status">
-              <div class="dot dot--ok"></div>
-              <div class="status__text">Deterministic</div>
-            </div>
-          </div>
-
-          <div style="padding:16px;">
-            <svg id="stc-graph" viewBox="0 0 800 500" width="100%" height="380"></svg>
-          </div>
-
-        </div>
-
+      <div class="cta">
+        <a href="/request-access" class="btn btn--primary">Request Access</a>
+        <a href="/architecture" class="btn btn--ghost">View Architecture</a>
       </div>
-
     </div>
+
+    <div id="stc-enforcement-graph"></div>
+
   </section>
 
   <!-- ========================================================= -->
@@ -221,6 +175,8 @@
     </div>
   </footer>
 
+  <script src="/assets/js/api-client.js"></script>
+  <script src="/assets/js/enforcement-graph.js"></script>
   <script src="/assets/js/stc-home.js"></script>
 
 </body>
