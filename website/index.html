@@ -70,7 +70,6 @@
             </a>
           </div>
 
-          <!-- 10-Second Credibility Strip -->
           <div class="proof-strip">
             <div class="proof-row">
               <div><strong>Deterministic Graph Execution</strong> — Version pinned</div>
@@ -82,56 +81,25 @@
 
         </div>
 
-        <!-- HERO PANEL (LIVE STATE PREVIEW) -->
+        <!-- HERO PANEL (DETERMINISTIC ENFORCEMENT GRAPH) -->
         <div class="panel">
 
           <div class="panel__head">
             <div>
-              <div class="panel__title">Runtime Governance Status</div>
+              <div class="panel__title">Deterministic Enforcement Graph</div>
               <div class="panel__subtitle">
-                Single-Tenant Deterministic Foundation — Phase 4 Locked
+                controlplane.v1.1 traversal → revocation decision
               </div>
             </div>
 
             <div class="status">
               <div class="dot dot--ok"></div>
-              <div class="status__text">Operational</div>
+              <div class="status__text">Deterministic</div>
             </div>
           </div>
 
-          <div class="gov-panel">
-
-            <div class="gov-row">
-              <div class="gov-label">Runtime</div>
-              <div class="gov-value state-active">ACTIVE</div>
-            </div>
-
-            <div class="gov-row">
-              <div class="gov-label">Audit Chain</div>
-              <div class="gov-value state-valid" id="audit-status">
-                VALID
-              </div>
-            </div>
-
-            <div class="gov-row">
-              <div class="gov-label">Chain Head</div>
-              <div class="gov-value mono" id="chain-head">
-                —
-              </div>
-            </div>
-
-            <div class="gov-row">
-              <div class="gov-label">Last Verified</div>
-              <div class="gov-value mono" id="last-verified">
-                —
-              </div>
-            </div>
-
-          </div>
-
-          <div class="panel__foot">
-            <button class="btn" onclick="verifyAudit()">Verify Now</button>
-            <a href="/runtime" class="link">Runtime Documentation →</a>
+          <div style="padding:16px;">
+            <svg id="stc-graph" viewBox="0 0 800 500" width="100%" height="380"></svg>
           </div>
 
         </div>
@@ -253,24 +221,7 @@
     </div>
   </footer>
 
-  <!-- ========================================================= -->
-  <!-- RUNTIME VERIFY SCRIPT -->
-  <!-- ========================================================= -->
-  <script>
-    async function verifyAudit(){
-      try{
-        const res = await fetch("https://ztr-runtime.fly.dev/v1/audit/verify");
-        const data = await res.json();
-
-        document.getElementById("audit-status").textContent = data.status || "UNKNOWN";
-        document.getElementById("chain-head").textContent = data.chain_head || "—";
-        document.getElementById("last-verified").textContent = new Date().toISOString();
-
-      } catch(e){
-        document.getElementById("audit-status").textContent = "ERROR";
-      }
-    }
-  </script>
+  <script src="/assets/js/stc-home.js"></script>
 
 </body>
 </html>
