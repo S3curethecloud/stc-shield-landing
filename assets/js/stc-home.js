@@ -1,213 +1,118 @@
-/*
-  STC PLATFORM HOME - Live Preview
-  GOVERNANCE:
-  - Read-only: fetch() only
-  - Deterministic counters derived from incidents[].severity
-  - No writes to backend, no remediation calls
-*/
+// ============================================================
+// STC Deterministic Hero Graph
+// No external dependencies
+// Pure SVG render
+// ============================================================
 
-(function () {
-  "use strict";
+document.addEventListener("DOMContentLoaded", function(){
 
-  const FEED_URL = "https://stc-intelligence-core.fly.dev/shield/feed";
-  const REFRESH_MS = 30000; // 30s, light interactive
+  const svg = document.getElementById("stc-graph");
+  if(!svg) return;
 
-  const els = {
-    status: document.getElementById("stc-status"),
-    statusText: null,
-    statusDot: null,
+  const NS = "http://www.w3.org/2000/svg";
 
-    critical: document.getElementById("critical-count"),
-    high: document.getElementById("high-count"),
-    medium: document.getElementById("medium-count"),
-    low: document.getElementById("low-count"),
+  function node(id, label, x, y){
+    const g = document.createElementNS(NS,"g");
+    g.setAttribute("transform", `translate(${x},${y})`);
+    g.setAttribute("id", id);
 
-    lastUpdated: document.getElementById("stc-last-updated"),
-    feedCount: document.getElementById("stc-feed-count"),
-    year: document.getElementById("stc-year"),
+    const rect = document.createElementNS(NS,"rect");
+    rect.setAttribute("width", 210);
+    rect.setAttribute("height", 44);
+    rect.setAttribute("rx", 10);
+    rect.setAttribute("fill", "rgba(14,20,27,.65)");
+    rect.setAttribute("stroke", "rgba(201,162,39,.35)");
+    rect.setAttribute("stroke-width", "1.2");
 
-    canvas: document.getElementById("riskPulse")
-  };
+    const text = document.createElementNS(NS,"text");
+    text.setAttribute("x", 105);
+    text.setAttribute("y", 28);
+    text.setAttribute("text-anchor","middle");
+    text.setAttribute("fill","#E9EEF6");
+    text.setAttribute("font-size","13");
+    text.setAttribute("font-weight","700");
+    text.textContent = label;
 
-  function initStatusRefs() {
-    if (!els.status) return;
-    els.statusDot = els.status.querySelector(".dot");
-    els.statusText = els.status.querySelector(".status__text");
+    g.appendChild(rect);
+    g.appendChild(text);
+    svg.appendChild(g);
   }
 
-  function setStatus(state, label) {
-    if (!els.statusDot || !els.statusText) return;
-    els.statusDot.classList.remove("dot--idle", "dot--ok", "dot--err");
-    els.statusDot.classList.add(state === "ok" ? "dot--ok" : state === "err" ? "dot--err" : "dot--idle");
-    els.statusText.textContent = label;
+  function edge(x1,y1,x2,y2){
+    const line = document.createElementNS(NS,"line");
+    line.setAttribute("x1",x1);
+    line.setAttribute("y1",y1);
+    line.setAttribute("x2",x2);
+    line.setAttribute("y2",y2);
+    line.setAttribute("stroke","rgba(201,162,39,.25)");
+    line.setAttribute("stroke-width","1.2");
+    svg.appendChild(line);
+    return line;
   }
 
-  function nowStamp() {
-    const d = new Date();
-    // keep it readable and deterministic
-    return d.toLocaleString(undefined, { year: "numeric", month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+  // Node Layout
+  node("operational_policy","operational_policy",40,40);
+  node("financial_threshold","financial_threshold",320,40);
+  node("continuous_access_enforcement","continuous_access_enforcement",600,40);
+
+  node("token_introspection","token_introspection",180,180);
+  node("token_revocation_registry","token_revocation_registry",460,180);
+
+  node("session_invalidation_boundary","session_invalidation_boundary",320,320);
+  node("blast_radius_model","blast_radius_model",40,440);
+  node("compliance_surface","compliance_surface",600,440);
+
+  // Edges
+  edge(250,62,320,62);
+  edge(530,62,600,62);
+
+  edge(145,84,180,180);
+  edge(425,84,460,180);
+
+  edge(285,224,320,320);
+  edge(495,224,320,320);
+
+  edge(180,364,120,440);
+  edge(460,364,660,440);
+
+  // Deterministic traversal animation
+  const traversalOrder = [
+    "operational_policy",
+    "financial_threshold",
+    "continuous_access_enforcement",
+    "token_introspection",
+    "token_revocation_registry",
+    "session_invalidation_boundary",
+    "blast_radius_model",
+    "compliance_surface"
+  ];
+
+  function activateNode(id, delay){
+    setTimeout(()=>{
+      const g = document.getElementById(id);
+      if(!g) return;
+      const rect = g.querySelector("rect");
+      rect.setAttribute("stroke","#E84545");
+      rect.setAttribute("stroke-width","2");
+      rect.setAttribute("fill","rgba(232,69,69,.18)");
+    }, delay);
   }
 
-  function safeArray(x) {
-    return Array.isArray(x) ? x : [];
-  }
+  traversalOrder.forEach((id,i)=>{
+    activateNode(id, i * 500);
+  });
 
-  function deriveCounts(incidents) {
-    // Deterministic derivation based solely on severity field.
-    const counts = { CRITICAL: 0, HIGH: 0, MEDIUM: 0, LOW: 0 };
+  // Completion label
+  setTimeout(()=>{
+    const text = document.createElementNS(NS,"text");
+    text.setAttribute("x","400");
+    text.setAttribute("y","490");
+    text.setAttribute("text-anchor","middle");
+    text.setAttribute("fill","#E3C35A");
+    text.setAttribute("font-size","14");
+    text.setAttribute("font-weight","900");
+    text.textContent = "DETERMINISTIC REVOCATION PATH COMPLETE";
+    svg.appendChild(text);
+  }, traversalOrder.length * 500 + 600);
 
-    for (const i of incidents) {
-      const sev = (i && typeof i.severity === "string") ? i.severity.toUpperCase() : "";
-      if (sev in counts) counts[sev] += 1;
-    }
-    return counts;
-  }
-
-  function renderCounts(counts) {
-    els.critical.textContent = String(counts.CRITICAL);
-    els.high.textContent = String(counts.HIGH);
-    els.medium.textContent = String(counts.MEDIUM);
-    els.low.textContent = String(counts.LOW);
-  }
-
-  // ---- Risk pulse (subtle animated line) ----
-  const pulse = {
-    ctx: null,
-    w: 0,
-    h: 0,
-    t: 0,
-    baseline: 0.55,
-    intensity: 0.12,
-    points: [],
-    maxPoints: 110,
-    incidentVolume: 0
-  };
-
-  function initPulse() {
-    if (!els.canvas) return;
-    pulse.ctx = els.canvas.getContext("2d");
-    pulse.w = els.canvas.width;
-    pulse.h = els.canvas.height;
-    pulse.points = [];
-    for (let i = 0; i < pulse.maxPoints; i++) pulse.points.push(pulse.baseline);
-    requestAnimationFrame(tickPulse);
-  }
-
-  function setPulseVolume(n) {
-    // Tie intensity to volume but clamp for subtlety.
-    pulse.incidentVolume = Math.max(0, Number.isFinite(n) ? n : 0);
-    const capped = Math.min(10, pulse.incidentVolume); // keep subtle
-    pulse.intensity = 0.10 + (capped * 0.012); // 0.10..0.22
-  }
-
-  function tickPulse() {
-    if (!pulse.ctx) return;
-
-    pulse.t += 0.06;
-
-    // shift left
-    pulse.points.shift();
-
-    // generate next point: baseline + sin + noise
-    const sin = Math.sin(pulse.t) * pulse.intensity;
-    const noise = (Math.random() - 0.5) * (pulse.intensity * 0.35);
-    const next = pulse.baseline + sin + noise;
-
-    // clamp between 0.15..0.95
-    pulse.points.push(Math.max(0.15, Math.min(0.95, next)));
-
-    drawPulse();
-    requestAnimationFrame(tickPulse);
-  }
-
-  function drawPulse() {
-    const ctx = pulse.ctx;
-    const w = pulse.w;
-    const h = pulse.h;
-
-    ctx.clearRect(0, 0, w, h);
-
-    // background sweep (very faint)
-    ctx.fillStyle = "rgba(0,0,0,0.0)";
-    ctx.fillRect(0, 0, w, h);
-
-    // grid lines
-    ctx.strokeStyle = "rgba(255,255,255,0.05)";
-    ctx.lineWidth = 1;
-
-    for (let y = 40; y < h; y += 40) {
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(w, y);
-      ctx.stroke();
-    }
-
-    // pulse line (gold)
-    ctx.strokeStyle = "rgba(201,162,39,0.95)";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-
-    for (let i = 0; i < pulse.points.length; i++) {
-      const x = (i / (pulse.points.length - 1)) * w;
-      const y = (1 - pulse.points[i]) * h;
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
-    ctx.stroke();
-
-    // glow (subtle)
-    ctx.strokeStyle = "rgba(227,195,90,0.20)";
-    ctx.lineWidth = 5;
-    ctx.stroke();
-  }
-
-  // ---- Fetch + render ----
-  async function loadFeed() {
-    setStatus("idle", "Loading");
-    try {
-      const res = await fetch(FEED_URL, { method: "GET" });
-
-      if (!res.ok) {
-        setStatus("err", `HTTP ${res.status}`);
-        return;
-      }
-
-      const data = await res.json();
-      const incidents = safeArray(data && data.incidents);
-
-      const counts = deriveCounts(incidents);
-
-      renderCounts(counts);
-
-      const total = incidents.length;
-      if (els.feedCount) els.feedCount.textContent = `incidents: ${total}`;
-      if (els.lastUpdated) els.lastUpdated.textContent = nowStamp();
-
-      setPulseVolume(total);
-
-      setStatus("ok", "Live");
-    } catch (e) {
-      console.error("STC feed error:", e);
-      setStatus("err", "Offline");
-    }
-  }
-
-  function initYear() {
-    if (els.year) els.year.textContent = String(new Date().getFullYear());
-  }
-
-  // Boot
-  function boot() {
-    initStatusRefs();
-    initYear();
-    initPulse();
-    loadFeed();
-    setInterval(loadFeed, REFRESH_MS);
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot);
-  } else {
-    boot();
-  }
-})();
+});
