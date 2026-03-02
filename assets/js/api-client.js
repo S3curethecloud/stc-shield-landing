@@ -64,9 +64,28 @@ const STC_API = (() => {
     };
   }
 
+  function connectShieldStream(onMessage, onError) {
+    const url = "https://stc-intelligence-core.fly.dev/shield/stream";
+    const es = new EventSource(url);
+
+    es.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        onMessage(data);
+      } catch (_) {}
+    };
+
+    es.onerror = (err) => {
+      if (onError) onError(err);
+    };
+
+    return es;
+  }
+
   return {
     getRuntimeHealth,
-    getShieldStatus
+    getShieldStatus,
+    connectShieldStream
   };
 
 })();
