@@ -522,3 +522,95 @@ h2{
   color: var(--muted);
   line-height:1.5;
 }
+
+/* ============================================================
+   RESPONSIVE UPGRADE (Mobile + Tablet refined)
+   ============================================================ */
+
+@media (max-width: 980px){
+
+  .section{
+    padding: 44px 0;
+  }
+
+  .h-display{
+    font-size: 34px;
+  }
+
+  .proof-row{
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .lifecycle{
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+@media (max-width: 640px){
+
+  .container{
+    width:min(100%, calc(100% - 24px));
+  }
+
+  .hero{
+    gap: 16px;
+  }
+
+  .cta{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .lifecycle{
+    grid-template-columns: 1fr;
+  }
+
+  .ecosystem{
+    grid-template-columns: 1fr;
+  }
+
+  .topbar__inner{
+    padding: 12px 0;
+  }
+
+}
+
+/* --- STATE CLASSES --- */
+
+.state-active{
+  color: var(--gold2);
+}
+
+.state-revoked{
+  color: var(--critical);
+}
+
+.state-valid{
+  color: var(--gold2);
+}
+
+.state-broken{
+  color: var(--critical);
+}
+
+.state-critical{
+  color: var(--critical);
+}
+
+.state-high{
+  color: var(--high);
+}
+
+.state-medium{
+  color: var(--medium);
+}
