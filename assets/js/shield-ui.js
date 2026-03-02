@@ -10,6 +10,7 @@
 //   GSI-backed fetch
 //   Severity class-based styling
 //   DOM-safe
+//   SSE analysis.ready listener added
 // =========================================================
 
 
@@ -29,7 +30,7 @@ async function fetchLatestCritical() {
       return null;
     }
 
-    return data.incidents[0]; // newest first
+    return data.incidents[0];
 
   } catch (e) {
     console.warn("[Shield UI] Fetch failed:", e);
@@ -143,11 +144,35 @@ async function renderShieldPanel() {
 
 
 // ---------------------------------------------------------
+// SSE LISTENER FOR CONTROL-PLANE ANALYSIS
+// ---------------------------------------------------------
+
+function initShieldStream() {
+  const es = new EventSource("https://stc-intelligence-core.fly.dev/shield/stream?tenant_id=default");
+
+  es.addEventListener("analysis.ready", (evt) => {
+    const payload = JSON.parse(evt.data);
+    const env = payload.analysis_envelope;
+
+    const v11 = env?.graph_context?.["controlplane.v1.1"];
+
+    const panel = document.getElementById("shield-why-panel");
+    if (panel && v11) {
+      panel.innerHTML = "";
+      const pre = document.createElement("pre");
+      pre.textContent = JSON.stringify(v11, null, 2);
+      panel.appendChild(pre);
+      panel.style.display = "block";
+    }
+  });
+}
+
+
+// ---------------------------------------------------------
 // AUTO-INIT (DOM-SAFE)
 // ---------------------------------------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
   renderShieldPanel();
+  initShieldStream();
 });
-
-
