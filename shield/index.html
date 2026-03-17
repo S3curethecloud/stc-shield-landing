@@ -1,99 +1,890 @@
-<!doctype html>
+cat > shield/index.html <<'EOF'
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shield | SecureTheCloud</title>
+  <meta
+    name="description"
+    content="Shield is the SecureTheCloud capability for blast-radius containment, identity-path visibility, and runtime boundary enforcement."
+  />
+  <meta name="theme-color" content="#07101d" />
+  <style>
+    :root {
+      --bg: #07101d;
+      --bg-elev: #0b1730;
+      --bg-elev-2: #0f1e3d;
+      --panel: rgba(16, 29, 58, 0.72);
+      --text: #f4f7fb;
+      --muted: #a8b4c8;
+      --muted-2: #7f8ca2;
+      --line: rgba(129, 156, 209, 0.18);
+      --line-strong: rgba(129, 156, 209, 0.28);
+      --gold: #d6b04d;
+      --gold-2: #f2cf73;
+      --blue: #67b8ff;
+      --blue-2: #39d2ff;
+      --danger: #ff7373;
+      --success: #38d27d;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --container: 1220px;
+      --header-h: 82px;
+    }
 
-  <link rel="canonical" href="https://securethecloud.dev/shield/" />
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(214, 176, 77, 0.09), transparent 32%),
+        radial-gradient(circle at top right, rgba(57, 210, 255, 0.12), transparent 26%),
+        linear-gradient(180deg, #050b15 0%, #07101d 26%, #081225 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
 
-  <link rel="stylesheet" href="/assets/css/stc.css" />
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(89, 120, 170, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(89, 120, 170, 0.06) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.55), transparent 84%);
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      background: rgba(4, 9, 17, 0.7);
+      border-bottom: 1px solid rgba(129, 156, 209, 0.12);
+    }
+
+    .site-header-inner {
+      min-height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #f6dd96;
+      border: 1px solid rgba(214, 176, 77, 0.32);
+      background: linear-gradient(180deg, rgba(214,176,77,0.16), rgba(214,176,77,0.05));
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav a {
+      color: #dce4f2;
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 16px;
+      border: 1px solid var(--line-strong);
+      background: rgba(13, 25, 49, 0.7);
+      color: var(--text);
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+    }
+
+    .btn-primary {
+      border-color: rgba(214, 176, 77, 0.38);
+      background: linear-gradient(180deg, rgba(214,176,77,0.24), rgba(214,176,77,0.13));
+      color: #fff4d0;
+    }
+
+    .btn-link {
+      padding: 0;
+      min-height: auto;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      color: var(--blue);
+    }
+
+    .section {
+      padding: 104px 0;
+    }
+
+    .section.compact {
+      padding: 84px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(214, 176, 77, 0.24);
+      background: linear-gradient(180deg, rgba(214, 176, 77, 0.16), rgba(214, 176, 77, 0.06));
+      color: var(--gold-2);
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin: 18px 0 14px;
+      font-size: clamp(2rem, 3vw, 3.4rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+    }
+
+    .section-intro {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin: 0 0 38px;
+    }
+
+    .hero-grid,
+    .scenario-grid,
+    .arch-grid {
+      display: grid;
+      grid-template-columns: 1.03fr 0.97fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      margin: 18px 0 18px;
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+      max-width: 10ch;
+    }
+
+    .hero-copy p {
+      max-width: 700px;
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 1.14rem;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .card {
+      background:
+        linear-gradient(180deg, rgba(18, 31, 63, 0.86), rgba(10, 19, 38, 0.9));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(214,176,77,0.06), transparent 35%),
+        linear-gradient(240deg, rgba(57,210,255,0.07), transparent 38%);
+      pointer-events: none;
+    }
+
+    .card-inner {
+      position: relative;
+      padding: 30px;
+      z-index: 1;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card h3,
+    .proof-card h3,
+    .arch-card h3 {
+      margin: 14px 0 10px;
+      font-size: 1.28rem;
+      letter-spacing: -0.02em;
+    }
+
+    .feature-card p,
+    .proof-card p,
+    .arch-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .hero-visual {
+      min-height: 520px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at top right, rgba(57,210,255,0.12), transparent 30%),
+        linear-gradient(180deg, rgba(13,25,50,0.86), rgba(8,16,32,0.95));
+      box-shadow: var(--shadow);
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(80, 104, 145, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(80, 104, 145, 0.06) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+    }
+
+    .visual-head {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .visual-head h2 {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+
+    .visual-head p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .status-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(13, 24, 48, 0.78);
+      color: #d8e3f6;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .risk-panel {
+      position: relative;
+      z-index: 2;
+      border-radius: 22px;
+      border: 1px solid rgba(103,184,255,0.08);
+      background: linear-gradient(180deg, rgba(6,12,24,0.18), rgba(6,12,24,0.08));
+      padding: 22px;
+      min-height: 400px;
+    }
+
+    .risk-score {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      padding: 12px 16px;
+      border-radius: 16px;
+      background: rgba(255,115,115,0.12);
+      border: 1px solid rgba(255,115,115,0.28);
+      color: #ffd8d8;
+      font-weight: 800;
+    }
+
+    .blast-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .blast-card {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(12, 23, 45, 0.92);
+    }
+
+    .blast-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+    }
+
+    .blast-card small {
+      color: var(--muted);
+      display: block;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(11, 22, 44, 0.72);
+    }
+
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--gold);
+      margin-top: 8px;
+      flex: 0 0 12px;
+      box-shadow: 0 0 20px rgba(214,176,77,0.55);
+    }
+
+    .timeline-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .timeline-item span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .proof-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .preview-shell {
+      margin-top: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(7,13,26,0.9), rgba(10,19,36,0.98));
+      min-height: 190px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mini-bar {
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(57,210,255,0.28), rgba(57,210,255,0.9));
+      width: var(--w, 70%);
+    }
+
+    .mini-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .mini-cell {
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(16, 29, 58, 0.78);
+      border: 1px solid rgba(129,156,209,0.12);
+      min-height: 68px;
+    }
+
+    .mini-cell strong {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .mini-cell small {
+      color: var(--muted-2);
+      font-size: 0.78rem;
+    }
+
+    .cta-band {
+      padding: 42px;
+      text-align: center;
+      background:
+        radial-gradient(circle at left top, rgba(214,176,77,0.13), transparent 30%),
+        radial-gradient(circle at right center, rgba(57,210,255,0.12), transparent 36%),
+        linear-gradient(180deg, rgba(12,23,45,0.94), rgba(9,17,34,0.98));
+    }
+
+    .cta-band h2 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 3.2rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+    }
+
+    .cta-band p {
+      margin: 16px auto 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .site-footer {
+      padding: 48px 0 40px;
+      border-top: 1px solid rgba(129, 156, 209, 0.14);
+      background: rgba(5, 9, 17, 0.42);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr repeat(4, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .footer-col h3 {
+      margin: 0 0 14px;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-2);
+    }
+
+    .footer-col a,
+    .footer-col p {
+      display: block;
+      margin: 0 0 10px;
+      color: var(--muted);
+    }
+
+    .footer-bottom {
+      margin-top: 26px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(129,156,209,0.12);
+      color: var(--muted-2);
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 1180px) {
+      .hero-grid,
+      .scenario-grid,
+      .arch-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .site-header-inner {
+        flex-wrap: wrap;
+        padding: 16px 0;
+      }
+
+      .nav {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .grid-3,
+      .proof-strip,
+      .footer-grid,
+      .mini-row,
+      .blast-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width: min(var(--container), calc(100% - 24px));
+      }
+
+      .btn-row {
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .header-actions {
+        width: 100%;
+      }
+
+      .header-actions .btn {
+        flex: 1;
+      }
+
+      .hero-copy h1 {
+        max-width: none;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">STC</span>
+        <span>SecureTheCloud</span>
+      </a>
 
-<!-- ====================================== -->
-<!-- CANONICAL TOPBAR (SHARED ACROSS ALL) -->
-<!-- ====================================== -->
-<header class="topbar">
-  <div class="container topbar__inner">
-    <a class="brand" href="/">
-      <span class="brand__mark">STC</span>
-      <span class="brand__name">SecureTheCloud</span>
-    </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/#platform">Platform</a>
+        <a href="/#architecture">Architecture</a>
+        <a href="/#use-cases">Use Cases</a>
+        <a href="/#developers">Developers</a>
+        <a href="/#company">Company</a>
+      </nav>
 
-    <nav class="nav">
-      <a href="/">Home</a>
-      <a href="/shield/" class="active">Shield</a>
-      <a href="/copilot/">Copilot</a>
-      <a href="/ecosystem/">Ecosystem</a>
-      <a href="/riskdna/">RiskDNA</a>
-      <a href="/aegis-air/">Aegis-Air</a>
-      <a href="/labs/">Labs</a>
-      <a href="/media/">Media</a>
-      <a href="/consultancy/">Consultancy</a>
-    </nav>
-
-    <div class="topbar__actions">
-      <a class="btn btn--ghost" href="/console/">Console</a>
-      <a class="btn btn--primary" href="/shield/">Launch Shield</a>
+      <div class="header-actions">
+        <a class="btn" href="https://app.securethecloud.dev" target="_blank" rel="noopener noreferrer">Console</a>
+        <a class="btn btn-primary" href="/request-demo/">Request Demo</a>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<!-- ========================= -->
-<!-- SHIELD MODULE STRUCTURE -->
-<!-- ========================= -->
-<main class="container module">
-
-  <!-- Standardized Hero -->
-  <section class="module__hero">
-    <div class="eyebrow">Detection Surface</div>
-    <h1>Shield</h1>
-    <p class="lede">
-      Executive visualization of identity attack paths and risk propagation.
-    </p>
-  </section>
-
-  <!-- Product Surface Grid -->
-  <section class="module__grid">
-
-    <div class="card">
-      <h2>Live Risk Overview</h2>
-      <p class="muted">Read-only deterministic feed.</p>
-
-      <div class="shield-live-panel">
-
-        <div id="shield-risk-score" class="risk-badge">
-          Risk Score: —
+  <main>
+    <section class="section">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Shield</span>
+          <h1>Blast-radius containment for agent runtime</h1>
+          <p>
+            Shield is the SecureTheCloud capability for visualizing identity attack paths, constraining runtime exposure,
+            and containing downstream impact before privileged operations spread across sensitive resources.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="https://app.securethecloud.dev" target="_blank" rel="noopener noreferrer">Open Console</a>
+            <a class="btn" href="/#use-cases">View Use Cases</a>
+            <a class="btn btn-link" href="/riskdna/">See RiskDNA</a>
+          </div>
         </div>
 
-        <h3>Drivers</h3>
-        <ul id="shield-drivers"></ul>
+        <div class="hero-visual">
+          <div class="visual-head">
+            <div>
+              <h2>Shield Risk Surface</h2>
+              <p>Context-aware containment of downstream runtime exposure.</p>
+            </div>
+            <div class="status-pill">Containment active</div>
+          </div>
 
-        <h3>Recommended Actions</h3>
-        <ul id="shield-actions"></ul>
+          <div class="risk-panel">
+            <div class="risk-score">Critical runtime score detected</div>
 
-        <button id="shield-why-button" class="btn btn--ghost">
-          Why This Score?
-        </button>
+            <div class="blast-grid">
+              <div class="blast-card">
+                <strong>Request context</strong>
+                <small>After-hours refund attempt from unfamiliar runtime context.</small>
+              </div>
+              <div class="blast-card">
+                <strong>Primary exposure</strong>
+                <small>Refund workflow intersects payment and audit control surfaces.</small>
+              </div>
+              <div class="blast-card">
+                <strong>Containment rule</strong>
+                <small>Scope execution to bounded permissions and approved dependencies only.</small>
+              </div>
+              <div class="blast-card">
+                <strong>Operator outcome</strong>
+                <small>Blast radius remains visible, constrained, and auditable.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <div id="shield-why-panel" style="display:none;"></div>
+    <section class="section compact">
+      <div class="container">
+        <span class="eyebrow">What Shield does</span>
+        <h2 class="section-title">Shield turns exposure into governed boundaries</h2>
+        <p class="section-intro">
+          Shield maps the resources, identities, and downstream dependencies touched by a runtime decision so operators can
+          understand impact before access spreads beyond intended scope.
+        </p>
 
+        <div class="grid-3">
+          <article class="card feature-card">
+            <div class="card-inner">
+              <span class="eyebrow">Visibility</span>
+              <h3>Shows runtime attack paths</h3>
+              <p>Surfaces how agent actions, privileged identities, and dependent resources connect in context.</p>
+            </div>
+          </article>
+
+          <article class="card feature-card">
+            <div class="card-inner">
+              <span class="eyebrow">Containment</span>
+              <h3>Constrains blast radius</h3>
+              <p>Bounds execution to scoped access paths so authorization does not spread unchecked across systems.</p>
+            </div>
+          </article>
+
+          <article class="card feature-card">
+            <div class="card-inner">
+              <span class="eyebrow">Proof</span>
+              <h3>Preserves operator clarity</h3>
+              <p>Turns runtime containment into visible, reviewable, and explainable operational evidence.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container scenario-grid">
+        <article class="card">
+          <div class="card-inner">
+            <span class="eyebrow">Why it matters</span>
+            <h2 class="section-title" style="font-size: clamp(1.9rem, 2.8vw, 3rem);">Containment must happen before damage spreads</h2>
+            <p class="section-intro" style="margin-bottom: 0; max-width: 100%;">
+              Traditional tools may alert after the fact. Shield exists to make the potential impact of a runtime action visible and bounded
+              before privileged execution fans out across infrastructure, ledgers, or transactional systems.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-inner">
+            <span class="eyebrow">Guided scenario</span>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div>
+                  <strong>Request enters a high-risk path</strong>
+                  <span>A refund action arrives outside normal operating context.</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div>
+                  <strong>Shield maps downstream exposure</strong>
+                  <span>Payment systems, audit ledgers, and dependent services are evaluated as part of the path.</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div>
+                  <strong>Execution is bounded</strong>
+                  <span>Only the minimum scoped surface remains reachable under runtime policy.</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div>
+                  <strong>Operators retain proof</strong>
+                  <span>Containment remains visible for review, audit, and executive explanation.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container">
+        <span class="eyebrow">Visual proof</span>
+        <h2 class="section-title">Blast radius becomes visible before it becomes expensive</h2>
+        <p class="section-intro">
+          Shield gives teams a runtime-centered view of impact, not just a static diagram of infrastructure.
+        </p>
+
+        <div class="proof-strip">
+          <article class="card proof-card">
+            <div class="card-inner">
+              <span class="eyebrow">Preview 01</span>
+              <h3>Resource impact view</h3>
+              <p>See which resources fall inside the currently authorized execution boundary.</p>
+              <div class="preview-shell">
+                <div class="mini-row">
+                  <div class="mini-cell"><strong>payment_db</strong><small>Protected surface</small></div>
+                  <div class="mini-cell"><strong>audit_ledger</strong><small>Trace dependency</small></div>
+                  <div class="mini-cell"><strong>backup</strong><small>Scoped node</small></div>
+                </div>
+                <div class="mini-bar" style="--w: 86%;"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card proof-card">
+            <div class="card-inner">
+              <span class="eyebrow">Preview 02</span>
+              <h3>Decision path linkage</h3>
+              <p>Connect runtime decisions to the specific identities and intents that created exposure.</p>
+              <div class="preview-shell">
+                <div class="mini-row">
+                  <div class="mini-cell"><strong>Tenant</strong><small>Runtime scope</small></div>
+                  <div class="mini-cell"><strong>Principal</strong><small>Executing identity</small></div>
+                  <div class="mini-cell"><strong>Intent</strong><small>Requested action</small></div>
+                </div>
+                <div class="mini-bar" style="--w: 74%;"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card proof-card">
+            <div class="card-inner">
+              <span class="eyebrow">Preview 03</span>
+              <h3>Operator summary</h3>
+              <p>Translate containment into concise operational context for security and executive review.</p>
+              <div class="preview-shell">
+                <div class="mini-cell"><strong>Containment applied</strong><small>Scoped runtime boundary enforced</small></div>
+                <div class="mini-cell"><strong>Residual exposure</strong><small>Tracked and reviewable</small></div>
+                <div class="mini-bar" style="--w: 62%;"></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container arch-grid">
+        <article class="card arch-card">
+          <div class="card-inner">
+            <span class="eyebrow">Architecture tie-in</span>
+            <h2 class="section-title" style="font-size: clamp(1.9rem, 2.8vw, 3rem);">Shield is the enforcement surface for downstream impact</h2>
+            <p class="section-intro" style="margin-bottom: 0; max-width: 100%;">
+              RiskDNA scores the request. Policy decides what is allowed. Shield visualizes and constrains what that decision can touch across the runtime boundary.
+            </p>
+          </div>
+        </article>
+
+        <article class="card arch-card">
+          <div class="card-inner">
+            <span class="eyebrow">Platform connection</span>
+            <h3>SecureTheCloud capability alignment</h3>
+            <p>
+              Shield works with RiskDNA for context scoring and Copilot for governed explanation, while the control plane preserves state, audit, and session visibility.
+            </p>
+            <div class="btn-row" style="margin-top: 24px;">
+              <a class="btn" href="/riskdna/">Open RiskDNA</a>
+              <a class="btn" href="/copilot/">Open Copilot</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container">
+        <div class="card cta-band">
+          <h2>See how Shield constrains runtime exposure before it spreads</h2>
+          <p>
+            SecureTheCloud Shield gives teams a blast-radius-aware runtime surface for governing privileged agent actions.
+          </p>
+          <div class="btn-row" style="justify-content: center; margin-top: 22px;">
+            <a class="btn btn-primary" href="https://app.securethecloud.dev" target="_blank" rel="noopener noreferrer">Open Console</a>
+            <a class="btn" href="/request-demo/">Request Demo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a class="brand" href="/">
+            <span class="brand-mark">STC</span>
+            <span>SecureTheCloud</span>
+          </a>
+          <p style="max-width: 320px; color: var(--muted); margin-top: 14px;">
+            Zero-Trust Runtime for AI Agents — deterministic authorization, runtime enforcement, and governed operational proof.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Platform</h3>
+          <a href="/#platform">Platform</a>
+          <a href="/#architecture">Architecture</a>
+          <a href="/#use-cases">Use Cases</a>
+          <a href="/#developers">Developers</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Products</h3>
+          <a href="/shield/">Shield</a>
+          <a href="/riskdna/">RiskDNA</a>
+          <a href="/copilot/">Copilot</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Company</h3>
+          <a href="/#company">Company</a>
+          <a href="/media/">Media</a>
+          <a href="/consultancy/">Consultancy</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Access</h3>
+          <a href="https://app.securethecloud.dev" target="_blank" rel="noopener noreferrer">Console</a>
+          <a href="/request-demo/">Request Demo</a>
+        </div>
       </div>
 
-      <a class="btn btn--primary" href="/shield/preview/">Open Console</a>
+      <div class="footer-bottom">
+        SecureTheCloud Shield — Blast-radius containment for agent runtime
+      </div>
     </div>
-
-    <div class="card">
-      <h2>Blast Radius Graph</h2>
-      <p class="muted">Visualize trust-boundary traversal.</p>
-      <a class="btn btn--ghost" href="/graph/">View Graph</a>
-    </div>
-
-  </section>
-
-</main>
-<script src="/assets/js/shield-ui.js"></script>
-
+  </footer>
 </body>
 </html>
+EOF
