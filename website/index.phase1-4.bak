@@ -830,7 +830,7 @@
           <div class="btn-row">
             <a class="btn btn-primary" href="/request-demo/">Request Demo</a>
             <a class="btn" href="#architecture">View Architecture</a>
-            <a class="btn btn-link" href="https://app.securethecloud.dev" target="_blank">Open Console</a>
+            <a class="btn btn-link" href="https://app.securethecloud.dev" target="_blank" rel="noopener noreferrer">Open Console</a>
           </div>
 
           <div class="hero-proof">
@@ -859,44 +859,39 @@
           </div>
 
           <div class="graph-stage">
-
-            <!-- NODES (REALIGNED) -->
-            <div class="node blue" style="left: 42px; top: 58px;">
+            <div class="node blue" style="left: 52px; top: 52px;">
               <small>Request</small>
               <strong>Agent action initiated</strong>
             </div>
 
-            <div class="node" style="left: 258px; top: 34px;">
+            <div class="node" style="left: 286px; top: 20px;">
               <small>RiskDNA</small>
               <strong>Contextual runtime scoring</strong>
             </div>
 
-            <div class="node blue" style="left: 258px; top: 206px;">
+            <div class="node blue" style="left: 280px; top: 190px;">
               <small>Policy</small>
               <strong>Deterministic decision evaluation</strong>
             </div>
 
-            <div class="node green" style="left: 470px; top: 72px;">
+            <div class="node green" style="left: 516px; top: 44px;">
               <small>Authorization</small>
               <strong>Scoped token issuance</strong>
             </div>
 
-            <div class="node" style="left: 470px; top: 234px;">
+            <div class="node" style="left: 516px; top: 228px;">
               <small>Enforcement</small>
               <strong>Runtime boundary application</strong>
             </div>
 
-            <!-- LINES (REALIGNED) -->
-            <div class="line" style="left: 188px; top: 126px; width: 82px; transform: rotate(-12deg);"></div>
-            <div class="line" style="left: 188px; top: 146px; width: 90px; transform: rotate(16deg);"></div>
-            <div class="line" style="left: 420px; top: 112px; width: 62px; transform: rotate(10deg);"></div>
-            <div class="line" style="left: 420px; top: 268px; width: 66px; transform: rotate(-9deg);"></div>
+            <div class="line" style="left: 208px; top: 118px; width: 96px; transform: rotate(-14deg);"></div>
+            <div class="line" style="left: 208px; top: 134px; width: 102px; transform: rotate(18deg);"></div>
+            <div class="line" style="left: 444px; top: 94px; width: 88px; transform: rotate(10deg);"></div>
+            <div class="line" style="left: 444px; top: 256px; width: 88px; transform: rotate(-10deg);"></div>
 
-            <!-- DOTS (REALIGNED) -->
-            <div class="dot" style="left: 270px; top: 92px;"></div>
-            <div class="dot" style="left: 270px; top: 246px;"></div>
-            <div class="dot" style="left: 476px; top: 122px;"></div>
-
+            <div class="dot" style="left: 296px; top: 78px;"></div>
+            <div class="dot" style="left: 294px; top: 228px;"></div>
+            <div class="dot" style="left: 530px; top: 108px;"></div>
           </div>
         </div>
       </div>
