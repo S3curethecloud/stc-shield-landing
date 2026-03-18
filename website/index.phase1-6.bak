@@ -899,10 +899,10 @@
 
     <section class="section" id="platform">
       <div class="container">
-        <h2 class="section-title">AI agents need runtime control</h2>
-       <p class="section-intro">
-          Static policy alone is not enough for agentic systems. SecureTheCloud evaluates context, authorizes intent,
-          and constrains execution before a high-risk action can spread across sensitive environments.
+        <h2 class="section-title">AI agents need runtime control, not just static policy</h2>
+        <p class="section-intro">
+          AI systems can issue requests, chain actions, and operate across sensitive environments faster than traditional controls can safely govern.
+          SecureTheCloud enforces decisions at runtime, before the action executes.
         </p>
 
         <div class="grid-3">
@@ -1326,25 +1326,25 @@
         <div class="grid-3">
           <article class="card company-card">
             <div class="card-inner">
-              <span class="eyebrow">Security teams</span>
-              <h3>See runtime risk before impact spreads</h3>
-              <p>Understand blast radius, policy outcome, and operational exposure before privileged actions move across sensitive systems.</p>
+              <span class="eyebrow">Company</span>
+              <h3>Deterministic by design</h3>
+              <p>SecureTheCloud is built around runtime control, governed decisioning, and operational traceability.</p>
             </div>
           </article>
 
           <article class="card company-card">
             <div class="card-inner">
-              <span class="eyebrow">Platform teams</span>
-              <h3>Enforce agent actions inside bounded execution</h3>
-              <p>Apply deterministic policy, scoped authorization, and session governance without collapsing into reactive controls.</p>
+              <span class="eyebrow">Enterprise</span>
+              <h3>Designed for operational trust</h3>
+              <p>The platform aligns security controls, executive visibility, and product architecture into one runtime layer.</p>
             </div>
           </article>
 
           <article class="card company-card">
             <div class="card-inner">
-              <span class="eyebrow">Leadership</span>
-              <h3>Explain operational risk with governed proof</h3>
-              <p>Translate runtime events into clear, reviewable evidence for security leadership, architecture stakeholders, and executives.</p>
+              <span class="eyebrow">Contact</span>
+              <h3>Engage the platform team</h3>
+              <p>Use the demo flow to evaluate SecureTheCloud in the context of real agentic operations and runtime governance.</p>
             </div>
           </article>
         </div>
@@ -1354,9 +1354,10 @@
     <section class="section">
       <div class="container">
         <div class="card cta-band">
-          <h2>Put AI agents inside governed runtime boundaries</h2>
+          <h2>Bring deterministic control to AI agent runtime</h2>
           <p>
-            SecureTheCloud gives teams deterministic authorization, runtime enforcement, and operational proof for high-trust agent execution.
+            SecureTheCloud gives security teams a governed runtime layer for agentic actions across policy, enforcement,
+            and operational visibility.
           </p>
           <div class="btn-row" style="justify-content:center; margin-top:24px;">
             <a class="btn btn-primary" href="/request-demo/">Request Demo</a>
