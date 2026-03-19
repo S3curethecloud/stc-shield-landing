@@ -810,3 +810,93 @@ h2{
     padding: 46px 0 24px;
   }
 }
+
+/* HERO GRID BALANCE */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+/* FORCE BUTTONS INLINE */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.btn-row .btn {
+  width: auto;
+  white-space: nowrap;
+}
+
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+}
+
+.nav {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.hero-visual {
+  min-height: 420px;
+  border-radius: 24px;
+  border: 1px solid rgba(120,150,210,0.18);
+  background:
+    radial-gradient(circle at top right, rgba(53,209,255,0.12), transparent 40%),
+    linear-gradient(180deg, rgba(10,20,40,0.9), rgba(5,10,25,0.95));
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  padding: 24px;
+}
+
+/* subtle glow pulse */
+.hero-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: radial-gradient(circle at 70% 20%, rgba(53,209,255,0.18), transparent 60%);
+  opacity: 0.6;
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%,100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.hero-copy h1 {
+  font-size: clamp(3rem, 5vw, 4.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.hero-copy p {
+  font-size: 1.1rem;
+  color: #a6b3c8;
+  max-width: 560px;
+}
+
+.card {
+  border: 1px solid rgba(120,150,210,0.18);
+  background: linear-gradient(180deg, rgba(15,28,57,0.9), rgba(8,16,33,0.96));
+  border-radius: 20px;
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(102,183,255,0.4);
+}
