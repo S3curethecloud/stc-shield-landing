@@ -1113,3 +1113,108 @@ p {
 .hero-content {
   max-width: 640px;
 }
+
+/* =========================
+   HERO — COMPLETE SYSTEM
+========================= */
+
+.hero {
+  padding: 120px 0 80px;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.hero-content {
+  max-width: 640px;
+}
+
+/* Badge */
+
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(216,177,77,0.4);
+  color: var(--gold);
+  font-size: 12px;
+  margin-bottom: 18px;
+  letter-spacing: 0.08em;
+}
+
+/* Title */
+
+.hero h1 {
+  font-size: 58px;
+  line-height: 1.05;
+  margin-bottom: 18px;
+}
+
+/* Description */
+
+.hero p {
+  font-size: 18px;
+  color: var(--muted);
+  margin-bottom: 26px;
+}
+
+/* Points */
+
+.hero-points {
+  margin-top: 18px;
+  color: var(--muted2);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* =========================
+   RIGHT PANEL
+========================= */
+
+.hero-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  box-shadow: var(--shadow);
+}
+
+/* Panel title */
+
+.panel-title {
+  font-size: 16px;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+/* Graph box */
+
+.graph-box {
+  background: rgba(255,255,255,0.02);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Live indicator */
+
+.live {
+  color: var(--green);
+  font-weight: 500;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+}

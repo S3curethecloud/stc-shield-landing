@@ -44,54 +44,45 @@
 
 
 <!-- ================= HERO ================= -->
-<section class="section hero">
-  <div class="container hero-grid">
+<section class="hero">
+  <div class="container hero-inner">
 
-    <div class="hero-copy">
-      <span class="eyebrow">SecureTheCloud</span>
+    <!-- LEFT SIDE -->
+    <div class="hero-content">
+
+      <div class="badge">SECURETHECLOUD</div>
 
       <h1>Zero-Trust Runtime for AI Agents</h1>
 
       <p>
-        Deterministic authorization, real-time risk evaluation,
-        and cryptographically verifiable enforcement.
+        Deterministic authorization, real-time risk evaluation, and cryptographically verifiable enforcement.
       </p>
 
       <div class="btn-row">
         <a class="btn btn-primary" href="mailto:contact@securethecloud.dev">Request Demo</a>
         <a class="btn" href="#architecture">View Architecture</a>
-        <a class="btn btn-link" href="https://app.securethecloud.dev" target="_blank">Open Console</a>
+        <a class="btn" href="https://app.securethecloud.dev" target="_blank">Open Console</a>
       </div>
 
-      <div class="hero-proof">
-        <div class="proof-pill">
-          <small>Promise</small>
-          <strong>Deterministic authorization</strong>
-        </div>
-
-        <div class="proof-pill">
-          <small>Runtime</small>
-          <strong>Scoped execution boundaries</strong>
-        </div>
-
-        <div class="proof-pill">
-          <small>Audit</small>
-          <strong>Cryptographic lineage</strong>
-        </div>
+      <div class="hero-points">
+        <div>✔ Deterministic authorization</div>
+        <div>✔ Scoped execution boundaries</div>
+        <div>✔ Cryptographic lineage</div>
       </div>
+
     </div>
 
-    <!-- Visual stays same (your graph UI) -->
-    <div class="hero-visual">
-      <div class="visual-head">
-        <div>
-          <h2>Runtime Authorization Graph</h2>
-          <p>Policy → Risk → Enforcement</p>
-        </div>
-        <div class="status-pill">Runtime active</div>
+    <!-- RIGHT SIDE -->
+    <div class="hero-panel">
+
+      <div class="panel-title">Runtime Authorization Graph</div>
+
+      <div class="graph-box">
+        Policy → Risk → Enforcement
+        <br><br>
+        <span class="live">● Runtime active</span>
       </div>
 
-      <div class="graph-stage" id="graph-stage"></div>
     </div>
 
   </div>
