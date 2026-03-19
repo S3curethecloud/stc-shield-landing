@@ -7,29 +7,69 @@
 */
 
 :root{
+
+  /* =========================
+     CORE BACKGROUNDS
+     ========================= */
   --bg: #070A0F;
-  --bg2:#0B0F14;
-  --panel:#0E141B;
-  --panel2:#0A0F15;
+  --bg2: #0B0F14;
 
-  --text:#E9EEF6;
-  --muted:#AAB4C0;
-  --faint:#65707F;
+  /* =========================
+     PANELS
+     ========================= */
+  --panel: #0E141B;
+  --panel2: #0A0F15;
 
-  --gold:#C9A227;
-  --gold2:#E3C35A;
+  /* =========================
+     TEXT SYSTEM
+     ========================= */
+  --text: #E9EEF6;
+  --muted: #AAB4C0;
+  --muted2: #8a94a6;
+  --faint: #65707F;
 
-  --line:#1B2633;
-  --line2:#223244;
+  /* =========================
+     BRAND (GOLD)
+     ========================= */
+  --gold: #C9A227;
+  --gold2: #E3C35A;
 
-  --critical:#E84545;
-  --high:#FFB020;
-  --medium:#4DA3FF;
-  --low:#8A94A6;
+  /* =========================
+     BORDERS / LINES
+     ========================= */
+  --line: #1B2633;
+  --line2: #223244;
+  --line-strong: rgba(120,150,210,0.35);
 
-  --shadow: 0 18px 60px rgba(0,0,0,.55);
+  /* =========================
+     STATUS COLORS
+     ========================= */
+  --critical: #E84545;
+  --high: #FFB020;
+  --medium: #4DA3FF;
+  --low: #8A94A6;
+  --green: #3ddc97;
+
+  /* =========================
+     LAYOUT TOKENS
+     ========================= */
+  --container: 1240px;
+  --header-h: 72px;
+
+  /* =========================
+     RADIUS SYSTEM
+     ========================= */
   --radius: 18px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+
+  /* =========================
+     SHADOW
+     ========================= */
+  --shadow: 0 18px 60px rgba(0,0,0,.55);
+
 }
+
 
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -1415,4 +1455,3 @@ section p {
 * {
   transition: background 0.2s, border 0.2s, color 0.2s;
 }
-
