@@ -1079,3 +1079,37 @@ h2{
     0 0 0 1px rgba(216,177,77,0.4),
     0 10px 30px rgba(216,177,77,0.15);
 }
+
+/* =========================
+   SECTION SEPARATION (CRITICAL)
+========================= */
+
+.section {
+  padding: 100px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section:first-of-type {
+  border-top: none;
+}
+
+/* =========================
+   TYPOGRAPHY SPACING
+========================= */
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* =========================
+   CONTENT WIDTH CONTROL
+========================= */
+
+.hero-content {
+  max-width: 640px;
+}
