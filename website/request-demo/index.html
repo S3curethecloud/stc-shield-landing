@@ -80,6 +80,9 @@
     </p>
 
     <form action="https://formspree.io/f/mzdjyodg" method="POST">
+
+      <input type="hidden" name="_redirect" value="https://securethecloud.dev/request-demo/success.html">
+
       <input type="text" name="name" placeholder="Full Name" required />
       <input type="email" name="email" placeholder="Work Email" required />
       <input type="text" name="company" placeholder="Company" required />
@@ -95,24 +98,5 @@
     </div>
   </div>
 
-  <script>
-    const form = document.getElementById("demoForm");
-    const success = document.getElementById("successMessage");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const data = new FormData(form);
-
-      await fetch("https://formspree.io/f/xwkgnlby", {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" }
-      });
-
-      form.reset();
-      success.style.display = "block";
-    });
-  </script>
 </body>
 </html>
