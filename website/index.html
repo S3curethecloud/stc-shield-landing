@@ -12,7 +12,7 @@
   />
   <meta name="theme-color" content="#06101d" />
 
-  <link rel="stylesheet" href="../assets/css/stc.css" />
+  <link rel="stylesheet" href="/assets/css/stc.css" />
 </head>
 
 <body>
@@ -20,13 +20,12 @@
 <!-- ================= HEADER ================= -->
 <header class="site-header">
   <div class="container site-header-inner">
-
     <a class="brand" href="/">
       <span class="brand-mark">STC</span>
       <span>SecureTheCloud</span>
     </a>
 
-    <nav class="nav">
+    <nav class="nav" aria-label="Main navigation">
       <a href="#platform">Platform</a>
       <a href="#architecture">Architecture</a>
       <a href="#use-cases">Use Cases</a>
@@ -35,59 +34,98 @@
     </nav>
 
     <div class="header-actions">
-      <a class="btn" href="https://app.securethecloud.dev" target="_blank">Console</a>
-      <a class="btn btn-primary" href="mailto:contact@securethecloud.dev">Request Demo</a>
+      <a class="btn" href="https://app.securethecloud.dev" target="_blank" rel="noopener noreferrer">Console</a>
+      <a class="btn btn-primary" href="/request-demo/">Request Demo</a>
     </div>
-
   </div>
 </header>
 
+<main>
 
 <!-- ================= HERO ================= -->
-<section class="hero">
-  <div class="container hero-inner">
+<section class="section hero">
+  <div class="container hero-grid">
 
-    <!-- LEFT SIDE -->
-    <div class="hero-content">
-
-      <div class="badge">SECURETHECLOUD</div>
+    <div class="hero-copy">
+      <span class="eyebrow">SecureTheCloud</span>
 
       <h1>Zero-Trust Runtime for AI Agents</h1>
 
       <p>
-        Deterministic authorization, real-time risk evaluation, and cryptographically verifiable enforcement.
+        Deterministic authorization, real-time risk evaluation, and cryptographically verifiable
+        enforcement for agentic systems.
       </p>
 
       <div class="btn-row">
-        <a class="btn btn-primary" href="mailto:contact@securethecloud.dev">Request Demo</a>
+        <a class="btn btn-primary" href="/request-demo/">Request Demo</a>
         <a class="btn" href="#architecture">View Architecture</a>
-        <a class="btn" href="https://app.securethecloud.dev" target="_blank">Open Console</a>
+        <a class="btn btn-link" href="https://app.securethecloud.dev" target="_blank" rel="noopener noreferrer">Open Console</a>
       </div>
 
-      <div class="hero-points">
-        <div>✔ Deterministic authorization</div>
-        <div>✔ Scoped execution boundaries</div>
-        <div>✔ Cryptographic lineage</div>
+      <div class="hero-proof">
+        <div class="proof-pill">
+          <small>Promise</small>
+          <strong>Deterministic authorization</strong>
+        </div>
+        <div class="proof-pill">
+          <small>Runtime</small>
+          <strong>Scoped execution boundaries</strong>
+        </div>
+        <div class="proof-pill">
+          <small>Audit</small>
+          <strong>Cryptographic decision lineage</strong>
+        </div>
       </div>
-
     </div>
 
-    <!-- RIGHT SIDE -->
-    <div class="hero-panel">
-
-      <div class="panel-title">Runtime Authorization Graph</div>
-
-      <div class="graph-box">
-        Policy → Risk → Enforcement
-        <br><br>
-        <span class="live">● Runtime active</span>
+    <div class="hero-visual">
+      <div class="visual-head">
+        <div>
+          <h2>Runtime Authorization Graph</h2>
+          <p>Deterministic evaluation flowing across policy, risk, and enforcement.</p>
+        </div>
+        <div class="status-pill">Runtime active</div>
       </div>
 
+      <div class="graph-stage">
+        <div class="node blue" style="left: 34px; top: 56px;">
+          <small>Request</small>
+          <strong>Agent action initiated</strong>
+        </div>
+
+        <div class="node" style="left: 232px; top: 30px;">
+          <small>RiskDNA</small>
+          <strong>Contextual runtime scoring</strong>
+        </div>
+
+        <div class="node blue" style="left: 232px; top: 198px;">
+          <small>Policy</small>
+          <strong>Deterministic decision evaluation</strong>
+        </div>
+
+        <div class="node green" style="left: 412px; top: 58px;">
+          <small>Authorization</small>
+          <strong>Scoped token issuance</strong>
+        </div>
+
+        <div class="node" style="left: 412px; top: 228px;">
+          <small>Enforcement</small>
+          <strong>Runtime boundary application</strong>
+        </div>
+
+        <div class="line" style="left: 176px; top: 122px; width: 72px; transform: rotate(-14deg);"></div>
+        <div class="line" style="left: 176px; top: 136px; width: 78px; transform: rotate(18deg);"></div>
+        <div class="line" style="left: 388px; top: 114px; width: 46px; transform: rotate(8deg);"></div>
+        <div class="line" style="left: 388px; top: 280px; width: 48px; transform: rotate(-8deg);"></div>
+
+        <div class="dot" style="left: 240px; top: 88px;"></div>
+        <div class="dot" style="left: 240px; top: 240px;"></div>
+        <div class="dot" style="left: 416px; top: 120px;"></div>
+      </div>
     </div>
 
   </div>
 </section>
-
 
 <!-- ================= PLATFORM ================= -->
 <section class="section" id="platform">
@@ -130,7 +168,6 @@
   </div>
 </section>
 
-
 <!-- ================= ARCHITECTURE ================= -->
 <section class="section" id="architecture">
   <div class="container">
@@ -166,7 +203,6 @@
 
   </div>
 </section>
-
 
 <!-- ================= USE CASE ================= -->
 <section class="section" id="use-cases">
@@ -209,7 +245,6 @@
   </div>
 </section>
 
-
 <!-- ================= CTA ================= -->
 <section class="section">
   <div class="container">
@@ -222,7 +257,7 @@
       </p>
 
       <div class="btn-row" style="justify-content:center; margin-top:20px;">
-        <a class="btn btn-primary" href="mailto:contact@securethecloud.dev">
+        <a class="btn btn-primary" href="/request-demo/">
           Request Demo
         </a>
 
@@ -235,12 +270,10 @@
   </div>
 </section>
 
-
 <!-- ================= FOOTER ================= -->
 <footer class="site-footer">
   <div class="container footer-inner">
 
-    <!-- Brand -->
     <div class="footer-brand">
       <div class="brand">
         <span class="brand-mark">STC</span>
@@ -252,7 +285,6 @@
       </p>
     </div>
 
-    <!-- Platform -->
     <div class="footer-col">
       <h4>Platform</h4>
       <a href="#platform">Overview</a>
@@ -261,7 +293,6 @@
       <a href="#developers">Developers</a>
     </div>
 
-    <!-- Product -->
     <div class="footer-col">
       <h4>Products</h4>
       <a href="#">Shield</a>
@@ -269,12 +300,11 @@
       <a href="#">Copilot</a>
     </div>
 
-    <!-- Company -->
     <div class="footer-col">
       <h4>Company</h4>
       <a href="/media">Media</a>
       <a href="#">Consultancy</a>
-      <a href="mailto:contact@securethecloud.dev">Contact</a>
+      <a href="/request-demo/">Contact</a>
     </div>
 
   </div>
@@ -290,6 +320,7 @@
   </div>
 </footer>
 
+</main>
 
 </body>
 </html>
