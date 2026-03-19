@@ -9,7 +9,29 @@
     content="SecureTheCloud brings deterministic authorization, runtime enforcement, and governed visibility to AI agent execution."
   />
   <meta name="theme-color" content="#06101d" />
+
+  <!-- ✅ FIX: Ensure CSS file is correctly loaded -->
+  <link rel="stylesheet" href="/assets/css/stc.css" />
+
   <style>
+    .table-shell {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .table-shell .data-table {
+      min-width: 720px;
+    }
+
+    @media (max-width: 768px) {
+      .table-shell .data-table {
+        min-width: 620px;
+      }
+    }
+  </style>
+</head>
+
     :root {
       --bg: #06101d;
       --bg2: #081325;
