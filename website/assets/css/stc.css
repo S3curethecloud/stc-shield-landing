@@ -647,3 +647,31 @@ a {
     padding: 46px 0 24px;
   }
 }
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(120,150,210,0.16);
+  background: rgba(12,22,45,0.72);
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all .2s ease;
+}
+
+.footer-social a:hover {
+  border-color: rgba(216,177,77,0.3);
+  color: #fff;
+  transform: translateY(-1px);
+}
