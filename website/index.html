@@ -1,63 +1,80 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>SecureTheCloud | Zero-Trust Runtime for AI Agents</title>
 
-  <meta
-    name="description"
-    content="Deterministic authorization, runtime enforcement, and governed visibility for AI agent execution."
-  />
-  <meta name="theme-color" content="#06101d" />
+<meta
+ name="description"
+ content="Deterministic authorization, runtime enforcement, and governed visibility for AI agent execution."
+/> <meta name="theme-color" content="#06101d" />
 
   <link rel="stylesheet" href="/assets/css/stc.css" />
 </head>
 
 <body>
 
-<header class="site-header">
-  <div class="container site-header-inner">
-    <a class="brand" href="/">
-      <span class="brand-mark">STC</span>
-      <span>SecureTheCloud</span>
+  <!-- ================= HEADER ================= -->
+
+  <header class="site-header">
+    <div class="container site-header-inner">
+
+```
+  <a class="brand" href="/">
+    <span class="brand-mark">STC</span>
+    <span>SecureTheCloud</span>
+  </a>
+
+  <nav class="nav" aria-label="Main navigation">
+    <a href="#platform">Platform</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#use-cases">Use Cases</a>
+    <a href="#developers">Developers</a>
+    <a href="#company">Company</a>
+  </nav>
+
+  <div class="header-actions">
+    <a class="btn" href="https://app.securethecloud.dev" target="_blank" rel="noopener noreferrer">
+      Console
     </a>
-
-    <nav class="nav" aria-label="Main navigation">
-      <a href="#platform">Platform</a>
-      <a href="#architecture">Architecture</a>
-      <a href="#use-cases">Use Cases</a>
-      <a href="#developers">Developers</a>
-      <a href="#company">Company</a>
-    </nav>
-
-    <div class="header-actions">
-      <a class="btn" href="https://app.securethecloud.dev" target="_blank" rel="noopener noreferrer">Console</a>
-      <a class="btn btn-primary" href="/request-demo/">Request Demo</a>
-    </div>
+    <a class="btn btn-primary" href="/request-demo/">
+      Request Demo
+    </a>
   </div>
-</header>
 
-<main>
+</div>
+```
 
+  </header>
+
+  <!-- ================= MAIN ================= -->
+
+  <main>
+
+```
+<!-- ================= HERO ================= -->
 <section class="section hero">
   <div class="container hero-grid">
 
     <div class="hero-copy">
       <span class="eyebrow">SecureTheCloud</span>
-
       <h1>Zero-Trust Runtime for AI Agents</h1>
 
       <p>
-        Deterministic authorization, real-time risk evaluation, and cryptographically verifiable
-        enforcement for agentic systems.
+        Deterministic authorization, real-time risk evaluation, and
+        cryptographically verifiable enforcement for agentic systems.
       </p>
 
       <div class="btn-row">
         <a class="btn btn-primary" href="/request-demo/">Request Demo</a>
         <a class="btn" href="#architecture">View Architecture</a>
-        <a class="btn btn-link" href="https://app.securethecloud.dev" target="_blank" rel="noopener noreferrer">Open Console</a>
+        <a class="btn btn-link" href="https://app.securethecloud.dev" target="_blank" rel="noopener noreferrer">
+          Open Console
+        </a>
       </div>
 
       <div class="hero-proof">
@@ -80,51 +97,43 @@
       <div class="visual-head">
         <div>
           <h2>Runtime Authorization Graph</h2>
-          <p>Deterministic evaluation flowing across policy, risk, and enforcement.</p>
+          <p>Deterministic evaluation across policy, risk, and enforcement.</p>
         </div>
         <div class="status-pill">Runtime active</div>
       </div>
 
       <div class="graph-stage">
-        <div class="node blue" style="left: 34px; top: 56px;">
+        <div class="node blue" style="left:34px; top:56px;">
           <small>Request</small>
           <strong>Agent action initiated</strong>
         </div>
 
-        <div class="node" style="left: 232px; top: 30px;">
+        <div class="node" style="left:232px; top:30px;">
           <small>RiskDNA</small>
           <strong>Contextual runtime scoring</strong>
         </div>
 
-        <div class="node blue" style="left: 232px; top: 198px;">
+        <div class="node blue" style="left:232px; top:198px;">
           <small>Policy</small>
           <strong>Deterministic decision evaluation</strong>
         </div>
 
-        <div class="node green" style="left: 412px; top: 58px;">
+        <div class="node green" style="left:412px; top:58px;">
           <small>Authorization</small>
           <strong>Scoped token issuance</strong>
         </div>
 
-        <div class="node" style="left: 412px; top: 228px;">
+        <div class="node" style="left:412px; top:228px;">
           <small>Enforcement</small>
           <strong>Runtime boundary application</strong>
         </div>
-
-        <div class="line" style="left: 176px; top: 122px; width: 72px; transform: rotate(-14deg);"></div>
-        <div class="line" style="left: 176px; top: 136px; width: 78px; transform: rotate(18deg);"></div>
-        <div class="line" style="left: 388px; top: 114px; width: 46px; transform: rotate(8deg);"></div>
-        <div class="line" style="left: 388px; top: 280px; width: 48px; transform: rotate(-8deg);"></div>
-
-        <div class="dot" style="left: 240px; top: 88px;"></div>
-        <div class="dot" style="left: 240px; top: 240px;"></div>
-        <div class="dot" style="left: 416px; top: 120px;"></div>
       </div>
     </div>
 
   </div>
 </section>
 
+<!-- ================= PLATFORM ================= -->
 <section class="section" id="platform">
   <div class="container">
 
@@ -136,78 +145,62 @@
     </p>
 
     <div class="grid-3">
+      <div class="card"><div class="card-inner">
+        <span class="eyebrow">Problem</span>
+        <h3>Identity is insufficient</h3>
+        <p>Knowing who is acting does not prove the action is safe.</p>
+      </div></div>
 
-      <div class="card">
-        <div class="card-inner">
-          <span class="eyebrow">Problem</span>
-          <h3>Identity is insufficient</h3>
-          <p>Knowing who is acting does not prove the action is safe.</p>
-        </div>
-      </div>
+      <div class="card"><div class="card-inner">
+        <span class="eyebrow">Problem</span>
+        <h3>Detection is too late</h3>
+        <p>Security must act before execution, not after.</p>
+      </div></div>
 
-      <div class="card">
-        <div class="card-inner">
-          <span class="eyebrow">Problem</span>
-          <h3>Detection is too late</h3>
-          <p>Security must act before execution, not after.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-inner">
-          <span class="eyebrow">Problem</span>
-          <h3>Agents require governance</h3>
-          <p>Runtime actions must be deterministic, traceable, and bounded.</p>
-        </div>
-      </div>
-
+      <div class="card"><div class="card-inner">
+        <span class="eyebrow">Problem</span>
+        <h3>Agents require governance</h3>
+        <p>Runtime actions must be deterministic, traceable, and bounded.</p>
+      </div></div>
     </div>
+
   </div>
 </section>
 
+<!-- ================= ARCHITECTURE ================= -->
 <section class="section" id="architecture">
   <div class="container">
 
     <span class="eyebrow">Architecture</span>
-
     <h2 class="section-title">Three planes. One runtime.</h2>
 
     <div class="grid-3">
+      <div class="card"><div class="card-inner">
+        <h3>Decision Plane</h3>
+        <p>RiskDNA + policy evaluation.</p>
+      </div></div>
 
-      <div class="card">
-        <div class="card-inner">
-          <h3>Decision Plane</h3>
-          <p>RiskDNA + policy evaluation.</p>
-        </div>
-      </div>
+      <div class="card"><div class="card-inner">
+        <h3>Enforcement Plane</h3>
+        <p>Token issuance, session control, revocation.</p>
+      </div></div>
 
-      <div class="card">
-        <div class="card-inner">
-          <h3>Enforcement Plane</h3>
-          <p>Token issuance, session control, revocation.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-inner">
-          <h3>Control Plane</h3>
-          <p>Audit, visibility, blast radius, governance.</p>
-        </div>
-      </div>
-
+      <div class="card"><div class="card-inner">
+        <h3>Control Plane</h3>
+        <p>Audit, visibility, blast radius, governance.</p>
+      </div></div>
     </div>
 
   </div>
 </section>
 
+<!-- ================= USE CASES ================= -->
 <section class="section" id="use-cases">
   <div class="container grid-2">
 
     <div class="card">
       <div class="card-inner">
-
         <span class="eyebrow">Use Case</span>
-
         <h2 class="section-title">After-hours refund attempt</h2>
 
         <p class="section-intro">
@@ -217,15 +210,12 @@
         <div class="btn-row">
           <a class="btn btn-primary" href="/aegis-air/">Explore Scenario</a>
         </div>
-
       </div>
     </div>
 
     <div class="card">
       <div class="card-inner">
-
         <span class="eyebrow">Flow</span>
-
         <ul class="scenario-list">
           <li>Request detected</li>
           <li>RiskDNA recalculated</li>
@@ -233,28 +223,22 @@
           <li>Scoped access issued</li>
           <li>Session governed</li>
         </ul>
-
       </div>
     </div>
 
   </div>
 </section>
 
+<!-- ================= CTA ================= -->
 <section class="section">
   <div class="container">
     <div class="card cta-band">
 
       <h2>Evaluate SecureTheCloud</h2>
-
-      <p>
-        Control AI agent execution before risk propagates.
-      </p>
+      <p>Control AI agent execution before risk propagates.</p>
 
       <div class="btn-row" style="justify-content:center; margin-top:20px;">
-        <a class="btn btn-primary" href="/request-demo/">
-          Request Demo
-        </a>
-
+        <a class="btn btn-primary" href="/request-demo/">Request Demo</a>
         <a class="btn" href="https://app.securethecloud.dev" target="_blank" rel="noopener noreferrer">
           Open Console
         </a>
@@ -263,57 +247,73 @@
     </div>
   </div>
 </section>
+```
 
-<footer class="site-footer">
-  <div class="container footer-inner">
+  </main>
 
-    <div class="footer-brand">
-      <div class="brand">
-        <span class="brand-mark">STC</span>
-        <span>SecureTheCloud</span>
-      </div>
-      <p>
-        Zero-Trust Runtime for AI Agents — deterministic authorization,
-        runtime enforcement, and governed operational proof.
-      </p>
+  <!-- ================= FOOTER ================= -->
+
+  <footer class="site-footer">
+
+```
+<div class="container footer-inner">
+
+  <div class="footer-brand">
+    <div class="brand">
+      <span class="brand-mark">STC</span>
+      <span>SecureTheCloud</span>
     </div>
-
-    <div class="footer-col">
-      <h4>Platform</h4>
-      <a href="#platform">Overview</a>
-      <a href="#architecture">Architecture</a>
-      <a href="#use-cases">Use Cases</a>
-      <a href="#developers">Developers</a>
-    </div>
-
-    <div class="footer-col">
-      <h4>Products</h4>
-      <a href="#">Shield</a>
-      <a href="#">RiskDNA</a>
-      <a href="#">Copilot</a>
-    </div>
-
-    <div class="footer-col">
-      <h4>Company</h4>
-      <a href="/media">Media</a>
-      <a href="#">Consultancy</a>
-      <a href="/request-demo/">Contact</a>
-    </div>
-
+    <p>
+      Zero-Trust Runtime for AI Agents — deterministic authorization,
+      runtime enforcement, and governed operational proof.
+    </p>
   </div>
 
-  <div class="footer-bottom">
-    <div class="container footer-bottom-inner">
+  <div class="footer-col">
+    <h4>Platform</h4>
+    <a href="#platform">Overview</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#use-cases">Use Cases</a>
+    <a href="#developers">Developers</a>
+  </div>
+
+  <div class="footer-col">
+    <h4>Products</h4>
+    <a href="#">Shield</a>
+    <a href="#">RiskDNA</a>
+    <a href="#">Copilot</a>
+  </div>
+
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="/media">Media</a>
+    <a href="#">Consultancy</a>
+    <a href="/request-demo/">Contact</a>
+  </div>
+
+</div>
+
+<div class="footer-bottom">
+  <div class="container footer-bottom-inner">
+
+    <div class="footer-left">
       <span>© SecureTheCloud</span>
-      <div class="footer-links">
-        <a href="https://www.youtube.com/@SecureTheCloud-dev" target="_blank" rel="noopener noreferrer">YouTube</a>
-        <a href="#">LinkedIn</a>
-      </div>
     </div>
-  </div>
-</footer>
 
-</main>
+    <div class="footer-right footer-social">
+      <a href="https://www.youtube.com/@SecureTheCloud-dev" target="_blank" rel="noopener noreferrer">
+        YouTube
+      </a>
+      <a href="https://www.linkedin.com/company/securethecloud-dev/" target="_blank" rel="noopener noreferrer">
+        LinkedIn
+      </a>
+    </div>
+
+  </div>
+</div>
+```
+
+  </footer>
 
 </body>
 </html>
