@@ -93,35 +93,33 @@
     <div class="status-pill">Runtime active</div>
   </div>
 
-  <div class="graph-stage">
-    <svg class="graph-lines" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true">
-      <line x1="300" y1="215" x2="390" y2="175"></line>
-      <line x1="300" y1="250" x2="390" y2="425"></line>
-      <line x1="700" y1="210" x2="790" y2="225"></line>
-      <line x1="700" y1="455" x2="790" y2="470"></line>
-    </svg>
+  <div class="graph-stage graph-stage-fixed">
+    <span class="graph-link graph-link-1" aria-hidden="true"></span>
+    <span class="graph-link graph-link-2" aria-hidden="true"></span>
+    <span class="graph-link graph-link-3" aria-hidden="true"></span>
+    <span class="graph-link graph-link-4" aria-hidden="true"></span>
 
-    <div class="graph-node graph-request">
+    <div class="graph-node graph-node-request">
       <small>REQUEST</small>
       <strong>Agent action initiated</strong>
     </div>
 
-    <div class="graph-node graph-risk">
+    <div class="graph-node graph-node-risk">
       <small>RISKDNA</small>
       <strong>Contextual runtime scoring</strong>
     </div>
 
-    <div class="graph-node graph-policy">
-      <small>POLICY</small>
-      <strong>Deterministic decision evaluation</strong>
-    </div>
-
-    <div class="graph-node graph-auth">
+    <div class="graph-node graph-node-auth">
       <small>AUTHORIZATION</small>
       <strong>Scoped token issuance</strong>
     </div>
 
-    <div class="graph-node graph-enforce">
+    <div class="graph-node graph-node-policy">
+      <small>POLICY</small>
+      <strong>Deterministic decision evaluation</strong>
+    </div>
+
+    <div class="graph-node graph-node-enforce">
       <small>ENFORCEMENT</small>
       <strong>Runtime boundary application</strong>
     </div>
