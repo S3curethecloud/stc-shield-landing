@@ -12,6 +12,9 @@
 
   <link rel="canonical" href="https://securethecloud.dev/shield/preview/" />
 
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:;">
+
   <link rel="stylesheet" href="/assets/css/stc.css" />
   <link rel="stylesheet" href="/assets/css/shield-console.css" />
 </head>
@@ -156,11 +159,6 @@
   <script src="/js/console-data.js"></script>
 
   <script>
-  /* =========================================
-     Toggle: Table View / Graph View
-     Pure visibility control. No mutation.
-     ========================================= */
-
   document.addEventListener("DOMContentLoaded", function () {
 
     const toggles = document.querySelectorAll(".view-toggle .toggle");
