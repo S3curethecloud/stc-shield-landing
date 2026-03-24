@@ -304,3 +304,9 @@ nav a:hover {
   text-align: left;
   max-width: 720px;
 }
+
+main.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
